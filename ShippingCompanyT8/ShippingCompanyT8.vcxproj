@@ -139,7 +139,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Cargo.cpp" />
+    <ClCompile Include="Company.cpp" />
+    <ClCompile Include="Event.cpp" />
     <ClCompile Include="ShippingCompanyT8.cpp" />
+    <ClCompile Include="Truck.cpp" />
+    <ClCompile Include="UI.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Cargo.h" />
+    <ClInclude Include="Company.h" />
+    <ClInclude Include="Event.h" />
+    <ClInclude Include="Truck.h" />
+    <ClInclude Include="UI.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
