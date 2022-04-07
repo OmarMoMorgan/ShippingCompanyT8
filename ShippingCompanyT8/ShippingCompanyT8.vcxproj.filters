@@ -53,5 +53,26 @@
     <ClInclude Include="Truck.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="LinkedList.h">
+      <Filter>DataStructures</Filter>
+    </ClInclude>
+    <ClInclude Include="LinkedQueue.h">
+      <Filter>DataStructures</Filter>
+    </ClInclude>
+    <ClInclude Include="Node.h">
+      <Filter>DataStructures</Filter>
+    </ClInclude>
+    <ClInclude Include="PriorityNode.h">
+      <Filter>DataStructures</Filter>
+    </ClInclude>
+    <ClInclude Include="QueueADT.h">
+      <Filter>DataStructures</Filter>
+    </ClInclude>
+    <ClInclude Include="PrioirtyQueue.h">
+      <Filter>DataStructures</Filter>
+    </ClInclude>
+    <ClInclude Include="PriorirtyQueueArr.h">
+      <Filter>DataStructures</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

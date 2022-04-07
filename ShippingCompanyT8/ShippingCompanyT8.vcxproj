@@ -150,6 +150,13 @@
     <ClInclude Include="Cargo.h" />
     <ClInclude Include="Company.h" />
     <ClInclude Include="Event.h" />
+    <ClInclude Include="LinkedList.h" />
+    <ClInclude Include="LinkedQueue.h" />
+    <ClInclude Include="Node.h" />
+    <ClInclude Include="PrioirtyQueue.h" />
+    <ClInclude Include="PriorirtyQueueArr.h" />
+    <ClInclude Include="PriorityNode.h" />
+    <ClInclude Include="QueueADT.h" />
     <ClInclude Include="Truck.h" />
     <ClInclude Include="UI.h" />
   </ItemGroup>

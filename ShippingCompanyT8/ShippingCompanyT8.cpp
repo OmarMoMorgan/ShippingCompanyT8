@@ -2,9 +2,18 @@
 //
 
 #include <iostream>
+#include "PriorirtyQueueArr.h"
 
 int main()
 {
+    PriorityQueueArr<int> p1;
+    p1.insert(5,2);
+    p1.insert(7, 10);
+    p1.insert(1, 3);
+    p1.insert(4, 12);
+    p1.Pop();
+
+    p1.printarr();
     std::cout << "Hello World!\n";
 }
 
