@@ -1,6 +1,10 @@
 #pragma once
 using namespace std;
 
+
+//instead of doing what happened where we have a node with prioirty and some data we will overload operator instead
+
+
 template <typename T>
 class PriorityQueueArr {
 private:
@@ -14,6 +18,11 @@ private:
 public:
 	PriorityQueueArr() {
 		arr = new Node[16];
+		size = -1;
+	}
+
+	PriorityQueueArr(int maxSize) {
+		arr = new Node[maxSize];
 		size = -1;
 	}
 

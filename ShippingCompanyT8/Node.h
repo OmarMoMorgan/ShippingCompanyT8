@@ -17,7 +17,7 @@ public :
 	Node<T>* getNext() const ;
 }; // end Node
 #endif
-
+#pragma once
 template < typename T>
 Node<T>::Node() 
 {

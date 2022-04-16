@@ -2,18 +2,22 @@
 //
 
 #include <iostream>
-#include "PriorirtyQueueArr.h"
+//#include "PriorirtyQueueArr.h"
+#include "Company.h"
 
 int main()
 {
-    PriorityQueueArr<int> p1;
+   /* PriorityQueueArr<int> p1;
     p1.insert(5,2);
     p1.insert(7, 10);
     p1.insert(1, 3);
     p1.insert(4, 12);
     p1.Pop();
 
-    p1.printarr();
+    p1.printarr();*/
+
+    /*Company c;
+    c.LoadFile();*/
     std::cout << "Hello World!\n";
 }
 
