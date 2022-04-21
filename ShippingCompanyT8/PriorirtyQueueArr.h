@@ -120,5 +120,9 @@ public:
 		shiftDown(0);
 		return result;
 	}
+
+	int getCount() {
+		return size + 1;
+	}
 	
 };

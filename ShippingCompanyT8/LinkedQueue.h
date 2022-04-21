@@ -57,6 +57,7 @@ public :
 	bool enqueue(const T& newEntry);
 	bool dequeue(T& frntEntry);  
 	bool peek(T& frntEntry)  const;	
+	int getCount();
 	~LinkedQueue();
 };
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -165,6 +166,15 @@ bool LinkedQueue<T>:: peek(T& frntEntry) const
 
 }
 ///////////////////////////////////////////////////////////////////////////////////
+
+template <typename T>
+int LinkedQueue<T>::getCount() {
+	int counter = 0;
+	while  (frontPtr) {
+		counter++;
+	}
+	return counter;
+}
 
 template <typename T>
 LinkedQueue<T>::~LinkedQueue()

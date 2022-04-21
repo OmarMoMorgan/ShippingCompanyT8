@@ -119,6 +119,9 @@ public:
 	void MoveToLoading(LinkedQueue<Cargo*> , PriorityQueueArr<Cargo*>);
 	//overriding the function here so that it can accept more than type 
 	void MoveToLoading(PriorityQueueArr<Cargo*>, PriorityQueueArr<Cargo*>);
+
+	//This funciton counts the number of items in a given linked list / queue / priority queue
+	//int CountListItems(LinkedQueue<>);
 	
 	//The function to produce output file
 	void OutgoingFile();

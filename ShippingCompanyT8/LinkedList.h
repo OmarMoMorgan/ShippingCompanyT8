@@ -210,6 +210,21 @@ public:
 		}
 		else { return; }
 	}
+
+	int getCounter() {
+		int counter = 0;
+		if (Head) {
+			counter++;
+		}
+		Node* mover;
+		mover = Head->getNext();
+		while (mover)
+		{
+			counter++;
+			mover = mover->getNext();
+		}
+		return counter;
+	}
 };
 
 #endif	
