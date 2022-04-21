@@ -2,16 +2,23 @@
 
 Cargo::Cargo()
 {
+	this->setCargoType(normalCargo);
+	//this-> setPrepDay(ETD);
+	//this->setPrepHour(ETH);
+	this->setCargoID(0);
+	this->setDelieveryDistance(0);
+	this->setLoadTime(0);
+	this->setCost(0);
 }
 
 
 //Constructor Arguments: Same order as in the input file:
 //Cargo(Type , PrepTime DAY,PrepTime HOUR, ID, Distance, Load time, CargoCost)
-Cargo:: Cargo(eCargoType TYP, int ETD, int ETH, int ID, double DIST, int LT, double cost)
+Cargo:: Cargo(eCargoType TYP,/* int ETD, int ETH,*/ int ID, double DIST, int LT, double cost)
 {
 	this->setCargoType(TYP);
-	this-> setPrepDay(ETD);
-	this->setPrepHour(ETH);
+	//this-> setPrepDay(ETD);
+	//this->setPrepHour(ETH);
 	this->setCargoID(ID);
 	this->setDelieveryDistance(DIST);
 	this->setLoadTime(LT);
@@ -55,8 +62,8 @@ bool Cargo:: operator>(Cargo* C_cw) const
 }
 */
 //Setters
-void Cargo::setPrepDay(int pd) { prepDay = pd;}
-void Cargo::setPrepHour(int ph) { prepHour = ph; }
+//void Cargo::setPrepDay(int pd) { prepDay = pd;}
+//void Cargo::setPrepHour(int ph) { prepHour = ph; }
 void Cargo::setLoadTime(int lt) { loadTime = lt; }
 void Cargo::setUnloadTime(int ut) { unloadTime = ut; }
 void Cargo::setCargoType(eCargoType t) { this->cargoType = t; }
@@ -66,8 +73,8 @@ void Cargo::setCargoID(int id) { cargoID = id; }
 void Cargo::setMaxW(int mw) { maxW = mw; }
 
 //Getters
-int Cargo::getPrepDay() const { return prepDay; }
-int Cargo::getPrepHour() const { return prepHour; }
+//int Cargo::getPrepDay() const { return prepDay; }
+//int Cargo::getPrepHour() const { return prepHour; }
 int Cargo::getLoadTime() const { return loadTime; }
 int Cargo::getunloadTime() const { return unloadTime; }
 //eCargoType Cargo::getCargoType() const { return cargoType; }
