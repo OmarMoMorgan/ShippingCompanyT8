@@ -10,6 +10,11 @@
 #include <fstream>
 #include <sstream>
 
+
+//shall we make it so that it is not a moving list inside all the company or make it such that it is in 
+//never mind i think we should go with haing them there as it has less compleity 
+//log n vs n thus now we shouldn't overload the operators
+
 class Company
 {
 	private:
@@ -36,19 +41,19 @@ class Company
 		//Normal cargo
 		LinkedList<Cargo*> WaitingNormalCargo;
 		LinkedQueue<Cargo*> LoadingNormalCargo;
-		LinkedQueue<Cargo*> MoivingNormalCargo;
+		PriorityQueueArr<Cargo*> MoivingNormalCargo;
 		LinkedQueue<Cargo*> DeliveredNormalCargo;
 		
 		//Special Cargo
 		LinkedQueue<Cargo*> WaitingSpecialCargo;
 		LinkedQueue<Cargo*> LoadingSpecialCargo;
-		LinkedQueue<Cargo*> MoivingSpecialCargo;
+		PriorityQueueArr<Cargo*> MoivingSpecialCargo;
 		LinkedQueue<Cargo*> DeliveredSpecialCargo;
 
 		//Vip Cargo
 		PriorityQueueArr<Cargo*> WatitingVipCargo;
 		LinkedQueue<Cargo*> LoadingVipCargo;
-		LinkedQueue<Cargo*> MovingVipCargo;
+		PriorityQueueArr<Cargo*> MovingVipCargo;
 		LinkedQueue<Cargo*> DeliveredVipCargo;
 		
 		//Events list it is a queue as each one comes after the other
@@ -56,13 +61,16 @@ class Company
 
 		//Trucks lists
 		LinkedQueue<Truck*> AvailbleNormalTrucks;
-		LinkedList<Truck*> MovingNormalTrucks;
+		PriorityQueueArr<Truck*> LoadingNormalTrucks;
+		PriorityQueueArr<Truck*> MovingNormalTrucks;
 		
 		LinkedQueue<Truck*> AvailbleSpecialTrucks;
-		LinkedList<Truck*> MovingSpecialTrucks;
+		PriorityQueueArr<Truck*> LoadingSpecialTrucks;
+		PriorityQueueArr<Truck*> MovingSpecialTrucks;
 
 		PriorityQueueArr<Truck*> AvailbleVipTrucks;
-		LinkedList<Truck*> MovingVipTrucks;
+		PriorityQueueArr<Truck*> LoadingVipTrucks;
+		PriorityQueueArr<Truck*> MovingVipTrucks;
 		
 		LinkedQueue<Truck*> FixingTrucks;
 
@@ -94,6 +102,9 @@ class Company
 		int DummyNumJourneys;
 
 
+		//Time struct declrtionis here
+		Time UniversalTime;
+
 public:
 	//function to load the file 
 	void LoadFile();
@@ -101,6 +112,14 @@ public:
 	//SimTEst is a function for phase 1 to test that everything is working correctly
 	void SimTest();
 
+	//this function moves cargos from moving cargos to delievered cargos
+	void MoveToDeleiverd();
+
+	//this function moves cargos from waiting cargos into loading cargos
+	void MoveToLoading(LinkedQueue<Cargo*> , PriorityQueueArr<Cargo*>);
+	//overriding the function here so that it can accept more than type 
+	void MoveToLoading(PriorityQueueArr<Cargo*>, PriorityQueueArr<Cargo*>);
+	
 	//The function to produce output file
 	void OutgoingFile();
 };

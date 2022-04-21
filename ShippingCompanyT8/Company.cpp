@@ -36,6 +36,13 @@ void Company::LoadFile() {
 	Line.close();	
 }
 
+void Company::MoveToLoading(LinkedQueue<Cargo*> CameFromHere , PriorityQueueArr<Cargo*> GoingThere) {
+	Cargo* Thecargo;
+	CameFromHere.peek(Thecargo);
+	//if(UniversalTime.CurrentDay > Thecargo.)
+	
+}
+
 void Company::SimTest() {
 	//call print current time funciton here to print the current hour 
 	//you should think about hving a funciton in the event class wwhere it associates the lists needed
