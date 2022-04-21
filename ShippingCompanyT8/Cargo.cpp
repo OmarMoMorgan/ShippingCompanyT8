@@ -10,7 +10,6 @@ Cargo::Cargo()
 	this->setLoadTime(0);
 	this->setCost(0);
 }
-}
 
 
 //Constructor Arguments: Same order as in the input file:
