@@ -21,9 +21,6 @@
     <ClCompile Include="ShippingCompanyT8.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Event.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="UI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -36,11 +33,23 @@
     <ClCompile Include="Truck.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Events.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Ready.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Promote.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Cancel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LinkedListCargo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Event.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="UI.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -74,5 +83,23 @@
     <ClInclude Include="PriorirtyQueueArr.h">
       <Filter>DataStructures</Filter>
     </ClInclude>
+    <ClInclude Include="Events.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Ready.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Promote.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Cancel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LinkedListCargo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.Windows.CppWinRT.2.0.210806.1\build\native\Microsoft.Windows.CppWinRT.props" Condition="Exists('..\packages\Microsoft.Windows.CppWinRT.2.0.210806.1\build\native\Microsoft.Windows.CppWinRT.props')" />
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -139,20 +140,28 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Cancel.cpp" />
     <ClCompile Include="Cargo.cpp" />
     <ClCompile Include="Company.cpp" />
-    <ClCompile Include="Event.cpp" />
+    <ClCompile Include="Events.cpp" />
+    <ClCompile Include="LinkedListCargo.cpp" />
+    <ClCompile Include="Promote.cpp" />
+    <ClCompile Include="Ready.cpp" />
     <ClCompile Include="ShippingCompanyT8.cpp" />
     <ClCompile Include="Truck.cpp" />
     <ClCompile Include="UI.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Cancel.h" />
     <ClInclude Include="Cargo.h" />
     <ClInclude Include="Company.h" />
-    <ClInclude Include="Event.h" />
+    <ClInclude Include="Events.h" />
     <ClInclude Include="LinkedList.h" />
+    <ClInclude Include="LinkedListCargo.h" />
     <ClInclude Include="LinkedQueue.h" />
     <ClInclude Include="Node.h" />
+    <ClInclude Include="Promote.h" />
+    <ClInclude Include="Ready.h" />
     <ClInclude Include="PrioirtyQueue.h" />
     <ClInclude Include="PriorirtyQueueArr.h" />
     <ClInclude Include="PriorityNode.h" />
@@ -160,7 +169,18 @@
     <ClInclude Include="Truck.h" />
     <ClInclude Include="UI.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
+    <Import Project="..\packages\Microsoft.Windows.CppWinRT.2.0.210806.1\build\native\Microsoft.Windows.CppWinRT.targets" Condition="Exists('..\packages\Microsoft.Windows.CppWinRT.2.0.210806.1\build\native\Microsoft.Windows.CppWinRT.targets')" />
   </ImportGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Windows.CppWinRT.2.0.210806.1\build\native\Microsoft.Windows.CppWinRT.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Windows.CppWinRT.2.0.210806.1\build\native\Microsoft.Windows.CppWinRT.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Windows.CppWinRT.2.0.210806.1\build\native\Microsoft.Windows.CppWinRT.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Windows.CppWinRT.2.0.210806.1\build\native\Microsoft.Windows.CppWinRT.targets'))" />
+  </Target>
 </Project>

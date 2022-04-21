@@ -1,4 +1,10 @@
 #pragma once
+enum  eCargoType    //Should be moved to smth like defs.
+{
+	VIPCargo,
+	specialCargo,
+	normalCargo
+};
 class Cargo
 {
 private:
@@ -10,13 +16,9 @@ private:
 	//Load time is in hours
 	int loadTime;
 	int unloadTime;
-	enum class eCargoType    //Should be moved to smth like defs.
-	{
-		VIPCargo,
-		specialCargo,
-		normalCargo
-	};
+
 	eCargoType cargoType;
+
 
 	double deleiveryDistance;
 	double Cost;
@@ -25,14 +27,14 @@ private:
 
 public:
 	Cargo();
-	Cargo(eCargoType TYP, int ETD, int ETH, int ID, double DIST, int LT, double cost);
+	Cargo(eCargoType TYP, /*int ETD, int ETH,*/ int ID, double DIST, int LT, double cost);
 	bool isWaiting()const;
 	bool waitedForMax();
 
 	//bool operator> (Cargo& C_cw)const;
 
-	void setPrepDay(int pd);
-	void setPrepHour(int ph);
+	/*void setPrepDay(int pd);
+	void setPrepHour(int ph);*/
 	void setLoadTime(int lt);
 	void setUnloadTime(int ut);
 	void setCargoType(eCargoType t);
@@ -41,8 +43,8 @@ public:
 	void setMaxW(int mw);
 	void setCargoID(int id);
 
-	int getPrepDay() const;
-	int getPrepHour() const;
+	/*int getPrepDay() const;
+	int getPrepHour() const;*/
 	int getLoadTime() const;
 	int getunloadTime() const;
 	eCargoType getCargoType() const { return cargoType; }

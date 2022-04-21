@@ -3,6 +3,7 @@
 
 #include "Node.h"
 #include <iostream>
+#include"Cargo.h"
 using namespace std;
 
 template <typename T>
@@ -12,7 +13,6 @@ private:
 	Node<T> *Head;	//Pointer to the head of the list
 	//You can add tail pointer too (depending on your problem)
 public:
-
 
 	LinkedList()
 	{
@@ -79,6 +79,7 @@ public:
 
 	//[1]InsertEnd 
 	//inserts a new node at end if the list
+
 
 	//[2]Find 
 	//searches for a given value in the list, returns true if found; false otherwise.
@@ -228,3 +229,20 @@ public:
 };
 
 #endif	
+//class LinkedList<Cargo>
+//{
+//	Node<Cargo>* FindCargo(int Id) {
+//
+//		Cargo* P = Head;
+//		//P->setNext(Head);
+//		while (P != nullptr) {
+//			if (P->getCargoID() == id) {
+//				return P;
+//			}
+//			else {
+//				P = P->getNext();
+//			}
+//		}
+//		return nullptr;
+//	}
+//}

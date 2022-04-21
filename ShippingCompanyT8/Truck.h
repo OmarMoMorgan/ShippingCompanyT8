@@ -1,13 +1,15 @@
 #pragma once
+enum  eTruckType
+{
+	VipTruck,
+	SpecialTruck,
+	NormalTruck
+};
+
 class Truck
 {
 private:
-	enum class eTruckType
-	{
-		VipTruck,
-		SpecialTruck,
-		NormalTruck
-	};
+
 	eTruckType truckType;
 	int truckCapacity;
 	int maintenanceTime;
