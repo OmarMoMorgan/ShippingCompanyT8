@@ -225,6 +225,18 @@ public:
 		}
 		return counter;
 	}
+
+	T getHead() {
+		return Head;
+	}
+
+	//this one only removes it from the list but not from the program
+	T removeFirstelement() {
+		Node* out;
+		out = Head;
+		Head = Head->getNext();
+		return out;
+	}
 };
 
 #endif	

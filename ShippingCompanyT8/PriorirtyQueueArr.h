@@ -31,7 +31,7 @@ public:
 		n_node.data = n_item;
 		size++;
 	}
-
+private:
 	int leftChild(int i)
 	{
 
@@ -63,17 +63,9 @@ public:
 		}
 	}
 
-	void insert(T n_data,int p)
-	{
-		size = size + 1;
-		arr[size].data = n_data;
-		arr[size].priority = p;
+	
 
-		// Shift Up to maintain heap property
-		shiftUp(size);
-	}
-
-	//this method is mainly for debuggging right now
+	//this method is mainly for debuggging right now it shall be optimized later to suit the ui
 	void printarr() {
 		for (int i = 0; i < 5;i++) {
 			cout << arr[i].data << endl;
@@ -105,7 +97,7 @@ public:
 			shiftDown(maxIndex);
 		}
 	}
-
+public:
 	T Pop()
 	{
 		T result = arr[0].data;
@@ -121,8 +113,37 @@ public:
 		return result;
 	}
 
+
+	void insert(T n_data, int p)
+	{
+		size = size + 1;
+		arr[size].data = n_data;
+		arr[size].priority = p;
+
+		// Shift Up to maintain heap property
+		shiftUp(size);
+	}
+
+
 	int getCount() {
 		return size + 1;
 	}
 	
+	void peek(T &Output) {
+		Output =  arr[0].data;
+	}
+
+	void Pop(T& Output) {
+		Output = arr[0].data;
+
+		// Replace the value at the root
+		// with the last leaf
+		arr[0] = arr[size];
+		size = size - 1;
+
+		// Shift down the replaced element
+		// to maintain the heap property
+		shiftDown(0);
+	}
+
 };
