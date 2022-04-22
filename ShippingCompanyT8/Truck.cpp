@@ -24,8 +24,20 @@ int Truck::getTruckCapacity()const { return truckCapacity; }
 int Truck::getMaintenanceTime()const { return maintenanceTime; }
 int Truck::getBreakDownNum()const { return breakdownNum; }
 int Truck::getSpeed()const { return truckSpeed; }
-int Truck::getDelieveryInterval()const { return deleieryInterval; }
+double Truck::getDelieveryInterval()const { return deleieryInterval; }
 int Truck::getActiveTime()const { return activeTime; }
 int Truck::getJtm() const { return journeys_to_maintenance; }
 int Truck::getTDC() const{ return tDC; }
 int Truck::getTotalJourneys() const{ return totalJourneys; }
+
+int Truck::calcTruckUtilization(int TSim)
+{
+	int utilization = 0;
+	if (totalJourneys == 0) utilization = 0;
+	else
+	{
+		utilization = tDC / ((truckCapacity * totalJourneys) * (activeTime / TSim));
+
+		return utilization;
+	}
+}
