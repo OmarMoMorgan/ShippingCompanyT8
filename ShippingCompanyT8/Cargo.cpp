@@ -1,8 +1,9 @@
+#pragma once
 #include "Cargo.h"
 
 Cargo::Cargo()
 {
-	this->setCargoType(normalCargo);
+	this->setCargoType(1);
 	//this-> setPrepDay(ETD);
 	//this->setPrepHour(ETH);
 	this->setCargoID(0);
@@ -14,9 +15,9 @@ Cargo::Cargo()
 
 //Constructor Arguments: Same order as in the input file:
 //Cargo(Type , PrepTime DAY,PrepTime HOUR, ID, Distance, Load time, CargoCost)
-Cargo:: Cargo(eCargoType TYP,/* int ETD, int ETH,*/ int ID, double DIST, int LT, double cost)
+Cargo:: Cargo(int icomingCargoType,/* int ETD, int ETH,*/ int ID, double DIST, int LT, double cost)
 {
-	this->setCargoType(TYP);
+	this->setCargoType(icomingCargoType);
 	//this-> setPrepDay(ETD);
 	//this->setPrepHour(ETH);
 	this->setCargoID(ID);
@@ -66,7 +67,8 @@ bool Cargo:: operator>(Cargo* C_cw) const
 //void Cargo::setPrepHour(int ph) { prepHour = ph; }
 void Cargo::setLoadTime(int lt) { loadTime = lt; }
 void Cargo::setUnloadTime(int ut) { unloadTime = ut; }
-void Cargo::setCargoType(eCargoType t) { this->cargoType = t; }
+//void Cargo::setCargoType(eCargoType t) { this->cargoType = t; }
+void Cargo::setCargoType(int t) { CarTyp = t; }
 void Cargo::setDelieveryDistance(double dd) { deleiveryDistance = dd; }
 void Cargo::setCost(double c) { Cost = c; }
 void Cargo::setCargoID(int id) { cargoID = id; }

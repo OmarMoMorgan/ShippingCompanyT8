@@ -4,6 +4,7 @@
 #include <iostream>
 //#include "PriorirtyQueueArr.h"
 #include "Company.h"
+#include "LinkedList.h"
 
 int main()
 {
@@ -16,8 +17,15 @@ int main()
 
     p1.printarr();*/
 
-    /*Company c;
-    c.LoadFile();*/
+    Company c;
+    c.SimTest();
+    //LinkedList<int> l;
+   /* l.insertback(1);
+    l.insertback(2);
+    l.insertback(3);
+    l.insertback(4);
+    l.PrintList();*/
+
     std::cout << "Hello World!\n";
 }
 

@@ -2,10 +2,11 @@
 #include"Cargo.h"
 #include"LinkedList.h"
 template <typename T>
-class LinkedListCargo:public LinkedList<T>, Cargo
+class LinkedListCargo:public LinkedList<Cargo*>, Cargo
 {
 private:
 	Node<Cargo*>* Head;
+	//T getHead();
 public:
 
 	LinkedListCargo() :LinkedList< Cargo* >() {}
@@ -14,7 +15,7 @@ public:
 		Node<Cargo*>* P = Head;
 		while (P != nullptr) {
 			if (P->getItem()->getCargoID() == Id) {
-				return P;
+				return P->getItem();
 			}
 			else {
 				P = P->getNext();

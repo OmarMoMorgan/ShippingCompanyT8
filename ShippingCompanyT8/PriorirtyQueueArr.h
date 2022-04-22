@@ -1,4 +1,6 @@
 #pragma once
+//#include "stdafx.h"
+#include <iostream>
 using namespace std;
 
 
@@ -26,11 +28,7 @@ public:
 		size = -1;
 	}
 
-	void insert(T n_item) {
-		Node n_node;
-		n_node.data = n_item;
-		size++;
-	}
+	
 private:
 	int leftChild(int i)
 	{
@@ -114,6 +112,17 @@ public:
 	}
 
 
+	void insert(T n_item) {
+		//Node n_node;
+		//n_node.data = n_item;
+		size++;
+		arr[size].data = n_item;
+		arr[size].priority = 1;
+
+		// Shift Up to maintain heap property
+		shiftUp(size);
+	}
+
 	void insert(T n_data, int p)
 	{
 		size = size + 1;
@@ -133,7 +142,10 @@ public:
 		Output =  arr[0].data;
 	}
 
-	void Pop(T& Output) {
+	bool Pop(T &Output) {
+		if (getCount() == 0) {
+			return false;
+		}
 		Output = arr[0].data;
 
 		// Replace the value at the root
@@ -144,6 +156,7 @@ public:
 		// Shift down the replaced element
 		// to maintain the heap property
 		shiftDown(0);
+		return true;
 	}
 
 };

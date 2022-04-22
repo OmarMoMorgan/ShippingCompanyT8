@@ -3,20 +3,23 @@
 
 #include "Node.h"
 #include <iostream>
-#include"Cargo.h"
+#include "Cargo.h"
+//#include"Cargo.h"
 using namespace std;
 
 template <typename T>
 class LinkedList
 {
-private:
+protected:
 	Node<T> *Head;	//Pointer to the head of the list
 	//You can add tail pointer too (depending on your problem)
+	Node<T>* Tail;
 public:
 
 	LinkedList()
 	{
 		Head = nullptr;
+		Tail = nullptr;
 	}
 
 	//List is being desturcted ==> delete all items in the list
@@ -52,9 +55,16 @@ public:
 	*/
 	void InsertBeg(const T &data)
 	{
-		Node<T> *R = new Node<T>(data);
-		R->setNext(Head);
-		Head = R;
+		Node<T>* R = new Node<T>(data);
+		if (Head) {
+			R->setNext(Head);
+			Head = R;
+		}
+		else {
+			Head = R;
+			Tail = R;
+
+		}
 	}
 	
 	/*
@@ -114,10 +124,12 @@ public:
 		if (Head == nullptr) {
 			return false;
 		}
-		if (P->getNext()->getNext() == nullptr) {
+		//check this
+		if (P->getNext()/*->getNext()*/ == nullptr) {
 			if(P->getItem() == value){
 				delete P;
 				Head = nullptr;
+				
 			}
 		}
 			while (P->getNext()) {
@@ -232,11 +244,90 @@ public:
 	}
 
 	//this one only removes it from the list but not from the program
-	T removeFirstelement() {
-		Node* out;
-		out = Head;
-		Head = Head->getNext();
-		return out;
+	bool removeFirstelement(T& Element) {
+		//Node<T>* out;
+		if (Head == nullptr) {
+			return false;
+		}
+		else {
+			Element = Head->getItem();
+			if (Head->getNext()) {
+				Head = Head->getNext(); 
+			}
+			else
+			{
+				Head = nullptr;
+				Tail = nullptr;
+			}
+			return true;
+		}
+	}
+
+	bool removeFelement(T& Element) {
+		Element = Head->getItem();
+		if (DeleteNode(Head->getItem())) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	void insertback(const T &value) {
+		Node<T>* R = new Node<T>(value);
+		if (Tail) {
+			Tail->setNext(R);
+			Tail = Tail->getNext();
+		}
+		else {
+			Tail = R;
+			Head = R;
+		}
+	}
+
+	bool NewDeleteNode(T value) {
+		Node<T>* P = Head;
+		if (Head == nullptr) {
+			return false;
+		}
+		//check this
+		if (P->getNext() == nullptr) {
+			if (P->getItem() == value) {
+				delete P;
+				Head = nullptr;
+				Tail = nullptr;
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+		while (P->getNext()) {
+			if (P->getNext()->getItem() == value) {
+				P->setNext(P->getNext()->getNext());
+				delete P->getNext();
+				return true;
+			}
+			else {
+				P = P->getNext();
+			}
+		}
+
+		return false;
+	}
+
+	Cargo* FindCargo(int Id) {
+
+		Node<Cargo*>* P = Head;
+		while (P != nullptr) {
+			if (P->getItem()->getCargoID() == Id) {
+				return P->getItem();
+			}
+			else {
+				P = P->getNext();
+			}
+		}
+		return nullptr;
 	}
 };
 

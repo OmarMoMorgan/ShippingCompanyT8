@@ -6,22 +6,31 @@
 #pragma once
 
 using namespace std;
-template <typename T>
+//template <typename T>
 #pragma once
 class Cancel :public Events
 {
 public:
-	Cancel(int ID, int etD, int etH ) : Events(X, ID, etD, etH, normalCargo) {}
-	bool execute(LinkedListCargo<Cargo*> Normal ,Cargo* c)
+	Cancel(int ID, int etD, int etH ) : Events(2, ID, etD, etH, 1) {}
+	void Execute(LinkedList<Cargo*> &Normal  , LinkedQueue<Cargo*> &SpecialList
+		, PriorityQueueArr<Cargo*> &VipList)
      {
-		if (Normal.FindCargo(c->getCargoID()))
+		//Cargo* c = nullptr;
+		//c = Normal.FindCargo(getID());
+		if (Normal.FindCargo(getID()))
 		{
-			Normal.DeleteNode(c);
-			return true;
+			Normal.NewDeleteNode(Normal.FindCargo(getID()));
+			//return true;
+			cout << "list cancled";
 		}
-		else
-			return false;
+		else {
+			cout << "came but no sucess";
+		}
+
+		//else
+			//return false;
 
 	}
 };
+//i chaneged reyturn type for this function
 

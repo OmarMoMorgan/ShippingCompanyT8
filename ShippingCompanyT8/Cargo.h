@@ -1,10 +1,15 @@
 #pragma once
-enum  eCargoType    //Should be moved to smth like defs.
-{
-	VIPCargo,
-	specialCargo,
-	normalCargo
-};
+//for the time being there will be no enums as it is hard to pass them around
+//1 will be for normal
+//2will be for special
+//3 will be for vip
+//enum  eCargoType    //Should be moved to smth like defs.
+//{
+//	VIPCargo,
+//	specialCargo,
+//	normalCargo
+//};
+//ooooooos
 class Cargo
 {
 private:
@@ -17,7 +22,7 @@ private:
 	int loadTime;
 	int unloadTime;
 
-	eCargoType cargoType;
+	//eCargoType cargoType;
 
 
 	double deleiveryDistance;
@@ -25,9 +30,12 @@ private:
 
 	int maxW;
 
+	//this is the type of the cargo might be reomved later
+	int CarTyp;
+
 public:
 	Cargo();
-	Cargo(eCargoType TYP, /*int ETD, int ETH,*/ int ID, double DIST, int LT, double cost);
+	Cargo(int icomingCargoType, /*int ETD, int ETH,*/ int ID, double DIST, int LT, double cost);
 	bool isWaiting()const;
 	bool waitedForMax();
 
@@ -37,7 +45,8 @@ public:
 	void setPrepHour(int ph);*/
 	void setLoadTime(int lt);
 	void setUnloadTime(int ut);
-	void setCargoType(eCargoType t);
+	//void setCargoType(eCargoType t);
+	void setCargoType(int t);
 	void setDelieveryDistance(double dd);
 	void setCost(double c);
 	void setMaxW(int mw);
@@ -47,7 +56,8 @@ public:
 	int getPrepHour() const;*/
 	int getLoadTime() const;
 	int getunloadTime() const;
-	eCargoType getCargoType() const { return cargoType; }
+	//eCargoType getCargoType() const { return cargoType; }
+	int getCargoType() const { return CarTyp; }
 	double getDelieveryDistance() const;
 	double getCost() const;
 	int getCargoID() const;

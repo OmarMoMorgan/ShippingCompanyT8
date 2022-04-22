@@ -1,11 +1,15 @@
 #pragma once
 #include "Cargo.h"
-#include "Event.h"
+#include "Events.h"
+#include "Cancel.h"
+#include "Ready.h"
+#include "Promote.h"
 #include "Truck.h"
 #include "UI.h"
 #include "LinkedList.h"
 #include "PriorirtyQueueArr.h"
 #include "LinkedQueue.h"
+#include "LinkedListCargo.h"
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -46,6 +50,15 @@ class Company
 		};
 		
 
+		//method to split time 
+		template <typename T>
+		T convertString(std::string str) {
+			T ret;
+			std::stringstream ss(str);
+			ss >> ret;
+			return ret;
+		}
+
 		//Ecah list for cargo type they are seperated from each other and are divided
 		//into 3 lists one for miving one for waiting one for deliveried
 		//Normal cargo
@@ -72,7 +85,7 @@ class Company
 		PriorityQueueArr<Cargo*> MovingCargos;
 		
 		//Events list it is a queue as each one comes after the other
-		LinkedQueue<Event*> EventsList;
+		LinkedQueue<Events*> EventsList;
 
 		//Trucks lists
 		LinkedQueue<Truck*> AvailbleNormalTrucks;
@@ -116,7 +129,7 @@ class Company
 
 		int DummyNumJourneys;
 
-		string maxid;
+		int maxid;
 
 		//Time struct declrtionis here
 		Time UniversalTime;
@@ -178,57 +191,57 @@ public:
 	//also a template wil be used here so it can work for trucks and cargos
 	//lol some stuff don't also work on trucks as you need to only move it 
 	//thus this approach was not the best and the template is useless
-	template <typename T>
-	void MoveToOtherList(LinkedQueue<T> CameFromHere, PriorityQueueArr<T> GoingThere) {
-		T Thecargo;
-		CameFromHere.peek(Thecargo);
-		if (UniversalTime.CurrentDay >= Thecargo->getPrepDay() && UniversalTime.CurrentHour >= Thecargo->getPrepHour()) {
-			CameFromHere.dequeue(Thecargo);
-			GoingThere.insert(Thecargo, 1); //this number here shall be replaced with the function that gets loadtimes
-		}
-	}
-
-	template <typename T>
-	void MoveToOtherList(PriorityQueueArr<T> CameFromHere, PriorityQueueArr<T> GoingThere) {
-		T Thecargo;
-		CameFromHere.peek(Thecargo);
-		if (UniversalTime.CurrentDay >= Thecargo->getPrepDay() && UniversalTime.CurrentHour >= Thecargo->getPrepHour()) {
-			CameFromHere.Pop(Thecargo);
-			GoingThere.insert(Thecargo, 1); //this number here shall be replaced with the function that gets loadtimes
-		}
-	}
-
-	//this function is for moving from linked list to a queue it needs to be revised
-	template <typename T>
-	void MoveToOtherList(LinkedList<T> CameFromHere, LinkedQueue<T> GoingThere) {
-		T Thecargo;
-		Thecargo = CameFromHere.getHead();
-		if (UniversalTime.CurrentDay >= Thecargo->getPrepDay() && UniversalTime.CurrentHour >= Thecargo->getPrepHour()) {
-			Thecargo = CameFromHere.removeFirstelement();
-			GoingThere.enqueue(Thecargo);
-		}
-	}
-
-
-	template <typename T>
-	void MoveToOtherList(PriorityQueueArr<T> CameFromHere, LinkedQueue<T> GoingThere) {
-		T Thecargo;
-		CameFromHere.peek(Thecargo);
-		if (UniversalTime.CurrentDay >= Thecargo->getPrepDay() && UniversalTime.CurrentHour >= Thecargo->getPrepHour()) {
-			CameFromHere.Pop(Thecargo);
-			GoingThere.enque(Thecargo); 
-		}
-	}
-
-
-	template <typename T>
-	void MoveToOtherList(LinkedQueue<T> CameFromHere, LinkedQueue<T> GoingThere) {
-		T Thecargo;
-		CameFromHere.peek(Thecargo);
-		if (UniversalTime.CurrentDay >= Thecargo->getPrepDay() && UniversalTime.CurrentHour >= Thecargo->getPrepHour()) {
-			CameFromHere.dequeue(Thecargo);
-			GoingThere.enqueue(Thecargo);
-		}
-	}
+//	template <typename T>
+//	void MoveToOtherList(LinkedQueue<T> CameFromHere, PriorityQueueArr<T> GoingThere) {
+//		T Thecargo;
+//		CameFromHere.peek(Thecargo);
+//		if (UniversalTime.CurrentDay >= Thecargo->getPrepDay() && UniversalTime.CurrentHour >= Thecargo->getPrepHour()) {
+//			CameFromHere.dequeue(Thecargo);
+//			GoingThere.insert(Thecargo, 1); //this number here shall be replaced with the function that gets loadtimes
+//		}
+//	}
+//
+//	template <typename T>
+//	void MoveToOtherList(PriorityQueueArr<T> CameFromHere, PriorityQueueArr<T> GoingThere) {
+//		T Thecargo;
+//		CameFromHere.peek(Thecargo);
+//		if (UniversalTime.CurrentDay >= Thecargo->getPrepDay() && UniversalTime.CurrentHour >= Thecargo->getPrepHour()) {
+//			CameFromHere.Pop(Thecargo);
+//			GoingThere.insert(Thecargo, 1); //this number here shall be replaced with the function that gets loadtimes
+//		}
+//	}
+//
+//	//this function is for moving from linked list to a queue it needs to be revised
+//	template <typename T>
+//	void MoveToOtherList(LinkedList<T> CameFromHere, LinkedQueue<T> GoingThere) {
+//		T Thecargo;
+//		Thecargo = CameFromHere.getHead();
+//		if (UniversalTime.CurrentDay >= Thecargo->getPrepDay() && UniversalTime.CurrentHour >= Thecargo->getPrepHour()) {
+//			Thecargo = CameFromHere.removeFirstelement();
+//			GoingThere.enqueue(Thecargo);
+//		}
+//	}
+//
+//
+//	template <typename T>
+//	void MoveToOtherList(PriorityQueueArr<T> CameFromHere, LinkedQueue<T> GoingThere) {
+//		T Thecargo;
+//		CameFromHere.peek(Thecargo);
+//		if (UniversalTime.CurrentDay >= Thecargo->getPrepDay() && UniversalTime.CurrentHour >= Thecargo->getPrepHour()) {
+//			CameFromHere.Pop(Thecargo);
+//			GoingThere.enque(Thecargo); 
+//		}
+//	}
+//
+//
+//	template <typename T>
+//	void MoveToOtherList(LinkedQueue<T> CameFromHere, LinkedQueue<T> GoingThere) {
+//		T Thecargo;
+//		CameFromHere.peek(Thecargo);
+//		if (UniversalTime.CurrentDay >= Thecargo->getPrepDay() && UniversalTime.CurrentHour >= Thecargo->getPrepHour()) {
+//			CameFromHere.dequeue(Thecargo);
+//			GoingThere.enqueue(Thecargo);
+//		}
+//	}
 };
 
