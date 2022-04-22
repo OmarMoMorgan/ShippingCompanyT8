@@ -27,7 +27,9 @@ Cargo:: Cargo(eCargoType TYP,/* int ETD, int ETH,*/ int ID, double DIST, int LT,
 
 bool Cargo:: isWaiting() const
 {
-	if (prepDay < curDay && prepHour < curHour)
+	if (prepDay > curDay)
+		return true;
+	else if (prepDay == curDay && prepHour >= prepHour)
 		return true;
 	return false;
 }
