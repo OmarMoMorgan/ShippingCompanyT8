@@ -40,10 +40,12 @@ public:
 	int getMaintenanceTime()const;
 	int getBreakDownNum()const;
 	int getSpeed()const;
-	int getDelieveryInterval()const;
+	double getDelieveryInterval()const;
 	int getActiveTime()const;
 	int getJtm()const;
 	int getTDC()const;
 	int getTotalJourneys()const;
+
+	int calcTruckUtilization(int TSim);
 };
 
