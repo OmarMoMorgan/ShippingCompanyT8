@@ -29,6 +29,8 @@ int Truck::getActiveTime()const { return activeTime; }
 int Truck::getJtm() const { return journeys_to_maintenance; }
 int Truck::getTDC() const{ return tDC; }
 int Truck::getTotalJourneys() const{ return totalJourneys; }
+int  Truck::getTrucID() { return truckId; }
+
 
 int Truck::calcTruckUtilization(int TSim)
 {

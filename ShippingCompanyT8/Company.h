@@ -64,20 +64,20 @@ class Company
 		//Normal cargo
 		LinkedList<Cargo*> WaitingNormalCargo;
 		LinkedQueue<Cargo*> LoadingNormalCargo;
-		//PriorityQueueArr<Cargo*> MoivingNormalCargo;
-		//LinkedQueue<Cargo*> DeliveredNormalCargo;
+		PriorityQueueArr<Cargo*> MoivingNormalCargo;
+		LinkedQueue<Cargo*> DeliveredNormalCargo;
 		
 		//Special Cargo
 		LinkedQueue<Cargo*> WaitingSpecialCargo;
 		LinkedQueue<Cargo*> LoadingSpecialCargo;
-		//PriorityQueueArr<Cargo*> MoivingSpecialCargo;
-		//LinkedQueue<Cargo*> DeliveredSpecialCargo;
+		PriorityQueueArr<Cargo*> MoivingSpecialCargo;
+		LinkedQueue<Cargo*> DeliveredSpecialCargo;
 
 		//Vip Cargo
 		PriorityQueueArr<Cargo*> WatitingVipCargo;
 		LinkedQueue<Cargo*> LoadingVipCargo;
-		//PriorityQueueArr<Cargo*> MovingVipCargo;
-		//LinkedQueue<Cargo*> DeliveredVipCargo;
+		PriorityQueueArr<Cargo*> MovingVipCargo;
+		LinkedQueue<Cargo*> DeliveredVipCargo;
 
 		//the list for all the deleivred cargos look for changing this to a stack
 		//this is also the lsit for all the moving cargos
@@ -116,7 +116,7 @@ class Company
 
 
 		//this is the pointer to interact wtih the ui class
-		UI* UIController;
+		UIClass *UIController;
 
 		//These are dummy variables and shall be removed later after Truck class is ready
 		int DummyNSpeed;
@@ -243,5 +243,14 @@ public:
 //			GoingThere.enqueue(Thecargo);
 //		}
 //	}
+
+
+	////***functions needed for the UI***
+	//int getNumberNormalTrucks();
+	//int getNumberSpecialTrucks();
+	//int getNumberVipTrucks();
+
+	int getCurrentDay();
+	int getCurrentHour();
 };
 

@@ -10,6 +10,7 @@ class Truck
 {
 private:
 
+	int truckId;
 	eTruckType truckType;
 	int truckCapacity;
 	int maintenanceTime;
@@ -45,6 +46,8 @@ public:
 	int getJtm()const;
 	int getTDC()const;
 	int getTotalJourneys()const;
+
+	int getTrucID();
 
 	int calcTruckUtilization(int TSim);
 };

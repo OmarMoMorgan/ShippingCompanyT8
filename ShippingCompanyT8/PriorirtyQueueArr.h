@@ -1,6 +1,7 @@
 #pragma once
 //#include "stdafx.h"
 #include <iostream>
+#include "Cargo.h"
 using namespace std;
 
 
@@ -64,7 +65,7 @@ private:
 	
 
 	//this method is mainly for debuggging right now it shall be optimized later to suit the ui
-	void printarr() {
+	void printar() {
 		for (int i = 0; i < 5;i++) {
 			cout << arr[i].data << endl;
 		}
@@ -159,4 +160,23 @@ public:
 		return true;
 	}
 
+	void printarr(){}
+
+	void printarrCargo() {
+		for (int i = 0; i < 5; i++) {
+			cout << arr[i].data->getCargoID() << endl;
+		}
+	}
+
+
+	void printarrTruck() {
+		for (int i = 0; i < 5; i++) {
+			cout << arr[i].data->getTrucID() << endl;
+		}
+	}
+
 };
+
+
+
+

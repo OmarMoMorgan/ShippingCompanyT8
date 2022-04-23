@@ -224,19 +224,23 @@ public:
 		else { return; }
 	}
 
-	int getCounter() {
-		int counter = 0;
+	int getCount() {
+		int size = 0;
+		Node<T>* mover = Head;
 		if (Head) {
-			counter++;
+			size++;
 		}
-		Node* mover;
+		else {
+			return 0;
+		}
+		
 		mover = Head->getNext();
 		while (mover)
 		{
-			counter++;
+			size++;
 			mover = mover->getNext();
 		}
-		return counter;
+		return size;
 	}
 
 	T getHead() {
@@ -329,7 +333,26 @@ public:
 		}
 		return nullptr;
 	}
+
+
+	
+	void PrintListCargo() const
+	{
+		cout << "\nprinting list contents:\n\n";
+		Node<Cargo*>* p = Head;
+
+		while (p)
+		{
+			cout << "[ " << p->getItem()->getCargoID() << " ]";
+			cout << "--->";
+			p = p->getNext();
+		}
+		cout << "*\n";
+	}
+	
 };
+
+
 
 #endif	
 //class LinkedList<Cargo>

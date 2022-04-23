@@ -35,7 +35,7 @@ void Company::LoadFile() {
 	//reading events here 
 	for (int i = 0; i < NumberEvents; i++) {
 		Line >> eventtype;
-		cout << "here i am file loading" << endl;
+		//cout << "here i am file loading" << endl;
 		if (eventtype == "R") {
 
 			Line >> cargotype >> hourfromfile >> id >> dist >> LT >> cost;
@@ -57,7 +57,7 @@ void Company::LoadFile() {
 			Ready* nReady = new Ready(id, cost, day, hr, LT, dist, cargot);
 			//pEvent = nReady;
 			EventsList.enqueue(nReady);
-			cout << "Ready " << "day " << day << " hour " << hr << endl;
+			//cout << "Ready " << "day " << day << " hour " << hr << endl;
 		}
 		else if (eventtype == "X") {
 			Line >> hourfromfile >> id;
@@ -65,7 +65,7 @@ void Company::LoadFile() {
 			hr = convertString<int>(hourfromfile.substr(2, 4));
 			Cancel* ncanel = new Cancel(id, day, hr);
 			EventsList.enqueue(ncanel);
-			cout << "cancel " << "day " << day << " hour " << hr << endl;
+			//cout << "cancel " << "day " << day << " hour " << hr << endl;
 		}
 		else if (eventtype == "P") {
 			Line >> hourfromfile >> id >> cost;
@@ -73,7 +73,7 @@ void Company::LoadFile() {
 			hr = convertString<int>(hourfromfile.substr(2, 4));
 			Promote* nPromote = new Promote(id, day, hr, cost);
 			EventsList.enqueue(nPromote);
-			cout << "promote " << "day " << day << " hour " << hr << endl;
+			//cout << "promote " << "day " << day << " hour " << hr << endl;
 		}
 		
 
@@ -81,7 +81,7 @@ void Company::LoadFile() {
 		
 		
 		maxid = id;
-		cout<<"here is the num" << maxid << endl;
+		//cout<<"here is the num" << maxid << endl;
 	}
 
 	Line.close();	
@@ -107,15 +107,20 @@ void Company::SimTest() {
 	int eth ;
 
 	int flag = 0;
-	while (EventsList.getCount() >= 0 && DeliveredCargo.getCount()  != maxid && flag < 3) {
+	UIController = new UIClass();
+	while (EventsList.getCount() >= 0 && (DeliveredNormalCargo.getCount() + DeliveredSpecialCargo.getCount() + DeliveredVipCargo.getCount())  != maxid && flag < 3) {
 
 		UniversalTime.MoveOneunit();
 		EventsList.peek(Eventhappening);
 
+		/*UIController->StartInteractiveMode(UniversalTime.CurrentDay , UniversalTime.CurrentHour , 
+			WaitingSpecialCargo , WaitingNormalCargo , WatitingVipCargo , AvailbleNormalTrucks , AvailbleSpecialTrucks ,
+			AvailbleVipTrucks , DeliveredSpecialCargo , DeliveredVipCargo , DeliveredNormalCargo);*/
+
 		etd = Eventhappening->getETD();
 		eth= Eventhappening->getETH();
 
-		cout << "Day :" << UniversalTime.CurrentDay << " Hour : " << UniversalTime.CurrentHour << endl;
+		//cout << "Day :" << UniversalTime.CurrentDay << " Hour : " << UniversalTime.CurrentHour << endl;
 
 		
 			while (etd <= UniversalTime.CurrentDay && eth <= UniversalTime.CurrentHour && flag == 0) {
@@ -123,7 +128,7 @@ void Company::SimTest() {
 				if (!EventsList.dequeue(Eventhappening)) {
 					flag = 1;
 				}
-				cout << etd << "	" << eth << endl;
+			//	cout << etd << "	" << eth << endl;
 				Eventhappening->Execute(WaitingNormalCargo, WaitingSpecialCargo, WatitingVipCargo);
 				//delete Eventhappening;
 				EventsList.peek(Eventhappening);
@@ -134,21 +139,21 @@ void Company::SimTest() {
 			
 				if ((UniversalTime.CurrentDay + UniversalTime.CurrentHour) % 5 == 0) {
 					//if(WaitingNormalCargo.getHead(). >= UniversalTime.CurrentDay && WaitingNormalCargo)
-					WaitingNormalCargo.PrintList();
+					//WaitingNormalCargo.PrintList();
 					if (WaitingNormalCargo.removeFirstelement(CargoToBeMoved)) {
-						DeliveredCargo.enqueue(CargoToBeMoved);
-						cout << "Cargo added id : " << CargoToBeMoved->getCargoID() << endl;
+						DeliveredNormalCargo.enqueue(CargoToBeMoved);
+						//cout << "Cargo added id : " << CargoToBeMoved->getCargoID() << endl;
 						//WaitingNormalCargo.PrintList();
 					}
 
 					if (WaitingSpecialCargo.dequeue(CargoToBeMoved)) {
-						DeliveredCargo.enqueue(CargoToBeMoved);
-						cout << "Cargo added id : " << CargoToBeMoved->getCargoID() << endl;
+						DeliveredSpecialCargo.enqueue(CargoToBeMoved);
+						//cout << "Cargo added id : " << CargoToBeMoved->getCargoID() << endl;
 					}
 
 					if (WatitingVipCargo.Pop(CargoToBeMoved)) {
-						DeliveredCargo.enqueue(CargoToBeMoved);
-						cout << "Cargo added id : " << CargoToBeMoved->getCargoID() << endl;
+						DeliveredVipCargo.enqueue(CargoToBeMoved);
+						//cout << "Cargo added id : " << CargoToBeMoved->getCargoID() << endl;
 					}
 
 					
@@ -161,11 +166,11 @@ void Company::SimTest() {
 		//cout << "test" << endl;
 		//cout << DeliveredCargo.getCount();
 	}
-	int numCargos = DeliveredCargo.getCount();
-	for (int i = 0; i < numCargos; i++) {
-		DeliveredCargo.dequeue(CargoToBeMoved);
-		cout << CargoToBeMoved->getCargoID() << endl;
-	}
+	//int numCargos = DeliveredCargo.getCount();
+	//for (int i = 0; i < numCargos; i++) {
+	//	DeliveredCargo.dequeue(CargoToBeMoved);
+		//cout << CargoToBeMoved->getCargoID() << endl;}
+	
 	
 
 }
@@ -264,3 +269,19 @@ void Company::LoadCheck()
 	}
 }
 
+
+int Company::getCurrentDay()
+{
+	return UniversalTime.CurrentDay;
+}
+
+int Company::getCurrentHour()
+{
+	return UniversalTime.CurrentHour;
+}
+
+
+//UI UITest;
+//UITest.StartInteractiveMode(getCurrentDay(), getCurrentHour(), WaitingSpecialCargo, WaitingNormalCargo, WaitingVIPCargo, AvailbleNormalTrucks,
+	//AvailbleSpecialTrucks, AvailbleVipTrucks,
+	//DeliveredSpecialCargo, DeliveredVipCargo, DeliveredNormalCargo);

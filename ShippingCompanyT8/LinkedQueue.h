@@ -44,6 +44,11 @@ Single Node Case:
 
 #include "Node.h"
 #include "QueueADT.h"
+#include "Truck.h"
+#include "Cargo.h"
+#include <iostream>
+
+using namespace std;
 
 template <typename T>
 class LinkedQueue:public QueueADT<T>
@@ -59,6 +64,28 @@ public :
 	bool peek(T& frntEntry)  const;	
 	int getCount();
 	~LinkedQueue();
+	void PrintQueue();
+	//void PrintQueueCargo();
+	//void PrintQueueTruck();
+	//int getCount();
+
+	void PrintQueueTruck()
+	{
+		Truck* K;
+		cout << "\nQueue contents: ";
+		while (dequeue(K))
+			cout << K->getTrucID() << " ";
+		cout << endl;
+	}
+
+	void PrintQueueCargo()
+	{
+		Cargo* K;
+		cout << "\nQueue contents: ";
+		while (dequeue(K))
+			cout << K->getCargoID() << " ";
+		cout << endl;
+	}
 };
 /////////////////////////////////////////////////////////////////////////////////////////
 
@@ -193,5 +220,70 @@ LinkedQueue<T>::~LinkedQueue()
 	//cout<<"\n Is LinkedQueue Empty now?? ==> "<<boolalpha<<isEmpty();
 	//cout<<"\nEnding LinkedQueue destructor..."<<endl;
 }
+
+///////////////////# will use it for the UI (counter) #\\\\\\\\
+
+
+template<typename T>
+void LinkedQueue<T>::PrintQueue()
+{
+	T K;
+	cout << "\nQueue contents: ";
+	while (dequeue(K))
+		cout << K << " ";
+	cout << endl;
+}
+
+
+//void LinkedQueue<Cargo*>::PrintQueueCargo()
+//{
+//	Cargo* K;
+//	cout << "\nQueue contents: ";
+//	while (dequeue(K))
+//		cout << K->getCargoID() << " ";
+//	cout << endl;
+//}
+//void LinkedQueue<Truck*>::PrintQueue()
+//{
+//	Truck* K;
+//	cout << "\nQueue contents: ";
+//	while (dequeue(K))
+//		cout << K->getTrucID() << " ";
+//	cout << endl;
+//}
+
+
+
+
+//this function does the same thing for the one above
+//template <typename T>
+//int LinkedQueue<T>::getCount() {
+//	LinkedQueue<T>h;
+//	T frntEntry;
+//	int counter = 0;
+//	while (frontPtr) {
+//		counter++;
+//		dequeue(frntEntry);
+//		h.enqueue(frntEntry);
+//	}
+//	Node<T>* NodePtr = h.frontPtr;
+//	while (NodePtr)
+//	{
+//		enqueue(NodePtr->getItem());	//get data of each node and enqueue it in this queue 
+//		NodePtr = NodePtr->getNext();
+//	}		return counter;
+//
+//
+//}
+
+
+//void LinkedQueue<Truck*>::PrintQueueTruck()
+//{
+//	Truck* K;
+//	cout << "\nQueue contents: ";
+//	while (dequeue(K))
+//		cout << K->getTrucID() << " ";
+//	cout << endl;
+//}
 
 #endif
