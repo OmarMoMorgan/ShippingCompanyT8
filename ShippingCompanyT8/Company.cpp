@@ -113,9 +113,9 @@ void Company::SimTest() {
 		UniversalTime.MoveOneunit();
 		EventsList.peek(Eventhappening);
 
-		/*UIController->StartInteractiveMode(UniversalTime.CurrentDay , UniversalTime.CurrentHour , 
+		UIController->StartInteractiveMode(UniversalTime.CurrentDay , UniversalTime.CurrentHour , 
 			WaitingSpecialCargo , WaitingNormalCargo , WatitingVipCargo , AvailbleNormalTrucks , AvailbleSpecialTrucks ,
-			AvailbleVipTrucks , DeliveredSpecialCargo , DeliveredVipCargo , DeliveredNormalCargo);*/
+			AvailbleVipTrucks , DeliveredSpecialCargo , DeliveredVipCargo , DeliveredNormalCargo);
 
 		etd = Eventhappening->getETD();
 		eth= Eventhappening->getETH();

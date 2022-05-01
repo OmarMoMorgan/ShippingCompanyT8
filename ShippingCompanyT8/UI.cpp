@@ -1,31 +1,31 @@
 #include "UI.h"
 #include <iostream>
-#include "Company.h"
+//#include "Company.h"
 //#include "Truck.h"
 
 
 
-int UIClass::getTotalEmptytrucks(LinkedQueue<Truck*> lq1, LinkedQueue<Truck*> lq2, PriorityQueueArr<Truck*> pq)
+int UIClass::getTotalEmptytrucks(LinkedQueue<Truck*> &lq1, LinkedQueue<Truck*> &lq2, PriorityQueueArr<Truck*> &pq)
 {
 	return lq1.getCount() + lq2.getCount() + pq.getCount();
 }
 
-int UIClass::getTotalLoadingCargo(LinkedQueue<Cargo*> lq1, LinkedQueue<Cargo*> lq2, LinkedQueue<Cargo*> lq3)
+int UIClass::getTotalLoadingCargo(LinkedQueue<Cargo*> &lq1, LinkedQueue<Cargo*> &lq2, LinkedQueue<Cargo*> &lq3)
 {
 	return lq1.getCount() + lq2.getCount() + lq3.getCount();
 }
 
-int UIClass::getTotalWaitingCargo(PriorityQueueArr<Cargo*> pq, LinkedList<Cargo*> ll, LinkedQueue<Cargo*> lq)
+int UIClass::getTotalWaitingCargo(PriorityQueueArr<Cargo*> &pq, LinkedList<Cargo*> &ll, LinkedQueue<Cargo*> &lq)
 {
 	return pq.getCount() + ll.getCount() + lq.getCount();
 }
 
-int UIClassgetTotalMovingCargo(PriorityQueueArr<Cargo*> pq)
+int UIClassgetTotalMovingCargo(PriorityQueueArr<Cargo*> &pq)
 {
 	return  pq.getCount();
 }
 
-int UIClassgetTotalDelieveredCargo(LinkedQueue<Cargo*> lq1, LinkedQueue<Cargo*> lq2, LinkedQueue<Cargo*> lq3)
+int UIClassgetTotalDelieveredCargo(LinkedQueue<Cargo*> &lq1, LinkedQueue<Cargo*> &lq2, LinkedQueue<Cargo*> &lq3)
 {
 	return lq1.getCount() + lq2.getCount() + lq3.getCount();
 }
@@ -81,11 +81,11 @@ int UIClass::getCurrentMode()
 
 
 
-void UIClass::StartInteractiveMode(int D, int H, LinkedQueue<Cargo*> WaitingSpecialCargo, LinkedList<Cargo*> WaitingNormalCargo,
-	PriorityQueueArr<Cargo*> WaitingVIPCargo, LinkedQueue<Truck*> AvailbleNormalTrucks,
-	LinkedQueue<Truck*> AvailbleSpecialTrucks, PriorityQueueArr<Truck*> AvailbleVipTrucks,
-	LinkedQueue<Cargo*> DeliveredSpecialCargo, LinkedQueue<Cargo*> DeliveredVipCargo, 
-	LinkedQueue<Cargo*> DeliveredNormalCargo)
+void UIClass::StartInteractiveMode(int D, int H, LinkedQueue<Cargo*> &WaitingSpecialCargo, LinkedList<Cargo*> &WaitingNormalCargo,
+	PriorityQueueArr<Cargo*> &WaitingVIPCargo, LinkedQueue<Truck*> &AvailbleNormalTrucks,
+	LinkedQueue<Truck*> &AvailbleSpecialTrucks, PriorityQueueArr<Truck*> &AvailbleVipTrucks,
+	LinkedQueue<Cargo*> &DeliveredSpecialCargo, LinkedQueue<Cargo*> &DeliveredVipCargo, 
+	LinkedQueue<Cargo*> &DeliveredNormalCargo)
 
 {
 	{
@@ -95,14 +95,14 @@ void UIClass::StartInteractiveMode(int D, int H, LinkedQueue<Cargo*> WaitingSpec
 		std::cout << getTotalWaitingCargo(WaitingVIPCargo, WaitingNormalCargo, WaitingSpecialCargo);
 		std::cout << "Waiting Cargos: ";
 		std::cout << std::string(20, '_') << endl;
-		std::cout << "[ "; WaitingNormalCargo.PrintList(); cout << "]" << "  " << "("; WaitingSpecialCargo.PrintQueueCargo(); cout << ")" << " " << "{"; WaitingVIPCargo.printarr(); cout << "}";
+		std::cout << "[ "; WaitingNormalCargo.PrintListCargo(); cout << "]" << "  " << "("; WaitingSpecialCargo.PrintQueue(); cout << ")" << " " << "{"; WaitingVIPCargo.printarrCargo(); cout << "}";
 
 
 		//std::cout<<getTotalDelieveredCargo(delievedCargo);
 
 		std::cout << "delieverd Cargos: ";
 		std::cout << std::string(20, '_') << endl;
-		std::cout << "[ "; DeliveredNormalCargo.PrintQueueCargo(); cout << "]" << "  " << "("; DeliveredSpecialCargo.PrintQueueCargo(); cout << ")" << " " << "{"; DeliveredVipCargo.PrintQueueCargo(); cout << "}";
+		std::cout << "[ "; DeliveredNormalCargo.PrintQueue(); cout << "]" << "  " << "("; DeliveredSpecialCargo.PrintQueue(); cout << ")" << " " << "{"; DeliveredVipCargo.PrintQueue(); cout << "}";
 
 
 		/*std::cout << getTotalLoadingCargo(LoadingNormalCargo, LoadingVipCargo, LoadingSpecialCargo);
@@ -115,7 +115,7 @@ void UIClass::StartInteractiveMode(int D, int H, LinkedQueue<Cargo*> WaitingSpec
 		std::cout << "Empty Trucks: ";
 
 		std::cout << std::string(20, '_') << endl;
-		std::cout << "[ "; AvailbleNormalTrucks.PrintQueue(); cout << "]" << "  " << "("; AvailbleSpecialTrucks.PrintQueue(); cout << ")" << " " << "{"; AvailbleVipTrucks.printarr(); cout << "}";
+		std::cout << "[ "; AvailbleNormalTrucks.PrintQueue(); cout << "]" << "  " << "("; AvailbleSpecialTrucks.PrintQueue(); cout << ")" << " " << "{"; AvailbleVipTrucks.printarrTruck(); cout << "}";
 
 
 

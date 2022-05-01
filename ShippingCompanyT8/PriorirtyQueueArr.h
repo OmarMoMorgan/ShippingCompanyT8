@@ -163,14 +163,14 @@ public:
 	void printarr(){}
 
 	void printarrCargo() {
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < getCount(); i++) {
 			cout << arr[i].data->getCargoID() << endl;
 		}
 	}
 
 
 	void printarrTruck() {
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < getCount(); i++) {
 			cout << arr[i].data->getTrucID() << endl;
 		}
 	}

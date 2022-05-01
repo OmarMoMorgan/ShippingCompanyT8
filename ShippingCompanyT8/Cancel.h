@@ -1,13 +1,15 @@
+#pragma once
+
 #include "Events.h"
 #include "Cargo.h"
-#include"LinkedListCargo.h"
+//#include"LinkedListCargo.h"
 
-#include"defns.h"
-#pragma once
+//#include"defns.h"
+
 
 using namespace std;
 //template <typename T>
-#pragma once
+
 class Cancel :public Events
 {
 public:
@@ -21,11 +23,11 @@ public:
 		{
 			Normal.NewDeleteNode(Normal.FindCargo(getID()));
 			//return true;
-			cout << "list cancled";
+			//cout << "list cancled";
 		}
-		else {
-			cout << "came but no sucess";
-		}
+		//else {
+			//cout << "came but no sucess";
+		//}
 
 		//else
 			//return false;

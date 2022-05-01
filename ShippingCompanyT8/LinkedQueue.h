@@ -65,15 +65,16 @@ public :
 	int getCount();
 	~LinkedQueue();
 	void PrintQueue();
+	//template<> void PrintQueue<Cargo*>();
 	//void PrintQueueCargo();
 	//void PrintQueueTruck();
 	//int getCount();
 
-	void PrintQueueTruck()
+	/*void PrintQueueTruck()
 	{
 		Truck* K;
 		cout << "\nQueue contents: ";
-		while (dequeue(K))
+		while (LinkedQueue<Cargo*>.dequeue(K))
 			cout << K->getTrucID() << " ";
 		cout << endl;
 	}
@@ -82,10 +83,35 @@ public :
 	{
 		Cargo* K;
 		cout << "\nQueue contents: ";
-		while (dequeue(K))
+		while (LinkedQueue<Cargo*> dequeue(K))
 			cout << K->getCargoID() << " ";
 		cout << endl;
-	}
+	}*/
+
+
+	//before i stared working after phase 1 ended
+	/*void PrintTheQueue() {
+		Cargo* K;
+		Truck* nK;
+		switch (typeof(T)) {
+		case Cargo*:
+			
+			cout << "\nQueue contents: ";
+			while (LinkedQueue<Cargo*> dequeue(K))
+				cout << K->getCargoID() << " ";
+			cout << endl;
+			break;
+		case Truck*:
+			
+			cout << "\nQueue contents: ";
+			while (LinkedQueue<Truck*>.dequeue(nK))
+				cout << nK->getTrucID() << " ";
+			cout << endl;
+			break;
+		default:
+			cout << "NO";
+		}
+	}*/
 };
 /////////////////////////////////////////////////////////////////////////////////////////
 
@@ -285,5 +311,25 @@ void LinkedQueue<T>::PrintQueue()
 //		cout << K->getTrucID() << " ";
 //	cout << endl;
 //}
+
+template<>
+inline void LinkedQueue<Cargo*>::PrintQueue() {
+	Cargo* K;
+
+	cout << "\nQueue contents: ";
+	while (dequeue(K))
+		cout << K->getCargoID() << " " << endl;
+
+}
+
+template<>
+inline void LinkedQueue<Truck*>::PrintQueue() {
+	Truck* K;
+	cout << "\nQueue contents: ";
+	while (dequeue(K))
+		cout << K->getTrucID() << " ";
+	cout << endl;
+}
+
 
 #endif

@@ -2,7 +2,8 @@
 #include"Cargo.h"
 #include "LinkedQueue.h"
 #include "PriorirtyQueueArr.h"
-#include "LinkedListCargo.h"
+#include "LinkedList.h"
+//#include "LinkedListCargo.h"
 
 //this enum will be removed for now or not used as it 
 //is harder to know the value of the int or pass it as a parameter

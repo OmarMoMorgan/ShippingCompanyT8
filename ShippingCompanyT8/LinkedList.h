@@ -341,7 +341,7 @@ public:
 		cout << "\nprinting list contents:\n\n";
 		Node<Cargo*>* p = Head;
 
-		while (p)
+		while (p != nullptr)
 		{
 			cout << "[ " << p->getItem()->getCargoID() << " ]";
 			cout << "--->";

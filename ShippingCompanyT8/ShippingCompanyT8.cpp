@@ -4,7 +4,7 @@
 #include <iostream>
 //#include "PriorirtyQueueArr.h"
 #include "Company.h"
-#include "LinkedList.h"
+//#include "LinkedList.h"
 
 int main()
 {
@@ -26,7 +26,7 @@ int main()
     l.insertback(4);
     l.PrintList();*/
 
-    std::cout << "Hello World!\n";
+    //std::cout << "Hello World!\n";
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
