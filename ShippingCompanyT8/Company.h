@@ -81,8 +81,8 @@ class Company
 
 		//the list for all the deleivred cargos look for changing this to a stack
 		//this is also the lsit for all the moving cargos
-		LinkedQueue<Cargo*> DeliveredCargo;
-		PriorityQueueArr<Cargo*> MovingCargos;
+		//LinkedQueue<Cargo*> DeliveredCargo;
+		//PriorityQueueArr<Cargo*> MovingCargos;
 		
 		//Events list it is a queue as each one comes after the other
 		LinkedQueue<Events*> EventsList;
@@ -90,16 +90,17 @@ class Company
 		//Trucks lists
 		LinkedQueue<Truck*> AvailbleNormalTrucks;
 		PriorityQueueArr<Truck*> LoadingNormalTrucks;
-		PriorityQueueArr<Truck*> MovingNormalTrucks;
+		//PriorityQueueArr<Truck*> MovingNormalTrucks;
 		
 		LinkedQueue<Truck*> AvailbleSpecialTrucks;
 		PriorityQueueArr<Truck*> LoadingSpecialTrucks;
-		PriorityQueueArr<Truck*> MovingSpecialTrucks;
+		//PriorityQueueArr<Truck*> MovingSpecialTrucks;
 
 		PriorityQueueArr<Truck*> AvailbleVipTrucks;
 		PriorityQueueArr<Truck*> LoadingVipTrucks;
-		PriorityQueueArr<Truck*> MovingVipTrucks;
+		//PriorityQueueArr<Truck*> MovingVipTrucks;
 		
+		PriorityQueueArr<Truck*> MovingTrucks;
 		LinkedQueue<Truck*> FixingTrucks;
 
 
