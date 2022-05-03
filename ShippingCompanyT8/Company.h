@@ -63,20 +63,20 @@ class Company
 		//into 3 lists one for miving one for waiting one for deliveried
 		//Normal cargo
 		LinkedList<Cargo*> WaitingNormalCargo;
-		LinkedQueue<Cargo*> LoadingNormalCargo;
-		PriorityQueueArr<Cargo*> MoivingNormalCargo;
+		//LinkedQueue<Cargo*> LoadingNormalCargo;
+		//PriorityQueueArr<Cargo*> MoivingNormalCargo;
 		LinkedQueue<Cargo*> DeliveredNormalCargo;
 		
 		//Special Cargo
 		LinkedQueue<Cargo*> WaitingSpecialCargo;
-		LinkedQueue<Cargo*> LoadingSpecialCargo;
-		PriorityQueueArr<Cargo*> MoivingSpecialCargo;
+		//LinkedQueue<Cargo*> LoadingSpecialCargo;
+		//PriorityQueueArr<Cargo*> MoivingSpecialCargo;
 		LinkedQueue<Cargo*> DeliveredSpecialCargo;
 
 		//Vip Cargo
 		PriorityQueueArr<Cargo*> WatitingVipCargo;
-		LinkedQueue<Cargo*> LoadingVipCargo;
-		PriorityQueueArr<Cargo*> MovingVipCargo;
+		//LinkedQueue<Cargo*> LoadingVipCargo;
+		//PriorityQueueArr<Cargo*> MovingVipCargo;
 		LinkedQueue<Cargo*> DeliveredVipCargo;
 
 		//the list for all the deleivred cargos look for changing this to a stack

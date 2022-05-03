@@ -338,16 +338,16 @@ public:
 	
 	void PrintListCargo() const
 	{
-		cout << "\nprinting list contents:\n\n";
+		//cout << "\nprinting list contents:\n\n";
 		Node<Cargo*>* p = Head;
 
 		while (p != nullptr)
 		{
 			cout << "[ " << p->getItem()->getCargoID() << " ]";
-			cout << "--->";
+			//cout << "--->";
 			p = p->getNext();
 		}
-		cout << "*\n";
+		//cout << "*\n";
 	}
 	
 };

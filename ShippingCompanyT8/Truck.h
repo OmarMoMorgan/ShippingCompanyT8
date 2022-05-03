@@ -1,4 +1,7 @@
 #pragma once
+#include "PriorirtyQueueArr.h"
+
+
 enum  eTruckType
 {
 	VipTruck,
@@ -11,7 +14,8 @@ class Truck
 private:
 
 	int truckId;
-	eTruckType truckType;
+	//1 for normal , 2 for special , 3 for vip
+	int truckType;
 	int truckCapacity;
 	int maintenanceTime;
 	int journeys_to_maintenance;     //Rename for same convention.		
@@ -22,21 +26,25 @@ private:
 	int tDC = 0;  //Total Cargos Delievered, to be increased with each
 	int totalJourneys = 0;  //Total journeys by the truck.
 
+	//lists for the cargo that is being loaded into the truck and being moved by the truck
+	PriorityQueueArr<Cargo*> LoadingCargo{truckCapacity};
+	PriorityQueueArr<Cargo*> MovingCargo{truckCapacity};
+
 public:
-	Truck(eTruckType t,int speed, int capacity, int J, int maintt);
+	Truck(int ttype,int speed, int capacity, int J, int maintt);
 	
 	void setTruckCapacity(int c);
 	void setMaintenanceTime(int t);
 	void setBreakDownNum(int n);
 	void setSpeed(int s);   //Perhaps we can add the 3 speeds in an outer lvl...
 	//void setDelieveryInterval(double i);  //Think more..
-	void setTruckType(eTruckType t);
+	void setTruckType(int t);
 	void setActiveTime(int at);
 	void setJtm(int J);
 	void setTDC(int new_tDC);
 	void setTotalJourneys(int tj);
 
-	eTruckType getType()const { return truckType; };
+	int getType()const { return truckType; };
 	int getTruckCapacity()const;
 	int getMaintenanceTime()const;
 	int getBreakDownNum()const;
@@ -50,5 +58,7 @@ public:
 	int getTrucID();
 
 	int calcTruckUtilization(int TSim);
+
+	void MoveLoadingToMoving();
 };
 

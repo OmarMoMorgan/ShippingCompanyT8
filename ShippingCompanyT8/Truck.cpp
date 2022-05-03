@@ -1,7 +1,7 @@
 #include "Truck.h"
-Truck::Truck(eTruckType t, int speed, int capacity, int J, int maintt)
+Truck::Truck(int ttype, int speed, int capacity, int J, int maintt)
 {
-	this->setTruckType(t);
+	this->setTruckType(ttype);
 	this->setSpeed(speed);
 	this->setTruckCapacity(capacity);
 	this->setJtm(J);
@@ -13,7 +13,7 @@ void Truck:: setMaintenanceTime(int t) { maintenanceTime = t; }
 void Truck:: setBreakDownNum(int n) { breakdownNum = n; }
 void Truck::setSpeed(int s) { truckSpeed = s; }
 //void setDelieveryInterval(double i);  //Think more..
-void Truck::setTruckType(eTruckType t) { truckType = t; }
+void Truck::setTruckType(int t) { truckType = t; }
 void Truck::setActiveTime(int at) { activeTime = at; }
 void Truck::setJtm(int J) { journeys_to_maintenance = J; }
 void Truck::setTDC(int new_tDC) { tDC = new_tDC; }
@@ -41,5 +41,11 @@ int Truck::calcTruckUtilization(int TSim)
 		utilization = tDC / ((truckCapacity * totalJourneys) * (activeTime / TSim));
 
 		return utilization;
+	}
+}
+
+void Truck::MoveLoadingToMoving() {
+	for (int i = 0; i < truckCapacity; i++) {
+		MovingCargo.insert(LoadingCargo.Pop());
 	}
 }

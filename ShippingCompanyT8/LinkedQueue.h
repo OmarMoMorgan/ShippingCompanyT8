@@ -315,19 +315,36 @@ void LinkedQueue<T>::PrintQueue()
 template<>
 inline void LinkedQueue<Cargo*>::PrintQueue() {
 	Cargo* K;
-
-	cout << "\nQueue contents: ";
-	while (dequeue(K))
-		cout << K->getCargoID() << " " << endl;
+	Node<Cargo*> *np = frontPtr;
+	//cout << "\nQueue contents: ";
+	while (np) {
+		K = np->getItem();
+		cout << K->getCargoID() << " , ";
+		if (np->getNext()) {
+			np = np->getNext();
+		}
+		else {
+			break;
+		}
+	}
 
 }
 
 template<>
 inline void LinkedQueue<Truck*>::PrintQueue() {
 	Truck* K;
-	cout << "\nQueue contents: ";
-	while (dequeue(K))
+	Node<Truck*>* np = frontPtr;
+	//cout << "\nQueue contents: ";
+	while (np) {
+		K = np->getItem();
 		cout << K->getTrucID() << " ";
+		if (np->getNext()) {
+			np = np->getNext();
+		}
+		else {
+			break;
+		}
+	}
 	cout << endl;
 }
 

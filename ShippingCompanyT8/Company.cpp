@@ -142,12 +142,14 @@ void Company::SimTest() {
 					//WaitingNormalCargo.PrintList();
 					if (WaitingNormalCargo.removeFirstelement(CargoToBeMoved)) {
 						DeliveredNormalCargo.enqueue(CargoToBeMoved);
+						
 						//cout << "Cargo added id : " << CargoToBeMoved->getCargoID() << endl;
 						//WaitingNormalCargo.PrintList();
 					}
 
 					if (WaitingSpecialCargo.dequeue(CargoToBeMoved)) {
 						DeliveredSpecialCargo.enqueue(CargoToBeMoved);
+						
 						//cout << "Cargo added id : " << CargoToBeMoved->getCargoID() << endl;
 					}
 

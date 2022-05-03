@@ -17,10 +17,13 @@ private:
 	};
 	Node* arr;
 	int size;
+	int arrsize;
 
 public:
 	PriorityQueueArr() {
-		arr = new Node[16];
+		arrsize = 16;
+		arr = new Node[arrsize];
+		
 		size = -1;
 	}
 
@@ -96,6 +99,21 @@ private:
 			shiftDown(maxIndex);
 		}
 	}
+
+	//function to resize the array thus it will take any size
+	//it doubles the array size by 2
+	void resize() {
+		size_t newSize = arrsize * 2;
+		Node* newArr = new Node[newSize];
+
+		memcpy(newArr, arr, arrsize * sizeof(Node));
+
+		arrsize = newSize;
+		delete[] arr;
+		arr = newArr;
+	}
+
+
 public:
 	T Pop()
 	{
@@ -116,22 +134,44 @@ public:
 	void insert(T n_item) {
 		//Node n_node;
 		//n_node.data = n_item;
-		size++;
-		arr[size].data = n_item;
-		arr[size].priority = 1;
+		if (size < arrsize) {
+			size++;
+			arr[size].data = n_item;
+			arr[size].priority = 1;
 
-		// Shift Up to maintain heap property
-		shiftUp(size);
+			// Shift Up to maintain heap property
+			shiftUp(size);
+		}
+		else {
+			resize();
+			size++;
+			arr[size].data = n_item;
+			arr[size].priority = 1;
+
+			// Shift Up to maintain heap property
+			shiftUp(size);
+		}
 	}
 
 	void insert(T n_data, int p)
 	{
-		size = size + 1;
-		arr[size].data = n_data;
-		arr[size].priority = p;
+		if (size < arrsize) {
+			size = size + 1;
+			arr[size].data = n_data;
+			arr[size].priority = p;
 
-		// Shift Up to maintain heap property
-		shiftUp(size);
+			// Shift Up to maintain heap property
+			shiftUp(size);
+		}
+		else {
+			resize();
+			size = size + 1;
+			arr[size].data = n_data;
+			arr[size].priority = p;
+
+			// Shift Up to maintain heap property
+			shiftUp(size);
+		}
 	}
 
 
