@@ -44,8 +44,8 @@ int Truck::calcTruckUtilization(int TSim)
 	}
 }
 
-void Truck::MoveLoadingToMoving() {
-	for (int i = 0; i < truckCapacity; i++) {
-		MovingCargo.insert(LoadingCargo.Pop());
-	}
-}
+//void Truck::MoveLoadingToMoving() {
+//	for (int i = 0; i < truckCapacity; i++) {
+//		MovingCargo.insert(LoadingCargo.Pop());
+//	}
+//}

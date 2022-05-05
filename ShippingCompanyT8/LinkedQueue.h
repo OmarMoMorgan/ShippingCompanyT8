@@ -327,6 +327,8 @@ inline void LinkedQueue<Cargo*>::PrintQueue() {
 			break;
 		}
 	}
+	cout << '\b';  //Cursor moves 1 position backwards
+	cout << " ";
 
 }
 
@@ -337,7 +339,7 @@ inline void LinkedQueue<Truck*>::PrintQueue() {
 	//cout << "\nQueue contents: ";
 	while (np) {
 		K = np->getItem();
-		cout << K->getTrucID() << " ";
+		cout << K->getTrucID() << " , ";
 		if (np->getNext()) {
 			np = np->getNext();
 		}
@@ -345,7 +347,9 @@ inline void LinkedQueue<Truck*>::PrintQueue() {
 			break;
 		}
 	}
-	cout << endl;
+	cout << '\b';  //Cursor moves 1 position backwards
+	cout << " ";
+	
 }
 
 

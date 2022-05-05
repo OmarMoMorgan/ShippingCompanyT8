@@ -341,12 +341,17 @@ public:
 		//cout << "\nprinting list contents:\n\n";
 		Node<Cargo*>* p = Head;
 
+		//cout << "[ ";
+
 		while (p != nullptr)
 		{
-			cout << "[ " << p->getItem()->getCargoID() << " ]";
+			cout << p->getItem()->getCargoID()  << " , ";
 			//cout << "--->";
 			p = p->getNext();
 		}
+		cout << "\b";
+		cout << " ";
+		//cout << " ]";
 		//cout << "*\n";
 	}
 	

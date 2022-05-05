@@ -27,8 +27,8 @@ private:
 	int totalJourneys = 0;  //Total journeys by the truck.
 
 	//lists for the cargo that is being loaded into the truck and being moved by the truck
-	PriorityQueueArr<Cargo*> LoadingCargo{truckCapacity};
-	PriorityQueueArr<Cargo*> MovingCargo{truckCapacity};
+	//PriorityQueueArr<Cargo*> LoadingCargo{truckCapacity};
+	PriorityQueueArr<Cargo*> CargoinTruck{truckCapacity};
 
 public:
 	Truck(int ttype,int speed, int capacity, int J, int maintt);
@@ -59,6 +59,6 @@ public:
 
 	int calcTruckUtilization(int TSim);
 
-	void MoveLoadingToMoving();
+	//void MoveLoadingToMoving();
 };
 
