@@ -86,3 +86,7 @@ double Cargo::getDelieveryDistance() const { return deleiveryDistance; }
 double Cargo::getCost() const { return Cost; }
 int Cargo::getCargoID() const { return cargoID; }
 int Cargo::getMaxW()const { return maxW; }
+
+int Cargo::getWaitTime() const {
+	return prepDay * 24 + prepHour;
+}

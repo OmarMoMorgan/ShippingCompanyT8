@@ -25,6 +25,8 @@ private:
 	int activeTime;  //Can be increased with each activity.
 	int tDC = 0;  //Total Cargos Delievered, to be increased with each
 	int totalJourneys = 0;  //Total journeys by the truck.
+	int MoveTimeHR; //time at which truck starts to move this is for hours
+	int MoveTimeDAY; //time at which truck starts to move this is for Days
 
 	//lists for the cargo that is being loaded into the truck and being moved by the truck
 	//PriorityQueueArr<Cargo*> LoadingCargo{truckCapacity};
@@ -60,5 +62,11 @@ public:
 	int calcTruckUtilization(int TSim);
 
 	//void MoveLoadingToMoving();
+	void insertCargo(Cargo* Cargoin);
+	int getMoveTime() const;
+	void setMoveTime(int hr , int dy);
+	int getListCount();
+	Cargo* DeleiverCargo();
+	//void DeleiverCargos(LinkedQueue<Cargo*> &TOdeliverTo);
 };
 

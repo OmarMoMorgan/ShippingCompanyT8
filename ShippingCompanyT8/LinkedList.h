@@ -354,7 +354,9 @@ public:
 		//cout << " ]";
 		//cout << "*\n";
 	}
-	
+	T peek() {
+		return Head->getItem();
+	}
 };
 
 

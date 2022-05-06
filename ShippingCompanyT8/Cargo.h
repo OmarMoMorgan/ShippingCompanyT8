@@ -62,5 +62,6 @@ public:
 	double getCost() const;
 	int getCargoID() const;
 	int getMaxW() const;
+	int getWaitTime() const;
 };
 

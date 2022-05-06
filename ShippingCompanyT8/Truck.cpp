@@ -49,3 +49,25 @@ int Truck::calcTruckUtilization(int TSim)
 //		MovingCargo.insert(LoadingCargo.Pop());
 //	}
 //}
+
+void Truck::insertCargo(Cargo* cargoin) {
+	//will be replaced with cargo funciton that get actual time 
+	CargoinTruck.insert(cargoin, 1);
+}
+
+int Truck::getMoveTime() const {
+	return MoveTimeDAY + MoveTimeHR;
+}
+
+void Truck::setMoveTime(int hr , int dy) {
+	MoveTimeDAY = dy;
+	MoveTimeHR = hr;
+}
+
+int Truck::getListCount() {
+	return CargoinTruck.getCount();
+}
+
+Cargo* Truck::DeleiverCargo() {
+	return CargoinTruck.Pop();
+}

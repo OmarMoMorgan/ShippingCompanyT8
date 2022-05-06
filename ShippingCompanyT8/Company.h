@@ -74,7 +74,7 @@ class Company
 		LinkedQueue<Cargo*> DeliveredSpecialCargo;
 
 		//Vip Cargo
-		PriorityQueueArr<Cargo*> WatitingVipCargo;
+		PriorityQueueArr<Cargo*> WaitingVipCargo;
 		//LinkedQueue<Cargo*> LoadingVipCargo;
 		//PriorityQueueArr<Cargo*> MovingVipCargo;
 		LinkedQueue<Cargo*> DeliveredVipCargo;
@@ -89,17 +89,18 @@ class Company
 
 		//Trucks lists
 		LinkedQueue<Truck*> AvailbleNormalTrucks;
-		PriorityQueueArr<Truck*> LoadingNormalTrucks;
+		//PriorityQueueArr<Truck*> LoadingNormalTrucks;
 		//PriorityQueueArr<Truck*> MovingNormalTrucks;
 		
 		LinkedQueue<Truck*> AvailbleSpecialTrucks;
-		PriorityQueueArr<Truck*> LoadingSpecialTrucks;
+		//PriorityQueueArr<Truck*> LoadingSpecialTrucks;
 		//PriorityQueueArr<Truck*> MovingSpecialTrucks;
 
 		PriorityQueueArr<Truck*> AvailbleVipTrucks;
-		PriorityQueueArr<Truck*> LoadingVipTrucks;
+		//PriorityQueueArr<Truck*> LoadingVipTrucks;
 		//PriorityQueueArr<Truck*> MovingVipTrucks;
 		
+		PriorityQueueArr<Truck*> LoadingTrucks;
 		PriorityQueueArr<Truck*> MovingTrucks;
 		LinkedQueue<Truck*> FixingTrucks;
 
@@ -134,6 +135,14 @@ class Company
 
 		//Time struct declrtionis here
 		Time UniversalTime;
+
+
+		void MoveToTrucks();
+		void MoveTrucktoMoving();
+		void FinsihDeleivery();
+
+		
+
 
 public:
 	//function to load the file 
