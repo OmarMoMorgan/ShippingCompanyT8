@@ -350,6 +350,23 @@ void Company::FinsihDeleivery() {
 			break;
 		}
 	}
+
+	//this should be replaced here to make sure that the car gets to checkup list
+	int truckType = 0;
+	switch (truckType)
+	{
+	case 1 :
+		AvailbleNormalTrucks.enqueue(pTruck);
+		break;
+	case 2:
+		AvailbleSpecialTrucks.enqueue(pTruck);
+		break;
+	case 3:
+		AvailbleVipTrucks.insert(pTruck);
+		break;
+	default:
+		break;
+	}
 }
 
 
