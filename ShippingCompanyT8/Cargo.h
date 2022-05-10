@@ -24,7 +24,7 @@ private:
 
 	//eCargoType cargoType;
 
-
+	int movetime;
 	double deleiveryDistance;
 	double Cost;
 
@@ -51,11 +51,14 @@ public:
 	void setCost(double c);
 	void setMaxW(int mw);
 	void setCargoID(int id);
+	void setMovetime(int);
 
 	/*int getPrepDay() const;
 	int getPrepHour() const;*/
+	int getMoveTime() const;
 	int getLoadTime() const;
 	int getunloadTime() const;
+	int getCDT(int truckspeed) const; /// I added getmovetime func so it doesnot take it as a parameter but we should setmovetime for all cargos in same truck in the main
 	//eCargoType getCargoType() const { return cargoType; }
 	int getCargoType() const { return CarTyp; }
 	double getDelieveryDistance() const;

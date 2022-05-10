@@ -10,7 +10,7 @@ class Promote :public Events
 private:
 	double ExtraMoney;
 public:
-	Promote(int ID, int etD, int etH, double ExtraMoney) : Events(P,ID, etD, etH, 1) ,ExtraMoney(ExtraMoney) {}
+	Promote(int ID, int etD, int etH, double ExtraMoney) : Events(3,ID, etD, etH, 1) ,ExtraMoney(ExtraMoney) {}
 	double	getExtraMoney() { return ExtraMoney; }
 	void	setExtramoney(int y) { ExtraMoney = y; }
 	//I edited here also , will leave ooooooo in parts i edit

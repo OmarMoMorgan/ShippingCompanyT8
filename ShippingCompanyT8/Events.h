@@ -1,5 +1,4 @@
 #pragma once
-#include"Cargo.h"
 #include "LinkedQueue.h"
 #include "PriorirtyQueueArr.h"
 #include "LinkedList.h"
@@ -15,7 +14,7 @@
 //1 will mean normal cargo 
 // 2 will mean special event
 // 3 will mean vip event
-enum  event { R, X, P };
+//enum  event { R, X, P };
 
 //this calss shouldn't inhertit from cargo
 //ooooooo
@@ -23,7 +22,7 @@ class Events
 {
 private:
 	//eCargoType cargo;
-	event e; // Type of the event 
+	int e; // Type of the event 
 	int ID; // Id number of cargo
 	int etD; int etH;// current day and hour
 	//here is the new int look upwards for more explantion
@@ -46,7 +45,7 @@ public:
 	{
 		return e;
 	}
-	void setEventType(event f)
+	void setEventType(int f)
 	{
 		e = f;
 	}

@@ -10,6 +10,7 @@ Cargo::Cargo()
 	this->setDelieveryDistance(0);
 	this->setLoadTime(0);
 	this->setCost(0);
+	this ->setMovetime(0);
 }
 
 
@@ -24,6 +25,7 @@ Cargo:: Cargo(int icomingCargoType,/* int ETD, int ETH,*/ int ID, double DIST, i
 	this->setDelieveryDistance(DIST);
 	this->setLoadTime(LT);
 	this->setCost(cost);
+	this->setMovetime(0);
 }
 
 bool Cargo:: isWaiting() const
@@ -74,13 +76,26 @@ void Cargo::setCargoType(int t) { CarTyp = t; }
 void Cargo::setDelieveryDistance(double dd) { deleiveryDistance = dd; }
 void Cargo::setCost(double c) { Cost = c; }
 void Cargo::setCargoID(int id) { cargoID = id; }
+void Cargo::setMovetime(int x)
+{
+	movetime = x;
+}
 void Cargo::setMaxW(int mw) { maxW = mw; }
+
+int Cargo::getMoveTime() const
+{
+	return movetime;
+}
 
 //Getters
 //int Cargo::getPrepDay() const { return prepDay; }
 //int Cargo::getPrepHour() const { return prepHour; }
 int Cargo::getLoadTime() const { return loadTime; }
 int Cargo::getunloadTime() const { return unloadTime; }
+int Cargo::getCDT(int truckspeed) const //calculates time after cargo delvierly
+{
+	return getMoveTime() + getunloadTime() + getDelieveryDistance() / truckspeed;
+}
 //eCargoType Cargo::getCargoType() const { return cargoType; }
 double Cargo::getDelieveryDistance() const { return deleiveryDistance; }
 double Cargo::getCost() const { return Cost; }
