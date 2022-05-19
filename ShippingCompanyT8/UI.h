@@ -43,7 +43,7 @@ public:
 
 	void StartInteractiveMode(int D, int H, LinkedQueue<Cargo*> &WaitingSpecialCargo, LinkedList<Cargo*> &WaitingNormalCargo, PriorityQueueArr<Cargo*> &WaitingVIPCargo, LinkedQueue<Truck*> &AvailbleNormalTrucks,
 		LinkedQueue<Truck*> &AvailbleSpecialTrucks, PriorityQueueArr<Truck*> &AvailbleVipTrucks,
-		LinkedQueue<Cargo*> &DeliveredSpecialCargo, LinkedQueue<Cargo*> &DeliveredVipCargo, LinkedQueue<Cargo*> &DeliveredNormalCargo);
+		LinkedQueue<Cargo*> &DeliveredSpecialCargo, LinkedQueue<Cargo*> &DeliveredVipCargo, LinkedQueue<Cargo*> &DeliveredNormalCargo, PriorityQueueArr<Truck*>& LoadingTrucks);
 };
 
 

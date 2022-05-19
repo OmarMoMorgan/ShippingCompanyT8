@@ -136,7 +136,7 @@ class Company
 		//Time struct declrtionis here
 		Time UniversalTime;
 
-
+		void MoveTomaintace();
 		void MoveToTrucks();
 		void MoveTrucktoMoving();
 		void FinsihDeleivery();
@@ -150,7 +150,6 @@ public:
 
 	//SimTEst is a function for phase 1 to test that everything is working correctly
 	void SimTest();
-
 
 	//this function moves cargos from waiting cargos into loading cargos
 	//void MoveToOtherList(LinkedQueue<Cargo*> , PriorityQueueArr<Cargo*>);
@@ -262,5 +261,7 @@ public:
 
 	int getCurrentDay();
 	int getCurrentHour();
+
+	bool isOffHours();
 };
 

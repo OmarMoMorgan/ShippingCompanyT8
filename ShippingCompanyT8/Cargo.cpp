@@ -1,6 +1,7 @@
 #pragma once
 #include "Cargo.h"
 
+// setmovetime should be called in company.cpp when the truck carrying the ref cargo move
 Cargo::Cargo()
 {
 	this->setCargoType(1);

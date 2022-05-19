@@ -85,7 +85,7 @@ void UIClass::StartInteractiveMode(int D, int H, LinkedQueue<Cargo*> &WaitingSpe
 	PriorityQueueArr<Cargo*> &WaitingVIPCargo, LinkedQueue<Truck*> &AvailbleNormalTrucks,
 	LinkedQueue<Truck*> &AvailbleSpecialTrucks, PriorityQueueArr<Truck*> &AvailbleVipTrucks,
 	LinkedQueue<Cargo*> &DeliveredSpecialCargo, LinkedQueue<Cargo*> &DeliveredVipCargo, 
-	LinkedQueue<Cargo*> &DeliveredNormalCargo)
+	LinkedQueue<Cargo*> &DeliveredNormalCargo, PriorityQueueArr<Truck*> &LoadingTrucks)
 
 {
 	{
@@ -113,10 +113,12 @@ void UIClass::StartInteractiveMode(int D, int H, LinkedQueue<Cargo*> &WaitingSpe
 
 		std::cout << getTotalEmptytrucks(AvailbleNormalTrucks, AvailbleSpecialTrucks, AvailbleVipTrucks);
 		std::cout << "Empty Trucks: ";
-
+		AvailbleVipTrucks.printarrTruck();
 		std::cout << std::string(20, '_') << endl;
 		std::cout << "[ "; AvailbleNormalTrucks.PrintQueue(); cout << "]" << "  " << "("; AvailbleSpecialTrucks.PrintQueue(); cout << ")" << " " << "{"; AvailbleVipTrucks.printarrTruck(); cout << "}";
-
+		cout << "LoadingTrucks" << " ";
+		LoadingTrucks.printarrTruck();
+		std::cout << std::string(20, '_') << endl;
 
 
 		//std::cin >> m;

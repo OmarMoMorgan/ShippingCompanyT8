@@ -15,20 +15,31 @@ void Truck:: setBreakDownNum(int n) { breakdownNum = n; }
 void Truck::setSpeed(int s) { truckSpeed = s; }
 void Truck::setfinishTime()
 {
-		finishTime = getMoveTime() + getDelieveryInterval();
+	int finishtime = 0;
+	Cargo* Pcargo;
+	for (int i = 0; i < CargoinTruck.getCount(); i++)
+	{
+		CargoinTruck.Pop(Pcargo);
+
+		if (Pcargo->getCDT(getSpeed()) > finishtime)
+			finishtime = Pcargo->getCDT(getSpeed());
+	}
+	finishTime = finishtime;
+
+
 }
 void Truck::setDelieveryInterval()
 {
 	Cargo* Pcargo;
 	
 	int total_unload_cargos_Time = 0;
-int	farthest_distance_cargo=0;
+    int	farthest_distance_cargo=0;
 	for (int i = 0; i < CargoinTruck.getCount(); i++)
 	{
 		CargoinTruck.Pop(Pcargo);
-		total_unload_cargos_Time = total_unload_cargos_Time +Pcargo->getLoadTime();
-		if (farthest_distance_cargo < Pcargo->getDelieveryDistance() / getSpeed())
-			farthest_distance_cargo = Pcargo->getDelieveryDistance() / getSpeed();
+		total_unload_cargos_Time = total_unload_cargos_Time +Pcargo->getunloadTime();
+		if (farthest_distance_cargo < Pcargo->getDelieveryDistance())
+			farthest_distance_cargo = Pcargo->getDelieveryDistance() ;
 	}
 	if (currentJourney%journeys_to_maintenance==0)
 		delivery_Interval = farthest_distance_cargo*2 / getSpeed() + getMaintenanceTime() + total_unload_cargos_Time;
@@ -37,6 +48,8 @@ int	farthest_distance_cargo=0;
 	
 }
 
+
+
 void Truck::incrementJourney()
 {
 		currentJourney++;
@@ -44,10 +57,23 @@ void Truck::incrementJourney()
 }
 
 void Truck::setTruckType(int t) { truckType = t; }
-void Truck::setActiveTime() { activeTime = delivery_Interval*currentJourney; }
+void Truck::setActiveTime() { 
+	Cargo* Pcargo;
+	int total_loadAndunload_cargos_Time = 0;
+	int farthest_distance_cargo = 0; 
+	for (int i = 0; i < CargoinTruck.getCount(); i++)
+	{
+		CargoinTruck.Pop(Pcargo);
+		total_loadAndunload_cargos_Time = total_loadAndunload_cargos_Time + Pcargo->getLoadTime()+Pcargo->getunloadTime();
+		if (farthest_distance_cargo < Pcargo->getDelieveryDistance())
+			farthest_distance_cargo = Pcargo->getDelieveryDistance();
+
+	}
+	activeTime = activeTime+ total_loadAndunload_cargos_Time + farthest_distance_cargo/getSpeed(); 
+}
 void Truck::setJtm(int J) { journeys_to_maintenance = J; }
 void Truck::setTDC(int new_tDC) { tDC = new_tDC; }
-void Truck::setTotalJourneys(int tj) { totalJourneys = tj; }
+void Truck::setTotalJourneys(int tj) { currentJourney = tj; }
 
 //eTruckType Truck::getType()const { return truckType; }
 int Truck::getTruckCapacity()const { return truckCapacity; }
@@ -58,17 +84,17 @@ int Truck::getDelieveryInterval()const { return delivery_Interval; }
 int Truck::getActiveTime()const { return activeTime; }
 int Truck::getJtm() const { return journeys_to_maintenance; }
 int Truck::getTDC() const{ return tDC; }
-int Truck::getTotalJourneys() const{ return totalJourneys; }
+int Truck::getTotalJourneys() const{ return currentJourney; }
 int  Truck::getTrucID() { return truckId; }
 
 
 int Truck::calcTruckUtilization(int TSim)
 {
 	int utilization = 0;
-	if (totalJourneys == 0) utilization = 0;
+	if (currentJourney == 0) utilization = 0;
 	else
 	{
-		utilization = tDC / ((truckCapacity * totalJourneys) * (activeTime / TSim));
+		utilization = tDC / ((truckCapacity * currentJourney) * (activeTime / TSim));
 
 		return utilization;
 	}
