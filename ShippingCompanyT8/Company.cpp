@@ -189,7 +189,6 @@ void Company::MoveToTrucks() {
 	Cargo* pCargo;
 
 	int counter = 0;
-
 	//vip first it is here assumed they are in the correct order with right priorties
 	while (!isOffHours())
 	{
