@@ -171,16 +171,20 @@ void Company::SimTest() {
 
 
 
-//void Company::MoveTomaintace()
-//{
-//	Truck* Ptruck;
-//	MovingTrucks.peek(Ptruck);
-//	if (Ptruck->getTotalJourneys() % Ptruck->getJtm() == 0 && cu)
-//	{
-//		MovingTrucks.Pop(Ptruck);
-//		FixingTrucks.dequeue(Ptruck);
-//	}
-//}
+void Company::MoveTofixed()
+{
+	Truck* Ptruck;
+	MovingTrucks.peek(Ptruck);
+	int currentTime = getCurrentDay() * 24 + getCurrentHour();
+	if (Ptruck->getTotalJourneys() % Ptruck->getJtm() == 0)
+	{
+		if (currentTime == Ptruck->getfinishTime())
+		{
+			MovingTrucks.Pop(Ptruck);
+			FixingTrucks.enqueue(Ptruck);
+		}
+	}
+}
 
 void Company::MoveToTrucks() {
 	int maxloadingTime;
