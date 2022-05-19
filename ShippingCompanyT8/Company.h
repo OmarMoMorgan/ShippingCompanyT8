@@ -136,7 +136,7 @@ class Company
 		//Time struct declrtionis here
 		Time UniversalTime;
 
-		void MoveTomaintace();
+		void MoveTofixed();
 		void MoveToTrucks();
 		void MoveTrucktoMoving();
 		void FinsihDeleivery();
