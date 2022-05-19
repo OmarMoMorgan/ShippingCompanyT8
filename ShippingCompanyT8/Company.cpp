@@ -169,8 +169,6 @@ void Company::SimTest() {
 }
 
 
-
-
 void Company::MoveTofixed()
 {
 	Truck* Ptruck;
