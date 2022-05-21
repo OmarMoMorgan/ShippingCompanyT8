@@ -130,6 +130,9 @@ class Company
 		int DummyVCap;
 
 		int DummyNumJourneys;
+		int DummyNumJourneysN;
+		int DummyNumJourneysS;
+		int DummyNumJourneysV;
 
 		int maxid;
 
@@ -141,7 +144,16 @@ class Company
 		void MoveTrucktoMoving();
 		void FinsihDeleivery();
 
+		void LoadVip();
+		void LoadNormal();
+		void LoadSpecial();
+
+		void MaxwNormalSpecial();
+		void AutoUpgradeToVip();
+
 		
+
+		bool AllEnded();
 
 
 public:
@@ -151,25 +163,7 @@ public:
 	//SimTEst is a function for phase 1 to test that everything is working correctly
 	void SimTest();
 
-	//this function moves cargos from waiting cargos into loading cargos
-	//void MoveToOtherList(LinkedQueue<Cargo*> , PriorityQueueArr<Cargo*>);
-	//overriding the function here so that it can accept more than type 
-	//void MoveToOtherList(PriorityQueueArr<Cargo*>, PriorityQueueArr<Cargo*>);
-	//another override
-
-	//this function moves cargos from Loading cargos into Moving cargos
-	//void MoveToOtherList(LinkedList<Cargo*>, LinkedQueue<Cargo*>);
-	//overriding the function here so that it can accept more than type 
-	//void MoveToOtherList(PriorityQueueArr<Cargo*>, LinkedQueue<Cargo*>);
-
-	//void MoveToOtherList(LinkedQueue<Cargo*>, LinkedQueue<Cargo*>);
-
-
-	//this function moves cargos from moving cargos to delievered cargos
-	//void MoveToDeleiverd();
-
-	//This funciton counts the number of items in a given linked list / queue / priority queue
-	//int CountListItems(LinkedQueue<>);
+	
 	
 	//The function to produce output file
 	void OutgoingFile();
@@ -195,63 +189,7 @@ public:
 	);
 
 
-	//this functions here are for moving items from a list to another the function shall be overriden
-	//so that you don't need to know the type of list you are inserting each time 
-	//also a template wil be used here so it can work for trucks and cargos
-	//lol some stuff don't also work on trucks as you need to only move it 
-	//thus this approach was not the best and the template is useless
-//	template <typename T>
-//	void MoveToOtherList(LinkedQueue<T> CameFromHere, PriorityQueueArr<T> GoingThere) {
-//		T Thecargo;
-//		CameFromHere.peek(Thecargo);
-//		if (UniversalTime.CurrentDay >= Thecargo->getPrepDay() && UniversalTime.CurrentHour >= Thecargo->getPrepHour()) {
-//			CameFromHere.dequeue(Thecargo);
-//			GoingThere.insert(Thecargo, 1); //this number here shall be replaced with the function that gets loadtimes
-//		}
-//	}
-//
-//	template <typename T>
-//	void MoveToOtherList(PriorityQueueArr<T> CameFromHere, PriorityQueueArr<T> GoingThere) {
-//		T Thecargo;
-//		CameFromHere.peek(Thecargo);
-//		if (UniversalTime.CurrentDay >= Thecargo->getPrepDay() && UniversalTime.CurrentHour >= Thecargo->getPrepHour()) {
-//			CameFromHere.Pop(Thecargo);
-//			GoingThere.insert(Thecargo, 1); //this number here shall be replaced with the function that gets loadtimes
-//		}
-//	}
-//
-//	//this function is for moving from linked list to a queue it needs to be revised
-//	template <typename T>
-//	void MoveToOtherList(LinkedList<T> CameFromHere, LinkedQueue<T> GoingThere) {
-//		T Thecargo;
-//		Thecargo = CameFromHere.getHead();
-//		if (UniversalTime.CurrentDay >= Thecargo->getPrepDay() && UniversalTime.CurrentHour >= Thecargo->getPrepHour()) {
-//			Thecargo = CameFromHere.removeFirstelement();
-//			GoingThere.enqueue(Thecargo);
-//		}
-//	}
-//
-//
-//	template <typename T>
-//	void MoveToOtherList(PriorityQueueArr<T> CameFromHere, LinkedQueue<T> GoingThere) {
-//		T Thecargo;
-//		CameFromHere.peek(Thecargo);
-//		if (UniversalTime.CurrentDay >= Thecargo->getPrepDay() && UniversalTime.CurrentHour >= Thecargo->getPrepHour()) {
-//			CameFromHere.Pop(Thecargo);
-//			GoingThere.enque(Thecargo); 
-//		}
-//	}
-//
-//
-//	template <typename T>
-//	void MoveToOtherList(LinkedQueue<T> CameFromHere, LinkedQueue<T> GoingThere) {
-//		T Thecargo;
-//		CameFromHere.peek(Thecargo);
-//		if (UniversalTime.CurrentDay >= Thecargo->getPrepDay() && UniversalTime.CurrentHour >= Thecargo->getPrepHour()) {
-//			CameFromHere.dequeue(Thecargo);
-//			GoingThere.enqueue(Thecargo);
-//		}
-//	}
+	void Simulator();
 
 
 	////***functions needed for the UI***

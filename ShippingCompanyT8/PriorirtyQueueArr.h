@@ -22,14 +22,14 @@ private:
 
 public:
 	PriorityQueueArr() {
-		arrsize = 16;
+		arrsize = 16000;
 		arr = new Node[arrsize];
 
 		size = -1;
 	}
 
 	PriorityQueueArr(int maxSize) {
-		arr = new Node[maxSize];
+		arr = new Node[maxSize+1000];
 		size = -1;
 	}
 
@@ -110,7 +110,7 @@ private:
 		memcpy(newArr, arr, arrsize * sizeof(Node));
 
 		arrsize = newSize;
-		delete[] arr;
+		//delete[] arr;
 		arr = newArr;
 	}
 
@@ -143,15 +143,16 @@ public:
 			// Shift Up to maintain heap property
 			shiftUp(size);
 		}
-		else {
-			resize();
-			size++;
-			arr[size].data = n_item;
-			arr[size].priority = 1;
+		//check this also if needed 
+		//else {
+		//	resize();
+		//	size++;
+		//	arr[size].data = n_item;
+		//	arr[size].priority = 1;
 
-			// Shift Up to maintain heap property
-			shiftUp(size);
-		}
+		//	// Shift Up to maintain heap property
+		//	shiftUp(size);
+		//}
 	}
 
 	void insert(T n_data, int p)
@@ -164,15 +165,16 @@ public:
 			// Shift Up to maintain heap property
 			shiftUp(size);
 		}
-		else {
-			resize();
-			size = size + 1;
-			arr[size].data = n_data;
-			arr[size].priority = p;
+		//ceck this if needed
+		//else {
+		//	resize();
+		//	size = size + 1;
+		//	arr[size].data = n_data;
+		//	arr[size].priority = p;
 
-			// Shift Up to maintain heap property
-			shiftUp(size);
-		}
+		//	// Shift Up to maintain heap property
+		//	shiftUp(size);
+		//}
 	}
 
 
