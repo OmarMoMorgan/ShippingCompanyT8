@@ -139,6 +139,22 @@ class Company
 		//Time struct declrtionis here
 		Time UniversalTime;
 
+		//Variables for statistics:
+		int NCargos = 0;
+		int SCargos = 0;
+		int VCargos = 0;
+		int cargTotalWait = 0;
+		int cargAvgWait = 0;
+		int autoPromoted = 0;
+		/*int NTrucks = 0;
+		int STrucks = 0;
+		int VTrucks = 0;*/
+		int truckTotalActive = 0;
+		int truckAvgActive = 0;
+		int truckTotalUtilization = 0;
+		int truckAvgUtilization = 0;
+
+
 		void MoveTofixed();
 		void MoveToTrucks();
 		void MoveTrucktoMoving();
@@ -207,5 +223,7 @@ public:
 
 	void checktoAvailable(int enteringDay, int enteringHr);
 	void movingtoAvailable(int enteringDay, int enteringHr);
+
+	void outputStatistics();
 };
 

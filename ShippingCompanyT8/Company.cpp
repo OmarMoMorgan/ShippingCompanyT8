@@ -49,12 +49,15 @@ void Company::LoadFile() {
 			int cargot;
 			if (cargotype == "N") {
 				cargot = 1;
+				this->NCargos++;
 			}
 			else if (cargotype == "S") {
 				cargot = 2;
+				this->SCargos++;
 			}
 			else if (cargotype == "V") {
 				cargot = 3;
+				this->VCargos++;
 			}
 
 			Ready* nReady = new Ready(id, cost, day, hr, LT, dist, cargot);
@@ -63,6 +66,7 @@ void Company::LoadFile() {
 			//cout << "Ready " << "day " << day << " hour " << hr << endl;
 		}
 		else if (eventtype == "X") {
+			this->NCargos--;
 			Line >> hourfromfile >> id;
 			day = convertString<int>(hourfromfile.substr(0, 2));
 			hr = convertString<int>(hourfromfile.substr(2, 4));
@@ -71,6 +75,8 @@ void Company::LoadFile() {
 			//cout << "cancel " << "day " << day << " hour " << hr << endl;
 		}
 		else if (eventtype == "P") {
+			this-> NCargos--;
+			this->VCargos++;
 			Line >> hourfromfile >> id >> cost;
 			day = convertString<int>(hourfromfile.substr(0, 2));
 			hr = convertString<int>(hourfromfile.substr(2, 4));
@@ -537,6 +543,7 @@ void Company::AutoUpgradeToVip() {
 			WaitingNormalCargo.removeFirstelement(pCargo);
 			//shoudl be replaced later
 			WaitingVipCargo.insert(pCargo, 1);
+			this->autoPromoted++;
 		}
 	}
 }
@@ -767,6 +774,20 @@ void Company:: movingtoAvailable(int enteringDay, int enteringHr)
 	}
 	//Last part is repeated, so, it can be moved to a separate function, smth like "MoveTruck"... 
 	
+}
+
+void Company::outputStatistics()
+{
+	ofstream of;
+	of.open("testOut.txt");
+	//In auto promoted u compared with all cargos, while only normal are promoted.  //Fixed.
+	of << "Statistics: " << endl;
+	of << "Cargos: " << (NCargos+SCargos+VCargos) << "[N: " << NCargos << ", S: " << SCargos << ", V:  " << VCargos << "]" << endl;
+	of << "Auto Promoted Cargos: " << 100 * (autoPromoted / (NCargos + autoPromoted)) << "%" << endl;
+	of << "Trucks: "<< (NumberNormalTrucks+ NumberSpecialTrucks+ NumberVipTrucks) << "[N: " << NumberNormalTrucks << ", S: " << NumberSpecialTrucks << ", V:  " << NumberVipTrucks << "]" << endl;
+	of << "Average Active Time: " << endl;
+	of << "Average Utilization: " << endl;
+
 }
 
 
