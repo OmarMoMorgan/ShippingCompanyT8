@@ -66,5 +66,6 @@ public:
 	int getCargoID() const;
 	int getMaxW() const;
 	int getWaitTime() const;
+	int getVIPPriority() const;
 };
 
