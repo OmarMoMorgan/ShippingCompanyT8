@@ -18,7 +18,7 @@ int main()
     p1.printarr();*/
     Company c;
     //c.Simulator();
-    c.SimTest();
+    c.Simulator();
     //LinkedList<int> l;
    /* l.insertback(1);
     l.insertback(2);

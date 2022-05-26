@@ -19,6 +19,8 @@
 //never mind i think we should go with haing them there as it has less compleity 
 //log n vs n thus now we shouldn't overload the operators
 
+// I added returnbacktrucks priorityqueue
+
 class Company
 {
 	private:
@@ -103,7 +105,7 @@ class Company
 		PriorityQueueArr<Truck*> LoadingTrucks;
 		PriorityQueueArr<Truck*> MovingTrucks;
 		LinkedQueue<Truck*> FixingTrucks;
-
+		PriorityQueueArr<Truck*> ReturnBackTruck;
 
 		//some variabeles that might be neeeded later
 		int NumberNormalTrucks;
@@ -116,7 +118,7 @@ class Company
 		int MaxW;
 
 
-
+		
 		//this is the pointer to interact wtih the ui class
 		UIClass *UIController;
 
@@ -135,11 +137,13 @@ class Company
 		int DummyNumJourneysV;
 
 		int maxid;
+		void switchTrucksAvailable(Truck* t);
 
 		//Time struct declrtionis here
 		Time UniversalTime;
 
-		void MoveTofixed();
+		void ReturnToCompany();
+		void movefromFixed();
 		void MoveToTrucks();
 		void MoveTrucktoMoving();
 		void FinsihDeleivery();
@@ -150,7 +154,6 @@ class Company
 
 		void MaxwNormalSpecial();
 		void AutoUpgradeToVip();
-
 		
 
 		bool AllEnded();
