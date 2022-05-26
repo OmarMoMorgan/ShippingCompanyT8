@@ -106,3 +106,15 @@ int Cargo::getMaxW()const { return maxW; }
 int Cargo::getWaitTime() const {
 	return prepDay * 24 + prepHour;
 }
+
+int Cargo::getVIPPriority() const
+{
+	if (CarTyp != 1) //Make sure that is the number for VIP...
+		return 0;
+	else
+	{
+		int priority = 100*(  (1 / getDelieveryDistance()) /* + ()*/ + (10 * getCost())  );
+		return priority;
+	}
+
+}
