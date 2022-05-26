@@ -199,7 +199,13 @@ public:
 
 	int getCurrentDay();
 	int getCurrentHour();
-
 	bool isOffHours();
+
+
+
+
+
+	void checktoAvailable(int enteringDay, int enteringHr);
+	void movingtoAvailable(int enteringDay, int enteringHr);
 };
 

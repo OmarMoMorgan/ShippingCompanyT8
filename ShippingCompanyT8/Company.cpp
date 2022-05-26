@@ -710,5 +710,64 @@ bool Company::AllEnded() {
 	//AvailbleSpecialTrucks, AvailbleVipTrucks,
 	//DeliveredSpecialCargo, DeliveredVipCargo, DeliveredNormalCargo);
 
+void Company::checktoAvailable(int enteringDay, int enteringHr)
+{
+	Truck* cTruck;
+	int deltaTime=0;			//TBC...
+	  
+	this->FixingTrucks.peek(cTruck);
+	if ((24 * getCurrentDay() + getCurrentHour()) > (cTruck->getfinishTime()+cTruck->getMaintenanceTime()))
+	{
+		//1 for normal , 2 for special , 3 for vip
+		if (cTruck->getType() == 1)
+		{
+			FixingTrucks.dequeue(cTruck);
+			AvailbleNormalTrucks.enqueue(cTruck);
+		}
+		else if (cTruck->getType() == 2)
+		{
+			FixingTrucks.dequeue(cTruck);
+			AvailbleSpecialTrucks.enqueue(cTruck);
+
+		}
+		else if (cTruck->getType() == 3)
+		{
+			FixingTrucks.dequeue(cTruck);
+			AvailbleVipTrucks.insert(cTruck);
+		}
+	}
+}
+
+void Company:: movingtoAvailable(int enteringDay, int enteringHr)
+{
+	Truck* mTruck;
+	int deltaTime=0;		//TBC...
+	this->MovingTrucks.peek(mTruck);
+	if (  (24*getCurrentDay()+getCurrentHour()) > mTruck->getfinishTime()   ) //current time>truck->finishtime
+	{
+		//1 for normal , 2 for special , 3 for vip
+		if (mTruck->getType() == 1)
+		{
+			FixingTrucks.dequeue(mTruck);
+			AvailbleNormalTrucks.enqueue(mTruck);
+		}
+
+		else if (mTruck->getType() == 2)
+		{
+			FixingTrucks.dequeue(mTruck);
+			AvailbleSpecialTrucks.enqueue(mTruck);
+
+		}
+
+		else if (mTruck->getType() == 3)
+		{
+			FixingTrucks.dequeue(mTruck);
+			AvailbleVipTrucks.insert(mTruck);
+		}
+	}
+	//Last part is repeated, so, it can be moved to a separate function, smth like "MoveTruck"... 
+	
+}
+
 
 

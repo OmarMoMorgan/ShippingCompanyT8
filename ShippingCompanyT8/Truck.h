@@ -24,6 +24,8 @@ private:
 	int truckCapacity;
 	int maintenanceTime;
 	int journeys_to_maintenance;     // This is the max journey number read from input file
+	int maintenanceTime;				//ASSUME its all hrs
+	int journeys_to_maintenance;     //Rename for same convention.	// This is the max journey number	
 	int breakdownNum;				//Number of journeys before the truck needs to be checked
 	int truckSpeed;
 	int delivery_Interval;
@@ -57,7 +59,7 @@ public:
 	void  setDelieveryInterval();
 	
 	int getfinishTime() { return finishTime; }
-	int getType()const { return truckType; };
+	int getType()const { return truckType; }
 	int getTruckCapacity()const;
 	int getMaintenanceTime()const;
 	int getBreakDownNum()const;
