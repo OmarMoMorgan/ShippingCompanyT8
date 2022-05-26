@@ -29,7 +29,7 @@ public:
 	}
 
 	PriorityQueueArr(int maxSize) {
-		arr = new Node[maxSize+1000];
+		arr = new Node[maxSize];
 		size = -1;
 	}
 

@@ -23,7 +23,7 @@ public:
 			{
 				c->setCost(c->getCost() + ExtraMoney);
 				VipList.insert(c);
-				Normal.DeleteNode(c);
+				Normal.NewDeleteNode(c);
 			}
 		}
 };
