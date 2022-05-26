@@ -58,7 +58,7 @@ public:
 	int getMoveTime() const;
 	int getLoadTime() const;
 	int getunloadTime() const;
-	int getCDT(int truckspeed) const; /// I added getmovetime func so it doesnot take it as a parameter but we should setmovetime for all cargos in same truck in the main
+	int getCDT(int truckspeed, int movetime) const; 
 	//eCargoType getCargoType() const { return cargoType; }
 	int getCargoType() const { return CarTyp; }
 	double getDelieveryDistance() const;

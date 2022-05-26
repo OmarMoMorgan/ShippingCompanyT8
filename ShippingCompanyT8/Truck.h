@@ -6,6 +6,7 @@
 // delivery interval time is moving +returning time is calculated after truck finishes loading
 // finish time is the time when cargo gets back to company so is movetime of truck+ DI,  is calculated after truck finishes loading 
 
+// i added peekCargo to get cargo in top of queue
 enum  eTruckType
 {
 	VipTruck,
@@ -16,7 +17,10 @@ enum  eTruckType
 class Truck
 {
 private:
-	int farthest_distance_Cargo;
+	int loadtime; //to know when it starts loading
+	inline static int counter = 0; //to give an Id for trucks;
+	int returntime;
+	//int farthest_distance_Cargo;
 	int currentJourney; // this is used to keep track of undergoing journeys to calculate return time if there is maintance or not
 	int truckId;
 	//1 for normal , 2 for special , 3 for vip
@@ -24,6 +28,8 @@ private:
 	int truckCapacity;
 	int maintenanceTime;
 	int journeys_to_maintenance;     // This is the max journey number read from input file
+	//int maintenanceTime;				//ASSUME its all hrs
+	//int journeys_to_maintenance;     //Rename for same convention.	// This is the max journey number	
 	int breakdownNum;				//Number of journeys before the truck needs to be checked
 	int truckSpeed;
 	int delivery_Interval;
@@ -37,6 +43,7 @@ private:
 	PriorityQueueArr<Cargo*> CargoinTruck{truckCapacity};
 	int finishTime;
 public:
+
 		Truck(int ttype,int speed, int capacity, int J, int maintt);
 	
 	void setTruckCapacity(int c);
@@ -50,26 +57,27 @@ public:
 	void setTDC(int new_tDC);
 	void setTotalJourneys(int tj); // 
 
-
+	void setTruckId(int x);
 	void setActiveTime();   /// I changed it to increase with each journey and not take it an int as a parameter
 	void incrementJourney(); /// This is a new function that should be called in the main to increase journey number
-	void setfinishTime();
+	void setfinishTime(int);
 	void  setDelieveryInterval();
 	
-	int getfinishTime() { return finishTime; }
+	int getfinishTime();
 	int getType()const { return truckType; };
 	int getTruckCapacity()const;
 	int getMaintenanceTime()const;
 	int getBreakDownNum()const;
 	int getSpeed()const;
-	int getDelieveryInterval()const;
-	int getActiveTime()const;
+	int getDelieveryInterval();
+	int getActiveTime();
 	int getJtm()const;
 	int getTDC()const;
 	int getTotalJourneys()const; //total journeys done by truck since the beginning of the sim
 	int getTrucID();
 	int calcTruckUtilization(int TSim);
-
+	void	setReturnTime(int x);
+	int getReturnTime();
 	//void MoveLoadingToMoving();
 	void insertCargo(Cargo* Cargoin);
 	int getMoveTime() const;
@@ -77,5 +85,9 @@ public:
 	int getListCount();
 	Cargo* DeleiverCargo();
 	//void DeleiverCargos(LinkedQueue<Cargo*> &TOdeliverTo);
+	Cargo* peekCargo();
+
+	void setLoadTime(int);
+	int getLoadTime() const;
 };
 

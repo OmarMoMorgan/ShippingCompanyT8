@@ -19,6 +19,8 @@
 //never mind i think we should go with haing them there as it has less compleity 
 //log n vs n thus now we shouldn't overload the operators
 
+// I added returnbacktrucks priorityqueue
+
 class Company
 {
 	private:
@@ -103,7 +105,7 @@ class Company
 		PriorityQueueArr<Truck*> LoadingTrucks;
 		PriorityQueueArr<Truck*> MovingTrucks;
 		LinkedQueue<Truck*> FixingTrucks;
-
+		PriorityQueueArr<Truck*> ReturnBackTruck;
 
 		//some variabeles that might be neeeded later
 		int NumberNormalTrucks;
@@ -116,7 +118,7 @@ class Company
 		int MaxW;
 
 
-
+		
 		//this is the pointer to interact wtih the ui class
 		UIClass *UIController;
 
@@ -135,11 +137,30 @@ class Company
 		int DummyNumJourneysV;
 
 		int maxid;
+		void switchTrucksAvailable(Truck* t);
 
 		//Time struct declrtionis here
 		Time UniversalTime;
 
+		//Variables for statistics:
+		int NCargos = 0;
+		int SCargos = 0;
+		int VCargos = 0;
+		int cargTotalWait = 0;
+		int cargAvgWait = 0;
+		int autoPromoted = 0;
+		/*int NTrucks = 0;
+		int STrucks = 0;
+		int VTrucks = 0;*/
+		int truckTotalActive = 0;
+		int truckAvgActive = 0;
+		int truckTotalUtilization = 0;
+		int truckAvgUtilization = 0;
+
+
 		void MoveTofixed();
+		void ReturnToCompany();
+		void movefromFixed();
 		void MoveToTrucks();
 		void MoveTrucktoMoving();
 		void FinsihDeleivery();
@@ -150,7 +171,6 @@ class Company
 
 		void MaxwNormalSpecial();
 		void AutoUpgradeToVip();
-
 		
 
 		bool AllEnded();
@@ -199,7 +219,15 @@ public:
 
 	int getCurrentDay();
 	int getCurrentHour();
-
 	bool isOffHours();
+
+
+
+
+
+	void checktoAvailable(int enteringDay, int enteringHr);
+	void movingtoAvailable(int enteringDay, int enteringHr);
+
+	void outputStatistics();
 };
 

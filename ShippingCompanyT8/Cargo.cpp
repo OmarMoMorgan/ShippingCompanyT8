@@ -83,7 +83,7 @@ void Cargo::setMovetime(int x)
 }
 void Cargo::setMaxW(int mw) { maxW = mw; }
 
-int Cargo::getMoveTime() const
+int Cargo::getMoveTime() const /// we didnot use it in company so I added movetime parameter in CDT
 {
 	return movetime;
 }
@@ -92,10 +92,10 @@ int Cargo::getMoveTime() const
 //int Cargo::getPrepDay() const { return prepDay; }
 //int Cargo::getPrepHour() const { return prepHour; }
 int Cargo::getLoadTime() const { return loadTime; }
-int Cargo::getunloadTime() const { return unloadTime; }
-int Cargo::getCDT(int truckspeed) const //calculates time after cargo delvierly
+int  Cargo::getunloadTime() const { return unloadTime; }
+int Cargo::getCDT(int truckspeed, int movetime) const //calculates time after cargo delvierly
 {
-	return getMoveTime() + getunloadTime() + getDelieveryDistance() / truckspeed;
+	return movetime + getunloadTime() + getDelieveryDistance() / truckspeed;
 }
 //eCargoType Cargo::getCargoType() const { return cargoType; }
 double Cargo::getDelieveryDistance() const { return deleiveryDistance; }
@@ -105,4 +105,16 @@ int Cargo::getMaxW()const { return maxW; }
 
 int Cargo::getWaitTime() const {
 	return prepDay * 24 + prepHour;
+}
+
+int Cargo::getVIPPriority() const
+{
+	if (CarTyp != 1) //Make sure that is the number for VIP...
+		return 0;
+	else
+	{
+		int priority = 100*(  (1 / getDelieveryDistance()) /* + ()*/ + (10 * getCost())  );
+		return priority;
+	}
+
 }

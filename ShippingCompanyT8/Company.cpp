@@ -134,10 +134,10 @@ void Company::SimTest() {
 		UniversalTime.MoveOneunit();
 		EventsList.peek(Eventhappening);
 
-		UIController->StartInteractiveMode(UniversalTime.CurrentDay , UniversalTime.CurrentHour , 
-			WaitingSpecialCargo , WaitingNormalCargo , WaitingVipCargo, AvailbleNormalTrucks , AvailbleSpecialTrucks ,
-			AvailbleVipTrucks , DeliveredSpecialCargo , DeliveredVipCargo , DeliveredNormalCargo, LoadingTrucks);
-
+		UIController->StartInteractiveMode(UniversalTime.CurrentDay, UniversalTime.CurrentHour,
+			WaitingSpecialCargo, WaitingNormalCargo, WaitingVipCargo, AvailbleNormalTrucks, AvailbleSpecialTrucks,
+			AvailbleVipTrucks, DeliveredSpecialCargo, DeliveredVipCargo, DeliveredNormalCargo, ReturnBackTruck )
+			;
 		etd = Eventhappening->getETD();
 		eth= Eventhappening->getETH();
 
@@ -157,7 +157,7 @@ void Company::SimTest() {
 				eth = Eventhappening->getETH();
 			}
 		
-			
+			/*FinsihDeleivery();*/
 				if ((UniversalTime.CurrentDay + UniversalTime.CurrentHour) % 5 == 0) {
 					//if(WaitingNormalCargo.getHead(). >= UniversalTime.CurrentDay && WaitingNormalCargo)
 					//WaitingNormalCargo.PrintList();
@@ -184,28 +184,66 @@ void Company::SimTest() {
 						flag = 3;
 					}
 				}
-		//cout << "test" << endl;
-		//cout << DeliveredCargo.getCount();
+		/*cout << "test" << endl;
+		cout << DeliveredCargo.getCount();*/
 	}
 }
 
 
 
 
-void Company::MoveTofixed()
+void Company::switchTrucksAvailable(Truck* t)
+{
+	int truckType = t->getType();
+	switch (truckType)
+	{
+	case 1:
+		AvailbleNormalTrucks.enqueue(t);
+		break;
+	case 2:
+		AvailbleSpecialTrucks.enqueue(t);
+		break;
+	case 3:
+		AvailbleVipTrucks.insert(t);
+		break;
+	default:
+		break;
+	}
+}
+
+void Company::ReturnToCompany()
 {
 	Truck* Ptruck;
-	MovingTrucks.peek(Ptruck);
-	int currentTime = getCurrentDay() * 24 + getCurrentHour();
-	if (Ptruck->getTotalJourneys() % Ptruck->getJtm() == 0)
-	{
-		if (currentTime == Ptruck->getfinishTime())
+	Truck* Ltruck; 		int currentTime = getCurrentDay() * 24 + getCurrentHour();
+	if (ReturnBackTruck.getCount() > 0) {
+		ReturnBackTruck.peek(Ptruck);
+		// add to maintance or availabe
+		if (currentTime == Ptruck->getReturnTime())
+		{	ReturnBackTruck.Pop(Ptruck);
+			if (Ptruck->getTotalJourneys() % Ptruck->getJtm() == 0)
+			{
+				Ptruck->setLoadTime(currentTime );
+				FixingTrucks.enqueue(Ptruck);
+			}
+			else
+			{
+				switchTrucksAvailable(Ptruck);
+			}
+		}
+	}
+	// Remove from maintance
+	if (FixingTrucks.getCount() > 0) {
+		FixingTrucks.peek(Ltruck);
+		if (Ltruck->getMaintenanceTime() + Ltruck->getLoadTime()== currentTime)
 		{
-			MovingTrucks.Pop(Ptruck);
-			FixingTrucks.enqueue(Ptruck);
+			FixingTrucks.dequeue(Ltruck);
+			switchTrucksAvailable(Ltruck);
+
 		}
 	}
 }
+
+
 void Company::MoveToTrucks() {
 	int maxloadingTime;
 
@@ -389,6 +427,7 @@ void Company::LoadVip() {
 						maxloadingTime = pCargo->getLoadTime();
 					}
 					pTruck->setMoveTime(maxloadingTime, UniversalTime.CurrentDay);
+					pTruck->incrementJourney();
 				}
 			}
 			else if (AvailbleSpecialTrucks.getCount() > 0) {
@@ -404,6 +443,7 @@ void Company::LoadVip() {
 						maxloadingTime = pCargo->getLoadTime();
 					}
 					pTruck->setMoveTime(maxloadingTime, UniversalTime.CurrentDay);
+					pTruck->incrementJourney();
 				}
 			}
 
@@ -445,6 +485,7 @@ void Company::LoadSpecial() {
 					maxloadingTime = pCargo->getLoadTime();
 				}
 				pTruck->setMoveTime(maxloadingTime, UniversalTime.CurrentDay);
+				pTruck->incrementJourney();
 			}
 			
 		}
@@ -486,6 +527,7 @@ void Company::LoadNormal() {
 					maxloadingTime = pCargo->getLoadTime();
 				}
 				pTruck->setMoveTime(maxloadingTime, UniversalTime.CurrentDay);
+				pTruck->incrementJourney();
 			}
 		}
 }
@@ -566,11 +608,13 @@ void Company::FinsihDeleivery() {
 	Truck* pTruck;
 	Cargo* pCargo;
 	int cargoType = 0;
+	int current_time_Hours = getCurrentDay() * 24 + getCurrentHour();
 	if (MovingTrucks.getCount() > 0) {
-		pTruck = MovingTrucks.Pop();
-		int x = pTruck->getListCount();
-		for (int i = 0; i < x; i++) {
-			pCargo = pTruck->DeleiverCargo();
+		MovingTrucks.peek(pTruck);
+		pCargo = pTruck->peekCargo();
+		if (current_time_Hours == pCargo->getCDT(pTruck->getSpeed(), pTruck->getMoveTime()))
+		{
+			MovingTrucks.Pop();
 			pCargo->getCargoType();
 			switch (cargoType)
 			{
@@ -586,26 +630,36 @@ void Company::FinsihDeleivery() {
 			default:
 				break;
 			}
-		}
-
-		//this should be replaced here to make sure that the car gets to checkup list
-		int truckType = 0;
-		switch (truckType)
-		{
-		case 1:
-			AvailbleNormalTrucks.enqueue(pTruck);
-			break;
-		case 2:
-			AvailbleSpecialTrucks.enqueue(pTruck);
-			break;
-		case 3:
-			AvailbleVipTrucks.insert(pTruck);
-			break;
-		default:
-			break;
+			pTruck->DeleiverCargo();
+			if (pTruck->getListCount() > 0)
+				MovingTrucks.insert(pTruck);
+			else {
+				pTruck->setfinishTime(current_time_Hours);
+				pTruck->setReturnTime(pCargo->getDelieveryDistance());
+				ReturnBackTruck.insert(pTruck, pTruck->getReturnTime());
+			}
 		}
 	}
 }
+
+		//this should be replaced here to make sure that the car gets to checkup list
+		//int truckType = 0;
+		//switch (truckType)
+		//{
+		//case 1:
+		//	AvailbleNormalTrucks.enqueue(pTruck);
+		//	break;
+		//case 2:
+		//	AvailbleSpecialTrucks.enqueue(pTruck);
+		//	break;
+		//case 3:
+		//	AvailbleVipTrucks.insert(pTruck);
+		//	break;
+		//default:
+		//	break;
+		//}
+	
+
 
 
 int Company::getCurrentDay()
@@ -682,6 +736,7 @@ void Company::Simulator() {
 
 			MoveTrucktoMoving();
 			FinsihDeleivery();
+ 	ReturnToCompany();
 			//complete here for the rest of the functions
 		}
 
