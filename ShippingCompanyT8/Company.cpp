@@ -49,12 +49,15 @@ void Company::LoadFile() {
 			int cargot;
 			if (cargotype == "N") {
 				cargot = 1;
+				this->NCargos++;
 			}
 			else if (cargotype == "S") {
 				cargot = 2;
+				this->SCargos++;
 			}
 			else if (cargotype == "V") {
 				cargot = 3;
+				this->VCargos++;
 			}
 
 			Ready* nReady = new Ready(id, cost, day, hr, LT, dist, cargot);
@@ -63,6 +66,7 @@ void Company::LoadFile() {
 			//cout << "Ready " << "day " << day << " hour " << hr << endl;
 		}
 		else if (eventtype == "X") {
+			this->NCargos--;
 			Line >> hourfromfile >> id;
 			day = convertString<int>(hourfromfile.substr(0, 2));
 			hr = convertString<int>(hourfromfile.substr(2, 4));
@@ -71,6 +75,8 @@ void Company::LoadFile() {
 			//cout << "cancel " << "day " << day << " hour " << hr << endl;
 		}
 		else if (eventtype == "P") {
+			this-> NCargos--;
+			this->VCargos++;
 			Line >> hourfromfile >> id >> cost;
 			day = convertString<int>(hourfromfile.substr(0, 2));
 			hr = convertString<int>(hourfromfile.substr(2, 4));
@@ -580,6 +586,7 @@ void Company::AutoUpgradeToVip() {
 			WaitingNormalCargo.removeFirstelement(pCargo);
 			//shoudl be replaced later
 			WaitingVipCargo.insert(pCargo, 1);
+			this->autoPromoted++;
 		}
 	}
 }
@@ -765,6 +772,79 @@ bool Company::AllEnded() {
 //UITest.StartInteractiveMode(getCurrentDay(), getCurrentHour(), WaitingSpecialCargo, WaitingNormalCargo, WaitingVIPCargo, AvailbleNormalTrucks,
 	//AvailbleSpecialTrucks, AvailbleVipTrucks,
 	//DeliveredSpecialCargo, DeliveredVipCargo, DeliveredNormalCargo);
+
+void Company::checktoAvailable(int enteringDay, int enteringHr)
+{
+	Truck* cTruck;
+	int deltaTime=0;			//TBC...
+	  
+	this->FixingTrucks.peek(cTruck);
+	if ((24 * getCurrentDay() + getCurrentHour()) > (cTruck->getfinishTime()+cTruck->getMaintenanceTime()))
+	{
+		//1 for normal , 2 for special , 3 for vip
+		if (cTruck->getType() == 1)
+		{
+			FixingTrucks.dequeue(cTruck);
+			AvailbleNormalTrucks.enqueue(cTruck);
+		}
+		else if (cTruck->getType() == 2)
+		{
+			FixingTrucks.dequeue(cTruck);
+			AvailbleSpecialTrucks.enqueue(cTruck);
+
+		}
+		else if (cTruck->getType() == 3)
+		{
+			FixingTrucks.dequeue(cTruck);
+			AvailbleVipTrucks.insert(cTruck);
+		}
+	}
+}
+
+void Company:: movingtoAvailable(int enteringDay, int enteringHr)
+{
+	Truck* mTruck;
+	int deltaTime=0;		//TBC...
+	this->MovingTrucks.peek(mTruck);
+	if (  (24*getCurrentDay()+getCurrentHour()) > mTruck->getfinishTime()   ) //current time>truck->finishtime
+	{
+		//1 for normal , 2 for special , 3 for vip
+		if (mTruck->getType() == 1)
+		{
+			FixingTrucks.dequeue(mTruck);
+			AvailbleNormalTrucks.enqueue(mTruck);
+		}
+
+		else if (mTruck->getType() == 2)
+		{
+			FixingTrucks.dequeue(mTruck);
+			AvailbleSpecialTrucks.enqueue(mTruck);
+
+		}
+
+		else if (mTruck->getType() == 3)
+		{
+			FixingTrucks.dequeue(mTruck);
+			AvailbleVipTrucks.insert(mTruck);
+		}
+	}
+	//Last part is repeated, so, it can be moved to a separate function, smth like "MoveTruck"... 
+	
+}
+
+void Company::outputStatistics()
+{
+	ofstream of;
+	of.open("testOut.txt");
+	//In auto promoted u compared with all cargos, while only normal are promoted.  //Fixed.
+	of << "Statistics: " << endl;
+	of << "Cargos: " << (NCargos+SCargos+VCargos) << "[N: " << NCargos << ", S: " << SCargos << ", V:  " << VCargos << "]" << endl;
+	of << "Auto Promoted Cargos: " << 100 * (autoPromoted / (NCargos + autoPromoted)) << "%" << endl;
+	of << "Trucks: "<< (NumberNormalTrucks+ NumberSpecialTrucks+ NumberVipTrucks) << "[N: " << NumberNormalTrucks << ", S: " << NumberSpecialTrucks << ", V:  " << NumberVipTrucks << "]" << endl;
+	of << "Average Active Time: " << endl;
+	of << "Average Utilization: " << endl;
+
+}
 
 
 
