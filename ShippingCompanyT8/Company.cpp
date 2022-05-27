@@ -381,12 +381,12 @@ void Company::ReturnToCompany()
 	//			}
 	//		}
 
-			if (WaitingNormalCargo.peek()->getWaitTime() > AutoP) {
-				WaitingNormalCargo.removeFirstelement(pCargo);
-				//shoudl be replaced later
-				WaitingVipCargo.insert(pCargo, 1);
-			}
-		}
+		//	if (WaitingNormalCargo.peek()->getWaitTime() > AutoP) {
+		//		WaitingNormalCargo.removeFirstelement(pCargo);
+		//		//shoudl be replaced later
+		//		WaitingVipCargo.insert(pCargo, 1);
+		//	}
+		//}
 
 	//}
 //}
@@ -539,7 +539,7 @@ void Company::LoadNormal() {
 			}
 		}
 	}
-}
+
 void Company::MaxwNormalSpecial() {
 	Truck* pTruck;
 	Cargo* pCargo;
