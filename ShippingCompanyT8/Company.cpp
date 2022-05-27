@@ -258,7 +258,7 @@ void Company::MoveToTrucks() {
 
 	int counter = 0;
 	//vip first it is here assumed they are in the correct order with right priorties
-	while (!isOffHours())
+	if (!isOffHours())
 	{
 		if (WaitingVipCargo.getCount() > 0) {
 			AvailbleVipTrucks.peek(pTruck);
@@ -399,8 +399,8 @@ void Company::LoadVip() {
 
 	int counter = 0;
 	//vip first it is here assumed they are in the correct order with right priorties
-	//while (!isOffHours())
-	
+	if (!isOffHours())
+	{
 		if (WaitingVipCargo.getCount() > 0) {
 			WaitingVipCargo.peek(pCargo);
 			if (AvailbleVipTrucks.getCount() > 0) {
@@ -462,7 +462,8 @@ void Company::LoadVip() {
 				}
 			}*/
 		}
-	
+
+	}
 }
 
 
@@ -475,8 +476,9 @@ void Company::LoadSpecial() {
 
 	int counter = 0;
 	int numwaiting = WaitingSpecialCargo.getCount();
-	//while (!isOffHours())
-	//AvailbleSpecialTrucks.getCount() > 0
+	if (!isOffHours())
+	{
+		//AvailbleSpecialTrucks.getCount() > 0
 		if (numwaiting > 0 && AvailbleSpecialTrucks.getCount() > 0) {
 			AvailbleSpecialTrucks.peek(pTruck);
 			//WaitingSpecialCargo.peek(pCargo);
@@ -493,11 +495,11 @@ void Company::LoadSpecial() {
 				pTruck->setMoveTime(maxloadingTime, UniversalTime.CurrentDay);
 				pTruck->incrementJourney();
 			}
-			
-		}
-	
-}
 
+		}
+
+	}
+}
 
 void Company::LoadNormal() {
 	int maxloadingTime;
@@ -506,8 +508,8 @@ void Company::LoadNormal() {
 	Cargo* pCargo;
 
 	int counter = 0;
-	//while (!isOffHours())
-	
+	if (!isOffHours()) {
+
 		if (WaitingNormalCargo.getCount() > 0) {
 			AvailbleNormalTrucks.peek(pTruck);
 			if (WaitingNormalCargo.getCount() > pTruck->getTruckCapacity()) {
@@ -536,8 +538,8 @@ void Company::LoadNormal() {
 				pTruck->incrementJourney();
 			}
 		}
+	}
 }
-
 
 void Company::MaxwNormalSpecial() {
 	Truck* pTruck;
@@ -681,7 +683,7 @@ int Company::getCurrentHour()
 
 bool Company::isOffHours()
 {
-	if (getCurrentHour() < 24 || getCurrentHour() >= 5)
+	if (getCurrentHour() < 24 && getCurrentHour() >= 5)
 		return false;
 	else
 		return true;

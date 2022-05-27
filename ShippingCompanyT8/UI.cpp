@@ -77,10 +77,6 @@ int UIClass::getCurrentMode()
 {
 	return this->AppMode;
 }
-
-
-
-
 void UIClass::StartInteractiveMode(int D, int H, LinkedQueue<Cargo*> &WaitingSpecialCargo, LinkedList<Cargo*> &WaitingNormalCargo,
 	PriorityQueueArr<Cargo*> &WaitingVIPCargo, LinkedQueue<Truck*> &AvailbleNormalTrucks,
 	LinkedQueue<Truck*> &AvailbleSpecialTrucks, PriorityQueueArr<Truck*> &AvailbleVipTrucks,
@@ -118,7 +114,7 @@ void UIClass::StartInteractiveMode(int D, int H, LinkedQueue<Cargo*> &WaitingSpe
 		std::cout << "[ "; AvailbleNormalTrucks.PrintQueue(); cout << "]" << "  " << "("; AvailbleSpecialTrucks.PrintQueue(); cout << ")" << " " << "{"; AvailbleVipTrucks.printarrTruck(); cout << "}";
 		cout << "LoadingTrucks" << " ";
 		LoadingTrucks.printarrTruck();
-		std::cout << std::string(20, '_') << endl;
+	/*	std::cout << std::string(20, '_') << endl;*/
 
 
 		//std::cin >> m;

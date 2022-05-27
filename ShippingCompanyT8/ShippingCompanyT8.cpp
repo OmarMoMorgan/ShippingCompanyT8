@@ -18,8 +18,8 @@ int main()
     p1.printarr();*/
     Company c;
     //c.Simulator();
-    c.SimTest();
-    c.outputStatistics();
+    c.Simulator();
+    //c.outputStatistics();
     //LinkedList<int> l;
    /* l.insertback(1);
     l.insertback(2);
