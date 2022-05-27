@@ -28,7 +28,7 @@ private:
 	double deleiveryDistance;
 	double Cost;
 
-	int maxW;
+	int waitedTime;
 
 	//this is the type of the cargo might be reomved later
 	int CarTyp;
@@ -37,7 +37,7 @@ public:
 	Cargo();
 	Cargo(int icomingCargoType, /*int ETD, int ETH,*/ int ID, double DIST, int LT, double cost);
 	bool isWaiting()const;
-	bool waitedForMax();
+//	bool waitedForMax();
 
 	//bool operator> (Cargo& C_cw)const;
 
@@ -49,9 +49,10 @@ public:
 	void setCargoType(int t);
 	void setDelieveryDistance(double dd);
 	void setCost(double c);
-	void setMaxW(int mw);
+
 	void setCargoID(int id);
 	void setMovetime(int);
+	void setWaitedTimeByMove(int mt);
 
 	/*int getPrepDay() const;
 	int getPrepHour() const;*/
@@ -64,8 +65,10 @@ public:
 	double getDelieveryDistance() const;
 	double getCost() const;
 	int getCargoID() const;
-	int getMaxW() const;
-	int getWaitTime() const;
+
+	int getCurWaitTime(int curDay, int curHr) const;
 	int getVIPPriority() const;
+	int getWaitedTime() const;
+	
 };
 

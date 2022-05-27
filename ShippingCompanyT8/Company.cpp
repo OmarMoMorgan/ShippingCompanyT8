@@ -308,7 +308,7 @@ void Company::MoveToTrucks() {
 				}
 			}
 
-			else if (pCargo->getWaitTime() > MaxW) {
+			else if (pCargo->getCurWaitTime(UniversalTime.CurrentDay, UniversalTime.CurrentHour) > MaxW) {
 				while (WaitingVipCargo.getCount() > 0 && pTruck->getTruckCapacity() > counter) {
 					WaitingVipCargo.Pop(pCargo);
 					pTruck->insertCargo(pCargo);
@@ -335,7 +335,7 @@ void Company::MoveToTrucks() {
 				}
 				pTruck->setMoveTime( maxloadingTime, UniversalTime.CurrentDay);
 			}
-			else if (pCargo->getWaitTime() > MaxW) {
+			else if (pCargo->getCurWaitTime(UniversalTime.CurrentDay, UniversalTime.CurrentHour) > MaxW) {
 				while (WaitingSpecialCargo.getCount() > 0 && pTruck->getTruckCapacity() > counter) {
 					WaitingSpecialCargo.dequeue(pCargo);
 					pTruck->insertCargo(pCargo);
@@ -372,7 +372,7 @@ void Company::MoveToTrucks() {
 				}
 				pTruck->setMoveTime(maxloadingTime, UniversalTime.CurrentDay);
 			}
-			else if (WaitingNormalCargo.peek()->getWaitTime() > MaxW) {
+			else if (WaitingNormalCargo.peek()->getCurWaitTime(UniversalTime.CurrentDay, UniversalTime.CurrentHour) > MaxW) {
 				while (WaitingNormalCargo.getCount() > 0 && pTruck->getTruckCapacity() > counter) {
 					WaitingNormalCargo.removeFirstelement(pCargo);
 					pTruck->insertCargo(pCargo);
@@ -381,7 +381,7 @@ void Company::MoveToTrucks() {
 				}
 			}
 
-			if (WaitingNormalCargo.peek()->getWaitTime() > AutoP) {
+			if (WaitingNormalCargo.peek()->getCurWaitTime(UniversalTime.CurrentDay, UniversalTime.CurrentHour) > AutoP) {
 				WaitingNormalCargo.removeFirstelement(pCargo);
 				//shoudl be replaced later
 				WaitingVipCargo.insert(pCargo, 1);
@@ -399,8 +399,7 @@ void Company::LoadVip() {
 
 	int counter = 0;
 	//vip first it is here assumed they are in the correct order with right priorties
-	if (!isOffHours())
-	{
+	
 		if (WaitingVipCargo.getCount() > 0) {
 			WaitingVipCargo.peek(pCargo);
 			if (AvailbleVipTrucks.getCount() > 0) {
@@ -462,8 +461,6 @@ void Company::LoadVip() {
 				}
 			}*/
 		}
-
-	}
 }
 
 
@@ -476,8 +473,7 @@ void Company::LoadSpecial() {
 
 	int counter = 0;
 	int numwaiting = WaitingSpecialCargo.getCount();
-	if (!isOffHours())
-	{
+	
 		//AvailbleSpecialTrucks.getCount() > 0
 		if (numwaiting > 0 && AvailbleSpecialTrucks.getCount() > 0) {
 			AvailbleSpecialTrucks.peek(pTruck);
@@ -497,8 +493,6 @@ void Company::LoadSpecial() {
 			}
 
 		}
-
-	}
 }
 
 void Company::LoadNormal() {
@@ -508,8 +502,7 @@ void Company::LoadNormal() {
 	Cargo* pCargo;
 
 	int counter = 0;
-	if (!isOffHours()) {
-
+	
 		if (WaitingNormalCargo.getCount() > 0) {
 			AvailbleNormalTrucks.peek(pTruck);
 			if (WaitingNormalCargo.getCount() > pTruck->getTruckCapacity()) {
@@ -538,7 +531,6 @@ void Company::LoadNormal() {
 				pTruck->incrementJourney();
 			}
 		}
-	}
 }
 
 void Company::MaxwNormalSpecial() {
@@ -552,7 +544,7 @@ void Company::MaxwNormalSpecial() {
 	if (WaitingNormalCargo.getCount() > 0) {
 		if (AvailbleNormalTrucks.getCount() > 0) {
 			AvailbleNormalTrucks.peek(pTruck);
-			if (WaitingNormalCargo.peek()->getWaitTime() > MaxW) {
+			if (WaitingNormalCargo.peek()->getCurWaitTime(UniversalTime.CurrentDay, UniversalTime.CurrentHour) > MaxW) {
 				while (WaitingNormalCargo.getCount() > 0 && pTruck->getTruckCapacity() > counter) {
 					WaitingNormalCargo.removeFirstelement(pCargo);
 					pTruck->insertCargo(pCargo);
@@ -568,7 +560,7 @@ void Company::MaxwNormalSpecial() {
 		if(AvailbleSpecialTrucks.getCount() > 0){
 			AvailbleSpecialTrucks.peek(pTruck);
 			WaitingSpecialCargo.peek(pCargo);
-			if (pCargo->getWaitTime() > MaxW) {
+			if (pCargo->getCurWaitTime(UniversalTime.CurrentDay, UniversalTime.CurrentHour) > MaxW) {
 				while (WaitingSpecialCargo.getCount() > 0 && pTruck->getTruckCapacity() > counter) {
 					WaitingSpecialCargo.dequeue(pCargo);
 					pTruck->insertCargo(pCargo);
@@ -585,7 +577,7 @@ void Company::AutoUpgradeToVip() {
 
 	Cargo* pCargo;
 	if (WaitingNormalCargo.getCount() > 0) {
-		if (WaitingNormalCargo.peek()->getWaitTime() > AutoP) {
+		if (WaitingNormalCargo.peek()->getCurWaitTime(UniversalTime.CurrentDay, UniversalTime.CurrentHour) > AutoP) {
 			//pCargo = WaitingNormalCargo.peek();
 			WaitingNormalCargo.removeFirstelement(pCargo);
 			pCargo->setCargoType(3);
@@ -606,7 +598,10 @@ void Company::MoveTrucktoMoving() {
 			LoadingTrucks.Pop(pTruck);
 			//should be replaced with leaev time
 			MovingTrucks.insert(pTruck, 1);
+			//current time in hrs
+			int ct = ((24 * UniversalTime.CurrentDay) + UniversalTime.CurrentHour);
 		}
+		
 	}
 }
 
