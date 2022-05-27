@@ -171,3 +171,25 @@ int Truck::getLoadTime() const
 {
 	return loadtime;
 }
+
+void Truck::setCargosWaitedTime(int moveTime)
+{
+	int count = CargoinTruck.getCount();
+
+	Cargo** arrTemp = new Cargo* [count];
+	while (count != 0)
+	{
+		Cargo* C;
+		this->CargoinTruck.Pop(C);
+		C->setWaitedTimeByMove(moveTime);
+		arrTemp[count-1] = C;
+		count--;
+	}
+
+	for (int i = count; i > 0; i--)
+	{
+		CargoinTruck.insert(arrTemp[i]);
+	}
+	delete[] arrTemp;
+	arrTemp = nullptr;
+}

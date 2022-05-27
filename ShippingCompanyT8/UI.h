@@ -35,7 +35,7 @@ public:
 
 
 
-	//void StartInteractiveMode();
+	// StartInteractiveMode();
 	void StartStepByStepMode();
 	void StartSilentMode();
 

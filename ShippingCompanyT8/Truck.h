@@ -89,5 +89,7 @@ public:
 
 	void setLoadTime(int);
 	int getLoadTime() const;
+
+	void setCargosWaitedTime(int currentTime);
 };
 

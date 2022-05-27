@@ -39,7 +39,7 @@ bool Cargo:: isWaiting() const
 		return true;
 	return false;
 }
-
+/*
 bool Cargo::waitedForMax()
 {
 	//Check it..
@@ -53,6 +53,7 @@ bool Cargo::waitedForMax()
 
 
 }
+*/
 /*
 bool Cargo:: operator>(Cargo* C_cw) const
 {
@@ -83,7 +84,11 @@ void Cargo::setMovetime(int x)
 {
 	movetime = x;
 }
-void Cargo::setMaxW(int mw) { maxW = mw; }
+
+void Cargo::setWaitedTimeByMove(int mt)
+{
+	waitedTime = mt- ((24*prepDay) +prepHour );
+}
 
 int Cargo::getMoveTime() const /// we didnot use it in company so I added movetime parameter in CDT
 {
@@ -103,10 +108,9 @@ int Cargo::getCDT(int truckspeed, int movetime) const //calculates time after ca
 double Cargo::getDelieveryDistance() const { return deleiveryDistance; }
 double Cargo::getCost() const { return Cost; }
 int Cargo::getCargoID() const { return cargoID; }
-int Cargo::getMaxW()const { return maxW; }
 
-int Cargo::getWaitTime() const {
-	return prepDay * 24 + prepHour;
+int Cargo::getCurWaitTime(int curDay, int curHr) const {
+	return ( (24* curDay) +curHour ) - ( (prepDay * 24) + prepHour );
 }
 
 int Cargo::getVIPPriority() const
@@ -120,3 +124,5 @@ int Cargo::getVIPPriority() const
 	}
 
 }
+
+int Cargo::getWaitedTime() const { return waitedTime; }
