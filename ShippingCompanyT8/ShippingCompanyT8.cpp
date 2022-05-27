@@ -19,7 +19,8 @@ int main()
     Company c;
     //c.Simulator();
     c.Simulator();
-    //c.outputStatistics();
+    //c.SimTest();
+    c.outputStatistics();
     //LinkedList<int> l;
    /* l.insertback(1);
     l.insertback(2);
