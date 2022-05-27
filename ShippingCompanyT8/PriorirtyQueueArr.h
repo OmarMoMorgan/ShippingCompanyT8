@@ -214,11 +214,31 @@ public:
 
 
 	 void printarrTruck()
-	{
-		for (int i = 0; i < getCount(); i++) {
-			cout << arr[i].data->getTrucID() << ",";
-		}
-		//cout << arr[getCount() - 1].data->getTrucID();
-	}
-
+	 {
+		 if (getCount() > 0)
+		 {
+			 for (int i = 0; i < getCount(); i++) {
+				 cout << arr[i].data->getTrucID() << ",";
+			
+				 while (arr[i].data->getListCount()>0)
+				 {
+					 cout << "{  ";
+					 int cargotype = arr[i].data->peekCargo()->getCargoType();
+					 switch (cargotype) {
+					 case 1:
+						 cout << "[ " << arr[i].data->DeleiverCargo()->getCargoID() << "], ";
+					 case 2:
+						 cout << "( " << arr[i].data->DeleiverCargo()->getCargoID() << "), ";
+					 case 3:
+						 cout << "{ " << arr[i].data->DeleiverCargo()->getCargoID() << "}, ";
+					 default:
+						 break;
+					 }
+					 cout << "}";
+				 }
+				
+			 }
+			 //cout << arr[getCount() - 1].data->getTrucID();
+		 }
+	 }
 };

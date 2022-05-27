@@ -12,6 +12,8 @@ Cargo::Cargo()
 	this->setLoadTime(0);
 	this->setCost(0);
 	this ->setMovetime(0);
+	loadTime = 0;
+	unloadTime = 0;
 }
 
 

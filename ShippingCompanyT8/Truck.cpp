@@ -149,7 +149,9 @@ int Truck::getListCount() {
 }
 
 Cargo* Truck::DeleiverCargo() {
-	return CargoinTruck.Pop();
+	Cargo* pcargo= peekCargo();
+	CargoinTruck.Pop(pcargo);
+	return pcargo;
 }
 
 Cargo* Truck::peekCargo()
@@ -158,6 +160,7 @@ Cargo* Truck::peekCargo()
 	 CargoinTruck.peek(Pcargo);
 	 return Pcargo;
 }
+
 
 void Truck::setLoadTime(int x)
 {

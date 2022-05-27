@@ -20,15 +20,16 @@ int UIClass::getTotalWaitingCargo(PriorityQueueArr<Cargo*> &pq, LinkedList<Cargo
 	return pq.getCount() + ll.getCount() + lq.getCount();
 }
 
-int UIClassgetTotalMovingCargo(PriorityQueueArr<Cargo*> &pq)
+int UIClass::getTotalMovingCargo(PriorityQueueArr<Cargo*> &pq)
 {
 	return  pq.getCount();
 }
 
-int UIClassgetTotalDelieveredCargo(LinkedQueue<Cargo*> &lq1, LinkedQueue<Cargo*> &lq2, LinkedQueue<Cargo*> &lq3)
+int UIClass::getTotalDelieveredCargo(LinkedQueue<Cargo*> &lq1, LinkedQueue<Cargo*> &lq2, LinkedQueue<Cargo*> &lq3)
 {
 	return lq1.getCount() + lq2.getCount() + lq3.getCount();
 }
+
 
 
 void UIClass::SetCurrentMode()
@@ -81,7 +82,7 @@ void UIClass::StartInteractiveMode(int D, int H, LinkedQueue<Cargo*> &WaitingSpe
 	PriorityQueueArr<Cargo*> &WaitingVIPCargo, LinkedQueue<Truck*> &AvailbleNormalTrucks,
 	LinkedQueue<Truck*> &AvailbleSpecialTrucks, PriorityQueueArr<Truck*> &AvailbleVipTrucks,
 	LinkedQueue<Cargo*> &DeliveredSpecialCargo, LinkedQueue<Cargo*> &DeliveredVipCargo, 
-	LinkedQueue<Cargo*> &DeliveredNormalCargo, PriorityQueueArr<Truck*> &LoadingTrucks)
+	LinkedQueue<Cargo*> &DeliveredNormalCargo, PriorityQueueArr<Truck*> &LoadingTrucks, PriorityQueueArr<Truck*>& movingtruck, PriorityQueueArr<Truck*>& returningback,LinkedQueue<Truck*> fixingtruck)
 
 {
 	{
@@ -109,11 +110,34 @@ void UIClass::StartInteractiveMode(int D, int H, LinkedQueue<Cargo*> &WaitingSpe
 
 		std::cout << getTotalEmptytrucks(AvailbleNormalTrucks, AvailbleSpecialTrucks, AvailbleVipTrucks);
 		std::cout << "Empty Trucks: ";
-		AvailbleVipTrucks.printarrTruck();
-		std::cout << std::string(20, '_') << endl;
 		std::cout << "[ "; AvailbleNormalTrucks.PrintQueue(); cout << "]" << "  " << "("; AvailbleSpecialTrucks.PrintQueue(); cout << ")" << " " << "{"; AvailbleVipTrucks.printarrTruck(); cout << "}";
+		std::cout << std::string(20, '_') << endl;
+
 		cout << "LoadingTrucks" << " ";
+		LoadingTrucks.getCount();
 		LoadingTrucks.printarrTruck();
+		std::cout << std::string(20, '_') << endl;
+		
+		cout << "movingTrucks" << " ";
+		movingtruck.getCount();
+		movingtruck.printarrTruck();
+		std::cout << std::string(20, '_') << endl;
+		cout << "Returning Trucks" << " ";
+		returningback.getCount();
+		returningback.printarrTruck();
+		std::cout << std::string(20, '_') << endl;
+
+		cout << "fixing Trucks" << " "<<
+		fixingtruck.getCount();
+		fixingtruck.PrintQueue();
+		std::cout << std::string(20, '_') << endl;
+		//cout << "movingTrucks" << " ";
+		//movingtruck.getCount();
+		//movingtruck.printarrTruck();
+		//std::cout << std::string(20, '_') << endl;
+
+
+
 	/*	std::cout << std::string(20, '_') << endl;*/
 
 
