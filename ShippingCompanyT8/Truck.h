@@ -7,6 +7,7 @@
 // finish time is the time when cargo gets back to company so is movetime of truck+ DI,  is calculated after truck finishes loading 
 
 // i added peekCargo to get cargo in top of queue
+
 enum  eTruckType
 {
 	VipTruck,
@@ -14,11 +15,12 @@ enum  eTruckType
 	NormalTruck
 };
 
+
 class Truck
 {
 private:
 	int loadtime; //to know when it starts loading
-	inline static int counter = 0; //to give an Id for trucks;
+	static  int counter; //to give an Id for trucks;
 	int returntime;
 	//int farthest_distance_Cargo;
 	int currentJourney; // this is used to keep track of undergoing journeys to calculate return time if there is maintance or not

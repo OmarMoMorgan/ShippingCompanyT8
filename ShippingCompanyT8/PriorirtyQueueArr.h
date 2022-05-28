@@ -215,20 +215,22 @@ public:
 
 	 void printarrTruck()
 	 {
-		 if (getCount() > 0)
+		 if (getCount() >= 0)
 		 {
 			 for (int i = 0; i < getCount(); i++) {
 				 cout << arr[i].data->getTrucID() << ",";
 			
-				 while (arr[i].data->getListCount()>0)
+				 for (int j=0;j< arr[i].data->getListCount();j++)
 				 {
 					 cout << "{  ";
 					 int cargotype = arr[i].data->peekCargo()->getCargoType();
 					 switch (cargotype) {
 					 case 1:
 						 cout << "[ " << arr[i].data->DeleiverCargo()->getCargoID() << "], ";
+						 break;
 					 case 2:
 						 cout << "( " << arr[i].data->DeleiverCargo()->getCargoID() << "), ";
+						 break;
 					 case 3:
 						 cout << "{ " << arr[i].data->DeleiverCargo()->getCargoID() << "}, ";
 					 default:

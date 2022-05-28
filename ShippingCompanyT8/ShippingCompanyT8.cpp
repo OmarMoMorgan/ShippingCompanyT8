@@ -5,7 +5,7 @@
 //#include "PriorirtyQueueArr.h"
 #include "Company.h"
 //#include "LinkedList.h"
-
+int Truck::counter = 0;
 int main()
 {
    /* PriorityQueueArr<int> p1;
@@ -15,20 +15,46 @@ int main()
     p1.insert(4, 12);
     p1.Pop();
 
-    p1.printarr();*/
+    //p1.printarr();*/
     Company c;
-    //c.Simulator();
     c.Simulator();
-    //c.SimTest();
-    c.outputStatistics();
+    //c.Simulator();
+    ////c.SimTest();
+    //c.outputStatistics();
     //LinkedList<int> l;
    /* l.insertback(1);
     l.insertback(2);
     l.insertback(3);
     l.insertback(4);
     l.PrintList();*/
+  //  Cargo * c1= new Cargo(1, 15, 300, 20, 16);
+  //  Cargo* c4 = new Cargo(1, 18, 300, 20, 16);
 
-    //std::cout << "Hello World!\n";
+  //  Cargo* c2 = new Cargo(2, 16, 300, 20, 16);
+  //  Cargo* c3 = new Cargo(2, 17, 300, 20, 16);
+
+
+  //  Truck* t1=new Truck( 1, 200, 20,3, 5);
+  //  Truck* t2 = new Truck(2, 200, 20, 3, 5);
+  //  cout << t1->getTrucID() << " " << t2->getTrucID();
+  //  cout << t1->getListCount() << endl;
+  //  t1->insertCargo(c1);
+  //t1->insertCargo(c4);
+  //cout << t1->getListCount() << endl;
+  //cout << t1->DeleiverCargo()->getCargoID() << endl;
+  //cout << t1->peekCargo()->getCargoID() << "hmm";
+  //cout << t1->getListCount() << endl;
+
+
+  //cout << t1->DeleiverCargo()->getCargoID();
+  // /* t2->insertCargo(c2);
+  //  t2->insertCargo(c3);*/
+  //  PriorityQueueArr<Truck*> q;
+
+//
+//    q.insert(t1);
+////q.insert(t2);
+//q.printarrTruck();   //std::cout << "Hello World!\n";
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
