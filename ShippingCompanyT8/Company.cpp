@@ -416,6 +416,7 @@ void Company::LoadVip() {
 						maxloadingTime = pCargo->getLoadTime();
 					}
 					pTruck->setMoveTime(maxloadingTime+ getCurrentHour(), UniversalTime.CurrentDay);
+					//this is for debiugging only 
 					cout << "in a vip truck";
 					pTruck->printcargosdebug();
 					cout << endl;
@@ -438,6 +439,7 @@ void Company::LoadVip() {
 					}
 					pTruck->setMoveTime(maxloadingTime+ getCurrentHour(), UniversalTime.CurrentDay);
 					pTruck->incrementJourney();
+					//this is for debiugging only 
 					cout << "in a normal truck";
 					pTruck->printcargosdebug();
 				}
@@ -456,6 +458,7 @@ void Company::LoadVip() {
 					}
 					pTruck->setMoveTime(maxloadingTime	+ getCurrentHour(), UniversalTime.CurrentDay);
 					pTruck->incrementJourney();
+					//this is for debiugging only 
 					cout << "in a special truck";
 					pTruck->printcargosdebug();
 				}
@@ -617,9 +620,12 @@ void Company::MoveTrucktoMoving() {
 			LoadingTrucks.Pop(pTruck);
 			//should be replaced with leaev time
 			MovingTrucks.insert(pTruck, pTruck->peekCargo()->getCDT(pTruck->getSpeed(), pTruck->getMoveTime()));
-			//cout << endl << "debug test starts here";
-			//pTruck->printcargosdebug();
-			//cout << endl;
+			//this is for debiugging only 
+			cout << endl << "debug test starts here";
+			pTruck->printcargosdebug();
+			cout << endl;
+			MovingTrucks.printarrTruck();
+			cout << endl;
 		}
 		
 	}
@@ -732,6 +738,7 @@ void Company::Simulator() {
 	while (flag < 2){
 
 		UniversalTime.MoveOneunit();
+		//this is for debiugging only 
 		cout << "Current Time " << "(Day " << UniversalTime.CurrentDay << " : " << UniversalTime.CurrentHour << " Hour) \n";
 		//EventsList.peek(Eventhappening);
 
@@ -790,7 +797,7 @@ void Company::Simulator() {
 		
 		
 		//all of the below lines are for debugging purposes only:
-
+		//this is for debiugging only 
 		cout << "[ "; WaitingNormalCargo.PrintListCargo(); 
 		cout << "]" << "  " << "(";
 		WaitingSpecialCargo.PrintQueue();
@@ -809,9 +816,9 @@ void Company::Simulator() {
 		if (!isOffHours()) {
 			LoadVip();
 			LoadSpecial();
-			//LoadNormal();
+			LoadNormal();
 			MaxwNormalSpecial();
-			//AutoUpgradeToVip();
+			AutoUpgradeToVip();
 
 			MoveTrucktoMoving();
 			FinsihDeleivery();

@@ -64,9 +64,17 @@ int main()
   //  //
 
   //  l.insertback(2);
+  //  l.PrintList();
   //  l.removeFirstelement(p);
   //  l.PrintList();
-
+  //  l.insertback(4);
+  //  l.insertback(7);
+  //  l.PrintList();
+  //  l.NewDeleteNode(4);
+  //  l.PrintList();
+  //  l.insertback(9);
+  //  l.insertback(34);
+  //  l.PrintList();
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

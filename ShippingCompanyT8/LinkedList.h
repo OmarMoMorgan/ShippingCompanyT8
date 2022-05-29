@@ -121,6 +121,7 @@ public:
 	//Note: List is not sorted
 	bool DeleteNode(T value){
 		Node<T>* P = Head;
+		Node<T>* temp;
 		if (Head == nullptr) {
 			return false;
 		}
@@ -129,13 +130,14 @@ public:
 			if(P->getItem() == value){
 				delete P;
 				Head = nullptr;
-				
+				Tail = nullptr;
 			}
 		}
 			while (P->getNext()) {
 				if (P->getNext()->getItem() == value) {
+					temp = P->getNext();
 					P->setNext(P->getNext()->getNext());
-					delete P->getNext();
+					delete temp;
 					return true;
 				}
 				else {
@@ -291,6 +293,7 @@ public:
 
 	bool NewDeleteNode(T value) {
 		Node<T>* P = Head;
+		Node<T>* temp;
 		if (Head == nullptr) {
 			return false;
 		}
@@ -308,8 +311,14 @@ public:
 		}
 		while (P->getNext()) {
 			if (P->getNext()->getItem() == value) {
+				temp = P->getNext();
 				P->setNext(P->getNext()->getNext());
-				delete P->getNext();
+				if (temp->getNext()) {
+					delete temp;
+				}
+				else {
+					Tail = P;
+				}
 				return true;
 			}
 			else {

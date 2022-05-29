@@ -219,15 +219,15 @@ public:
 		 if (getCount() >= 0)
 		 {
 			 for (int i = 0; i < getCount(); i++) {
-				 cout << arr[i].data->getTrucID() << ",";
+				 cout << arr[i].data->getTrucID();
 			
 				 for (int j=0;j< arr[i].data->getListCount();j++)
 				 {
-					 cout << "{  ";
+					 //cout << "{  ";
 					 int cargotype = arr[i].data->peekCargo()->getCargoType();
 					 switch (cargotype) {
 					 case 1:
-						 cout << "[ " << arr[i].data->DeleiverCargo()->getCargoID() << "], ";
+						 cout << "[ "; arr[i].data->printcargosdebug();cout << "], ";
 						 break;
 					 case 2:
 						 cout << "( " << arr[i].data->DeleiverCargo()->getCargoID() << "), ";
@@ -237,7 +237,8 @@ public:
 					 default:
 						 break;
 					 }
-					 cout << "}";
+					 //cout << "}";
+					 cout << ",";
 				 }
 				
 			 }
