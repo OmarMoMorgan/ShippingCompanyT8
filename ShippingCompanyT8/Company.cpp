@@ -392,7 +392,7 @@ void Company::ReturnToCompany()
 //}
 
 void Company::LoadVip() {
-	int maxloadingTime;
+	int maxloadingTime = 0;
 
 	Truck* pTruck;
 	Cargo* pCargo;
@@ -416,6 +416,9 @@ void Company::LoadVip() {
 						maxloadingTime = pCargo->getLoadTime();
 					}
 					pTruck->setMoveTime(maxloadingTime+ getCurrentHour(), UniversalTime.CurrentDay);
+					cout << "in a vip truck";
+					pTruck->printcargosdebug();
+					cout << endl;
 				}
 			}
 
@@ -435,6 +438,8 @@ void Company::LoadVip() {
 					}
 					pTruck->setMoveTime(maxloadingTime+ getCurrentHour(), UniversalTime.CurrentDay);
 					pTruck->incrementJourney();
+					cout << "in a normal truck";
+					pTruck->printcargosdebug();
 				}
 			}
 			else if (AvailbleSpecialTrucks.getCount() > 0) {
@@ -451,6 +456,8 @@ void Company::LoadVip() {
 					}
 					pTruck->setMoveTime(maxloadingTime	+ getCurrentHour(), UniversalTime.CurrentDay);
 					pTruck->incrementJourney();
+					cout << "in a special truck";
+					pTruck->printcargosdebug();
 				}
 			}
 
@@ -468,7 +475,7 @@ void Company::LoadVip() {
 
 
 void Company::LoadSpecial() {
-	int maxloadingTime;
+	int maxloadingTime = 0;
 
 	Truck* pTruck;
 	Cargo* pCargo;
@@ -499,7 +506,7 @@ void Company::LoadSpecial() {
 }
 
 void Company::LoadNormal() {
-	int maxloadingTime;
+	int maxloadingTime = 0;
 
 	Truck* pTruck;
 	Cargo* pCargo;
@@ -507,38 +514,43 @@ void Company::LoadNormal() {
 	int counter = 0;
 	
 		if (WaitingNormalCargo.getCount() > 0) {
-			AvailbleNormalTrucks.peek(pTruck);
-			if (WaitingNormalCargo.getCount() > pTruck->getTruckCapacity()) {
-				//Move to loading trucks
-				AvailbleNormalTrucks.dequeue(pTruck);
-				LoadingTrucks.insert(pTruck, 1);
-				pTruck->setLoadTime(getCurrentDay() * 24 + getCurrentHour());
-				//Move to the truck
-				for (int i = 0; i < pTruck->getTruckCapacity(); i++) {
-					WaitingNormalCargo.removeFirstelement(pCargo);
-					pTruck->insertCargo(pCargo);
-					maxloadingTime = pCargo->getLoadTime();
-				}
-				pTruck->setMoveTime(maxloadingTime+getCurrentHour() + getCurrentHour(), UniversalTime.CurrentDay);
-			}
-			else {
-				AvailbleVipTrucks.peek(pTruck);
-				if (WaitingNormalCargo.getCount() > pTruck->getTruckCapacity()) {
+			if (AvailbleNormalTrucks.getCount() > 0) {
+				AvailbleNormalTrucks.peek(pTruck);
+				if (WaitingNormalCargo.getCount() >= pTruck->getTruckCapacity()) {
 					//Move to loading trucks
-					AvailbleVipTrucks.Pop(pTruck);
+					AvailbleNormalTrucks.dequeue(pTruck);
 					LoadingTrucks.insert(pTruck, 1);
+					pTruck->setLoadTime(getCurrentDay() * 24 + getCurrentHour());
 					//Move to the truck
 					for (int i = 0; i < pTruck->getTruckCapacity(); i++) {
 						WaitingNormalCargo.removeFirstelement(pCargo);
 						pTruck->insertCargo(pCargo);
 						maxloadingTime = pCargo->getLoadTime();
 					}
-					pTruck->setMoveTime(maxloadingTime+getCurrentDay(), UniversalTime.CurrentDay);
-					pTruck->incrementJourney();
+					pTruck->setMoveTime(maxloadingTime + getCurrentHour() + getCurrentHour(), UniversalTime.CurrentDay);
+					pTruck->printcargosdebug();
 				}
 			}
-		}
-	}
+			else {
+				if (AvailbleVipTrucks.getCount() > 0) {
+					AvailbleVipTrucks.peek(pTruck);
+					if (WaitingNormalCargo.getCount() >= pTruck->getTruckCapacity()) {
+						//Move to loading trucks
+						AvailbleVipTrucks.Pop(pTruck);
+						LoadingTrucks.insert(pTruck, 1);
+						//Move to the truck
+						for (int i = 0; i < pTruck->getTruckCapacity(); i++) {
+							WaitingNormalCargo.removeFirstelement(pCargo);
+							pTruck->insertCargo(pCargo);
+							maxloadingTime = pCargo->getLoadTime();
+						}
+						pTruck->setMoveTime(maxloadingTime + getCurrentDay(), UniversalTime.CurrentDay);
+						pTruck->incrementJourney();
+					}
+				}
+			}
+		}		
+}
 
 void Company::MaxwNormalSpecial() {
 	Truck* pTruck;
@@ -605,7 +617,9 @@ void Company::MoveTrucktoMoving() {
 			LoadingTrucks.Pop(pTruck);
 			//should be replaced with leaev time
 			MovingTrucks.insert(pTruck, pTruck->peekCargo()->getCDT(pTruck->getSpeed(), pTruck->getMoveTime()));
-
+			//cout << endl << "debug test starts here";
+			//pTruck->printcargosdebug();
+			//cout << endl;
 		}
 		
 	}
@@ -623,6 +637,7 @@ void Company::FinsihDeleivery() {
 	if (MovingTrucks.getCount() > 0) {
 		MovingTrucks.peek(pTruck);
 		pCargo = pTruck->peekCargo();
+		
 		if (current_time_Hours == pCargo->getCDT(pTruck->getSpeed(), pTruck->getMoveTime()))
 		{
 			MovingTrucks.Pop(pTruck);
@@ -709,31 +724,84 @@ void Company::Simulator() {
 
 	int flag = 0;
 	UIController = new UIClass();
-	while (flag == 0){
+
+	EventsList.peek(Eventhappening);
+	etd = Eventhappening->getETD();
+	eth = Eventhappening->getETH();
+
+	while (flag < 2){
 
 		UniversalTime.MoveOneunit();
-		EventsList.peek(Eventhappening);
+		cout << "Current Time " << "(Day " << UniversalTime.CurrentDay << " : " << UniversalTime.CurrentHour << " Hour) \n";
+		//EventsList.peek(Eventhappening);
 
-		UIController->StartInteractiveMode(UniversalTime.CurrentDay, UniversalTime.CurrentHour,
+
+		/*UIController->StartInteractiveMode(UniversalTime.CurrentDay, UniversalTime.CurrentHour,
 			WaitingSpecialCargo, WaitingNormalCargo, WaitingVipCargo, AvailbleNormalTrucks, AvailbleSpecialTrucks,
-			AvailbleVipTrucks, DeliveredSpecialCargo, DeliveredVipCargo, DeliveredNormalCargo, LoadingTrucks, MovingTrucks,ReturnBackTruck,FixingTrucks);
+			AvailbleVipTrucks, DeliveredSpecialCargo, DeliveredVipCargo, DeliveredNormalCargo, LoadingTrucks, MovingTrucks,ReturnBackTruck,FixingTrucks);*/
 
-		etd = Eventhappening->getETD();
-		eth = Eventhappening->getETH();
+		
 
 		
 		//Executing events
-		while (etd <= UniversalTime.CurrentDay && eth <= UniversalTime.CurrentHour && flag == 0) {
+	
+		if (flag == 0) {
+			while (etd <= UniversalTime.CurrentDay && eth <= UniversalTime.CurrentHour) {
+				Eventhappening->Execute(WaitingNormalCargo, WaitingSpecialCargo, WaitingVipCargo);
+				EventsList.dequeue(Eventhappening);
+				delete Eventhappening;
+				if (EventsList.getCount() == 0) {
+					flag = 1;
+					break;
+				}
+				EventsList.peek(Eventhappening);
+				etd = Eventhappening->getETD();
+				eth = Eventhappening->getETH();
+				
+			}			
+		}
 
-			if (!EventsList.dequeue(Eventhappening)) {
-				flag = 1;
-			}
-			Eventhappening->Execute(WaitingNormalCargo, WaitingSpecialCargo, WaitingVipCargo);
-			//delete Eventhappening;
+
+		/*do
+		{
 			EventsList.peek(Eventhappening);
 			etd = Eventhappening->getETD();
 			eth = Eventhappening->getETH();
+			if (etd <= UniversalTime.CurrentDay && eth <= UniversalTime.CurrentHour) {
+				Eventhappening->Execute(WaitingNormalCargo, WaitingSpecialCargo, WaitingVipCargo);
+				EventsList.dequeue(Eventhappening);
+				delete Eventhappening;
+			}
+			else {
+				flag = -1;
+			}
+			if (EventsList.getCount() == 0) {
+				flag = 1;
+				etd = 1000000;
+				eth = 1000000;
+				}
+			else {
+				EventsList.peek(Eventhappening);
+				etd = Eventhappening->getETD();
+				eth = Eventhappening->getETH();
+			}
 		}
+		while (flag == 0);*/
+		
+		
+		//all of the below lines are for debugging purposes only:
+
+		cout << "[ "; WaitingNormalCargo.PrintListCargo(); 
+		cout << "]" << "  " << "(";
+		WaitingSpecialCargo.PrintQueue();
+		cout << ")" << " " << "{";
+		WaitingVipCargo.printarrCargo(); cout << "}";
+		cout << endl;
+
+
+
+
+
 		//cout << "oamr test starts from here" "\n";
 		//WaitingNormalCargo.PrintListCargo();
 		//cout << "\n" " it eneded here \n";
@@ -741,9 +809,9 @@ void Company::Simulator() {
 		if (!isOffHours()) {
 			LoadVip();
 			LoadSpecial();
-			LoadNormal();
-			//MaxwNormalSpecial();
-			AutoUpgradeToVip();
+			//LoadNormal();
+			MaxwNormalSpecial();
+			//AutoUpgradeToVip();
 
 			MoveTrucktoMoving();
 			FinsihDeleivery();

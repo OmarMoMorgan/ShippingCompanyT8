@@ -22,7 +22,7 @@ private:
 
 public:
 	PriorityQueueArr() {
-		arrsize = 16000;
+		arrsize = 1600;
 		arr = new Node[arrsize];
 
 		size = -1;
@@ -31,6 +31,7 @@ public:
 	PriorityQueueArr(int maxSize) {
 		arr = new Node[maxSize];
 		size = -1;
+		arrsize = maxSize;
 	}
 
 
