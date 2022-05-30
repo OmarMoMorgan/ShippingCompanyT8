@@ -55,6 +55,26 @@ int main()
 //    q.insert(t1);
 ////q.insert(t2);
 //q.printarrTruck();   //std::cout << "Hello World!\n";
+
+  //  int p;
+  //LinkedList<int> l;
+  //  l.insertback(5);
+  //  l.insertback(3);
+  //  ////l.removeFelement(p);
+  //  //
+
+  //  l.insertback(2);
+  //  l.PrintList();
+  //  l.removeFirstelement(p);
+  //  l.PrintList();
+  //  l.insertback(4);
+  //  l.insertback(7);
+  //  l.PrintList();
+  //  l.NewDeleteNode(4);
+  //  l.PrintList();
+  //  l.insertback(9);
+  //  l.insertback(34);
+  //  l.PrintList();
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

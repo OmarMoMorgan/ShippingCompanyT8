@@ -193,3 +193,7 @@ void Truck::setCargosWaitedTime(int moveTime)
 	delete[] arrTemp;
 	arrTemp = nullptr;
 }
+
+void Truck::printcargosdebug() {
+	CargoinTruck.printarrCargo();
+}

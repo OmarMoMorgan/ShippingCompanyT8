@@ -42,7 +42,7 @@ private:
 	
 	//lists for the cargo that is being loaded into the truck and being moved by the truck
 	//PriorityQueueArr<Cargo*> LoadingCargo{truckCapacity};
-	PriorityQueueArr<Cargo*> CargoinTruck{truckCapacity};
+	PriorityQueueArr<Cargo*> CargoinTruck;
 	int finishTime;
 public:
 
@@ -93,5 +93,7 @@ public:
 	int getLoadTime() const;
 
 	void setCargosWaitedTime(int currentTime);
+
+	void printcargosdebug();
 };
 
