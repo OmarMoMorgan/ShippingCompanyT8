@@ -107,7 +107,7 @@ class Company
 		PriorityQueueArr<Truck*> MovingTrucks;
 		LinkedQueue<Truck*> FixingTrucks;
 		PriorityQueueArr<Truck*> ReturnBackTruck;
-
+		PriorityQueueArr<Cargo*> AllDelieverdCargos;
 		//some variabeles that might be neeeded later
 		int NumberNormalTrucks;
 		int NumberSpecialTrucks;
@@ -175,7 +175,7 @@ class Company
 		
 
 		bool AllEnded();
-
+		PriorityQueueArr<Cargo*> makeOneDelieverdQueue(LinkedQueue<Cargo*> normal, LinkedQueue<Cargo*> q1special, LinkedQueue<Cargo*> vip);
 
 public:
 	//function to load the file 

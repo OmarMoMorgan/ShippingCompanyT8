@@ -832,6 +832,7 @@ void Company::Simulator() {
 		/*ReturnToCompany()*/;/*
 		MoveTofixed();*/
 		if (AllEnded()) {
+		AllDelieverdCargos	=makeOneDelieverdQueue(DeliveredNormalCargo, DeliveredSpecialCargo, DeliveredVipCargo);
 			flag = 2;
 		}
 	}
@@ -855,6 +856,31 @@ bool Company::AllEnded() {
 	else {
 		return false;
 	}
+}
+PriorityQueueArr<Cargo*> Company::makeOneDelieverdQueue(LinkedQueue<Cargo*> normal, LinkedQueue<Cargo*> q1special, LinkedQueue<Cargo*> vip)
+{
+	Cargo* NormalCargo;
+	Cargo* SpecialCargo;
+	Cargo* VIPCargo;
+
+	while (normal.dequeue(NormalCargo) || q1special.dequeue(SpecialCargo) || vip.dequeue(VIPCargo))
+	{
+		if (normal.dequeue(NormalCargo))
+		{
+			AllDelieverdCargos.insert(NormalCargo, NormalCargo->getCDTdebug());
+		}
+		if (q1special.dequeue(SpecialCargo))
+		{
+			AllDelieverdCargos.insert(SpecialCargo, SpecialCargo->getCDTdebug());
+		}
+		if (vip.dequeue(VIPCargo))
+		{
+			AllDelieverdCargos.insert(VIPCargo, VIPCargo->getCDTdebug());
+		}
+
+
+	}
+	return PriorityQueueArr<Cargo*>();
 }
 //UI UITest;
 //UITest.StartInteractiveMode(getCurrentDay(), getCurrentHour(), WaitingSpecialCargo, WaitingNormalCargo, WaitingVIPCargo, AvailbleNormalTrucks,

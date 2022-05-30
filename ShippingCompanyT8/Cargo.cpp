@@ -100,10 +100,16 @@ int Cargo::getMoveTime() const /// we didnot use it in company so I added moveti
 //int Cargo::getPrepHour() const { return prepHour; }
 int Cargo::getLoadTime() const { return loadTime; }
 int  Cargo::getunloadTime() const { return unloadTime; }
-int Cargo::getCDT(int truckspeed, int movetime) const //calculates time after cargo delvierly
+int Cargo::getCDT(int truckspeed, int movetime)  //calculates time after cargo delvierly
 {
+	Cdt = movetime + getLoadTime() + getDelieveryDistance() / truckspeed;
 	return movetime + getLoadTime() + getDelieveryDistance() / truckspeed;
 }
+int Cargo::getCDTdebug() {
+	return Cdt;
+};
+
+
 //eCargoType Cargo::getCargoType() const { return cargoType; }
 double Cargo::getDelieveryDistance() const { return deleiveryDistance; }
 double Cargo::getCost() const { return Cost; }

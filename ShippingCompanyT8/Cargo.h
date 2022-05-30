@@ -32,6 +32,7 @@ private:
 
 	//this is the type of the cargo might be reomved later
 	int CarTyp;
+	int Cdt;
 
 public:
 	Cargo();
@@ -53,13 +54,15 @@ public:
 	void setCargoID(int id);
 	void setMovetime(int);
 	void setWaitedTimeByMove(int mt);
+	int getCDTdebug() {};
+
 
 	/*int getPrepDay() const;
 	int getPrepHour() const;*/
 	int getMoveTime() const;
 	int getLoadTime() const;
 	int getunloadTime() const;
-	int getCDT(int truckspeed, int movetime) const; 
+	int getCDT(int truckspeed, int movetime) ; 
 	//eCargoType getCargoType() const { return cargoType; }
 	int getCargoType() const { return CarTyp; }
 	double getDelieveryDistance() const;
