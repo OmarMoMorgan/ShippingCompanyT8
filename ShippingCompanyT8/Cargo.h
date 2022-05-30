@@ -54,7 +54,7 @@ public:
 	void setCargoID(int id);
 	void setMovetime(int);
 	void setWaitedTimeByMove(int mt);
-	int getCDTdebug() {};
+	int getCDTdebug() ;
 
 
 	int getPrepDay() const;
