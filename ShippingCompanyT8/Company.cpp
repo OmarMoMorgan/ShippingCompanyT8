@@ -3,7 +3,7 @@
 
 void Company::LoadFile() {
 	ifstream Line;
-	Line.open("test1.txt");
+	Line.open("File needed.txt");
 	if (!Line) {
 		//should be replaced with ui function
 		cout << "error couldn't open file";
