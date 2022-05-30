@@ -116,7 +116,7 @@ double Cargo::getCost() const { return Cost; }
 int Cargo::getCargoID() const { return cargoID; }
 
 int Cargo::getCurWaitTime(int curDay, int curHr) const {
-	return ( (24* curDay) +curHour ) - ( (prepDay * 24) + prepHour );
+	return ( (24* curDay) +curHr ) - ( (prepDay * 24) + prepHour );
 }
 
 int Cargo::getVIPPriority() const
