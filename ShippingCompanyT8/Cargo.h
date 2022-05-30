@@ -35,14 +35,14 @@ private:
 
 public:
 	Cargo();
-	Cargo(int icomingCargoType, /*int ETD, int ETH,*/ int ID, double DIST, int LT, double cost);
+	Cargo(int icomingCargoType, int prepD, int prepH, int ID, double DIST, int LT, double cost);
 	bool isWaiting()const;
 //	bool waitedForMax();
 
 	//bool operator> (Cargo& C_cw)const;
 
-	/*void setPrepDay(int pd);
-	void setPrepHour(int ph);*/
+	void setPrepDay(int pd);
+	void setPrepHour(int ph);
 	void setLoadTime(int lt);
 	void setUnloadTime(int ut);
 	//void setCargoType(eCargoType t);
@@ -54,8 +54,8 @@ public:
 	void setMovetime(int);
 	void setWaitedTimeByMove(int mt);
 
-	/*int getPrepDay() const;
-	int getPrepHour() const;*/
+	int getPrepDay() const;
+	int getPrepHour() const;
 	int getMoveTime() const;
 	int getLoadTime() const;
 	int getunloadTime() const;

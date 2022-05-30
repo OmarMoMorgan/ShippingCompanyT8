@@ -19,11 +19,11 @@ Cargo::Cargo()
 
 //Constructor Arguments: Same order as in the input file:
 //Cargo(Type , PrepTime DAY,PrepTime HOUR, ID, Distance, Load time, CargoCost)
-Cargo:: Cargo(int icomingCargoType,/* int ETD, int ETH,*/ int ID, double DIST, int LT, double cost)
+Cargo:: Cargo(int icomingCargoType, int prepD, int prepH, int ID, double DIST, int LT, double cost)
 {
 	this->setCargoType(icomingCargoType);
-	//this-> setPrepDay(ETD);
-	//this->setPrepHour(ETH);
+	this-> setPrepDay(prepD);
+	this->setPrepHour(prepH);
 	this->setCargoID(ID);
 	this->setDelieveryDistance(DIST);
 	this->setLoadTime(LT);
@@ -71,8 +71,8 @@ bool Cargo:: operator>(Cargo* C_cw) const
 }
 */
 //Setters
-//void Cargo::setPrepDay(int pd) { prepDay = pd;}
-//void Cargo::setPrepHour(int ph) { prepHour = ph; }
+void Cargo::setPrepDay(int pd) { prepDay = pd;}
+void Cargo::setPrepHour(int ph) { prepHour = ph; }
 void Cargo::setLoadTime(int lt) { loadTime = lt; }
 void Cargo::setUnloadTime(int ut) { unloadTime = ut; }
 //void Cargo::setCargoType(eCargoType t) { this->cargoType = t; }
@@ -96,8 +96,8 @@ int Cargo::getMoveTime() const /// we didnot use it in company so I added moveti
 }
 
 //Getters
-//int Cargo::getPrepDay() const { return prepDay; }
-//int Cargo::getPrepHour() const { return prepHour; }
+int Cargo::getPrepDay() const { return prepDay; }
+int Cargo::getPrepHour() const { return prepHour; }
 int Cargo::getLoadTime() const { return loadTime; }
 int  Cargo::getunloadTime() const { return unloadTime; }
 int Cargo::getCDT(int truckspeed, int movetime) const //calculates time after cargo delvierly
@@ -115,11 +115,11 @@ int Cargo::getCurWaitTime(int curDay, int curHr) const {
 
 int Cargo::getVIPPriority() const
 {
-	if (CarTyp != 1) //Make sure that is the number for VIP...
+	if (CarTyp != 3) //Make sure that is the number for VIP...
 		return 0;
 	else
 	{
-		int priority = 100*(  (1 / getDelieveryDistance()) /* + ()*/ + (10 * getCost())  );
+		int priority = 100* (  (1 / getDelieveryDistance())  + 2/((24*prepDay)+prepHour) + (5 * getCost()) );
 		return priority;
 	}
 

@@ -11,16 +11,20 @@ private:
 	int distance; // distance to be travelled (Km)
 	double cost;
 	int LoadingTime; // loading/unloading time(hours)
+	int etDay;
+	int etHour;
 	
 public:
 	Ready(int ID,int cost, int etD, int etH, int lT, int dis, int cl): Events(1,ID, etD, etH,cl),distance(dis)
 		,cost(cost),LoadingTime(lT)
 	{
+		etDay = etD; 
+		etHour = etH;
 	}
 	virtual void Execute(LinkedList<Cargo*> &Normal  , LinkedQueue<Cargo*> &SpecialList
 		, PriorityQueueArr<Cargo*> &VipList)
 	{
-		Cargo* c = new Cargo(getCType(),getID(), distance,LoadingTime,cost);
+		Cargo* c = new Cargo(getCType(),etDay, etHour, getID(), distance,LoadingTime,cost);
 		//Cargo* Cargopointer = c;
 		if (getCType() == 1) { 
 			Normal.insertback(c); 
