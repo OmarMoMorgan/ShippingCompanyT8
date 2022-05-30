@@ -948,15 +948,43 @@ void Company:: movingtoAvailable(int enteringDay, int enteringHr)
 
 void Company::outputStatistics()
 {
+	int totalTrucks = NumberNormalTrucks + NumberSpecialTrucks + NumberVipTrucks;
 	ofstream of;
 	of.open("testOut.txt");
 	//In auto promoted u compared with all cargos, while only normal are promoted.  //Fixed.
 	of << "Statistics: " << endl;
-	of << "Cargos: " << (NCargos+SCargos+VCargos) << "[N: " << NCargos << ", S: " << SCargos << ", V:  " << VCargos << "]" << endl;
+	of << "Cargos: " << (NCargos + SCargos + VCargos) << "[N: " << NCargos << ", S: " << SCargos << ", V:  " << VCargos << "]" << endl;
 	of << "Auto Promoted Cargos: " << 100 * (autoPromoted / (NCargos + autoPromoted)) << "%" << endl;
-	of << "Trucks: "<< (NumberNormalTrucks+ NumberSpecialTrucks+ NumberVipTrucks) << "[N: " << NumberNormalTrucks << ", S: " << NumberSpecialTrucks << ", V:  " << NumberVipTrucks << "]" << endl;
-	of << "Average Active Time: " << endl;
-	of << "Average Utilization: " << endl;
+	of << "Trucks: " << totalTrucks << "[N: " << NumberNormalTrucks << ", S: " << NumberSpecialTrucks << ", V:  " << NumberVipTrucks << "]" << endl;
+	Truck* temp;
+	for (int i = 0; i < NumberNormalTrucks; i++)
+	{
+		AvailbleNormalTrucks.dequeue(temp);
+		truckTotalActive += temp->getActiveTime();
+		int tsim = (24 * UniversalTime.CurrentDay) + UniversalTime.CurrentHour;
+		truckTotalUtilization += temp->calcTruckUtilization(tsim);
+		AvailbleNormalTrucks.enqueue(temp);
+	}
+	for (int i = 0; i < NumberVipTrucks; i++)
+	{
+		AvailbleVipTrucks.Pop(temp);
+		truckTotalActive += temp->getActiveTime();
+		int tsim = (24 * UniversalTime.CurrentDay) + UniversalTime.CurrentHour;
+		truckTotalUtilization += temp->calcTruckUtilization(tsim);
+		AvailbleVipTrucks.insert(temp);
+	}
+	for (int i = 0; i < NumberSpecialTrucks; i++)
+	{
+		AvailbleSpecialTrucks.dequeue(temp);
+		truckTotalActive += temp->getActiveTime();
+		int tsim = (24 * UniversalTime.CurrentDay) + UniversalTime.CurrentHour;
+		truckTotalUtilization += temp->calcTruckUtilization(tsim);
+		AvailbleNormalTrucks.enqueue(temp);
+	}
+	truckAvgActive = truckTotalActive / totalTrucks;
+	truckAvgUtilization = truckTotalUtilization / totalTrucks;
+	of << "Average Active Time: " << /*truckAvgActive<<*/endl;
+	of << "Average Utilization: " << /*truckAvgUtilization<<*/endl;
 
 }
 
