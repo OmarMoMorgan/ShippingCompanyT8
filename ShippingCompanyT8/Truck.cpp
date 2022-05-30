@@ -116,7 +116,7 @@ int Truck::calcTruckUtilization(int TSim)
 
 void Truck::setReturnTime(int x)
 {
-	returntime=x/getSpeed();
+	returntime=x;
 }
 
 int Truck::getReturnTime()

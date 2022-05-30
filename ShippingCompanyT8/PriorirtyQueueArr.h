@@ -220,29 +220,29 @@ public:
 		 {
 			 for (int i = 0; i < getCount(); i++) {
 				 cout << arr[i].data->getTrucID();
-			
-				 for (int j=0;j< arr[i].data->getListCount();j++)
-				 {
+
+				 if (arr[i].data->getListCount()) {
 					 //cout << "{  ";
 					 int cargotype = arr[i].data->peekCargo()->getCargoType();
 					 switch (cargotype) {
 					 case 1:
-						 cout << "[ "; arr[i].data->printcargosdebug();cout << "], ";
+						 cout << "[ "; arr[i].data->printcargosdebug(); cout << "], ";
 						 break;
 					 case 2:
-						 cout << "( " << arr[i].data->DeleiverCargo()->getCargoID() << "), ";
+						 cout << "( "; arr[i].data->printcargosdebug(); cout << "), ";
 						 break;
 					 case 3:
-						 cout << "{ " << arr[i].data->DeleiverCargo()->getCargoID() << "}, ";
+						 cout << "{ "; arr[i].data->printcargosdebug(); cout << "}, ";
 					 default:
 						 break;
 					 }
 					 //cout << "}";
 					 cout << ",";
+
+
 				 }
-				
+				 //cout << arr[getCount() - 1].data->getTrucID();
 			 }
-			 //cout << arr[getCount() - 1].data->getTrucID();
 		 }
 	 }
 };

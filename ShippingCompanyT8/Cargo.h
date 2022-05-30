@@ -21,7 +21,7 @@ private:
 	//Load time is in hours
 	int loadTime;
 	int unloadTime;
-
+	int truckID;
 	//eCargoType cargoType;
 
 	int movetime;
@@ -69,6 +69,7 @@ public:
 	int getCurWaitTime(int curDay, int curHr) const;
 	int getVIPPriority() const;
 	int getWaitedTime() const;
-	
+	int getTruckID();
+	void setTruckId(int);
 };
 

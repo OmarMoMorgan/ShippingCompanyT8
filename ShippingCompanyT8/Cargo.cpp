@@ -102,7 +102,7 @@ int Cargo::getLoadTime() const { return loadTime; }
 int  Cargo::getunloadTime() const { return unloadTime; }
 int Cargo::getCDT(int truckspeed, int movetime) const //calculates time after cargo delvierly
 {
-	return movetime + getunloadTime() + getDelieveryDistance() / truckspeed;
+	return movetime + getLoadTime() + getDelieveryDistance() / truckspeed;
 }
 //eCargoType Cargo::getCargoType() const { return cargoType; }
 double Cargo::getDelieveryDistance() const { return deleiveryDistance; }
@@ -126,3 +126,13 @@ int Cargo::getVIPPriority() const
 }
 
 int Cargo::getWaitedTime() const { return waitedTime; }
+
+int Cargo::getTruckID()
+{
+	return truckID;
+}
+
+void Cargo::setTruckId(int x)
+{
+	truckID = x;
+}
