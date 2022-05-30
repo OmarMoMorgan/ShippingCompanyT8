@@ -709,8 +709,7 @@ void Company::Simulator() {
 
 	int flag = 0;
 	UIController = new UIClass();
-	while (flag == 0){
-
+	while (flag == 0) {
 		UniversalTime.MoveOneunit();
 		EventsList.peek(Eventhappening);
 
