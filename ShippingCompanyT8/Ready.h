@@ -33,7 +33,7 @@ public:
 			SpecialList.enqueue(c);
 		}
 		else if (getCType() == 3) {
-			VipList.insert(c);
+			VipList.insert(c, c->getVIPPriority());
 		}
 	}
 
