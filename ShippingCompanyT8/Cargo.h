@@ -13,8 +13,8 @@
 class Cargo
 {
 private:
-	int curDay;  //current, to be removed with in the main
-	int curHour;
+	//int curDay;  //current, to be removed with in the main
+	//int curHour;
 	int prepDay;
 	int prepHour;
 	int cargoID; //Sequence from the input
@@ -55,6 +55,7 @@ public:
 	void setMovetime(int);
 	void setWaitedTimeByMove(int mt);
 	int getCDTdebug() ;
+
 
 
 	int getPrepDay() const;
