@@ -825,8 +825,8 @@ void Company::Simulator() {
 			LoadVip();
 			LoadSpecial();
 			LoadNormal();
-			/*MaxwNormalSpecial();
-			AutoUpgradeToVip();*/
+			MaxwNormalSpecial();
+			AutoUpgradeToVip();
 
 		
  /*	ReturnToCompany()*/;
@@ -839,6 +839,10 @@ void Company::Simulator() {
 		MoveTofixed();
 		if (AllEnded()) {
 		AllDelieverdCargos	=makeOneDelieverdQueue(DeliveredNormalCargo, DeliveredSpecialCargo, DeliveredVipCargo);
+
+		UIController->StartInteractiveMode(UniversalTime.CurrentDay, UniversalTime.CurrentHour,
+			WaitingSpecialCargo, WaitingNormalCargo, WaitingVipCargo, AvailbleNormalTrucks, AvailbleSpecialTrucks,
+			AvailbleVipTrucks, DeliveredSpecialCargo, DeliveredVipCargo, DeliveredNormalCargo, LoadingTrucks, MovingTrucks, ReturnBackTruck, FixingTrucks);
 			flag = 2;
 		}
 	}
