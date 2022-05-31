@@ -1,4 +1,7 @@
 #include "Company.h"
+//#include<iomanip>
+//
+//#include "windows.h."
 
 
 void Company::LoadFile() {
@@ -845,6 +848,7 @@ void Company::Simulator() {
 			WaitingSpecialCargo, WaitingNormalCargo, WaitingVipCargo, AvailbleNormalTrucks, AvailbleSpecialTrucks,
 			AvailbleVipTrucks, DeliveredSpecialCargo, DeliveredVipCargo, DeliveredNormalCargo, LoadingTrucks, MovingTrucks, ReturnBackTruck, FixingTrucks);
 			flag = 2;
+		/*	outputStatistics();*/
 		}
 	}
 }
@@ -956,48 +960,89 @@ PriorityQueueArr<Cargo*> Company::makeOneDelieverdQueue(LinkedQueue<Cargo*> norm
 //	//Last part is repeated, so, it can be moved to a separate function, smth like "MoveTruck"... 
 //	
 //}
+//void  Company::OutputFileFisrtP()
+//{
+	//std::cout << "Silent Mode \n Simulation Starts.. \n Simulation ends, Output file created";
+	////
+	//ofstream OutputFile("Output.txt");
+	//if (!OutputFile.is_open()) {
+	//	cout << "Unable to open the file.." << endl;
+	//}
 
-void Company::outputStatistics()
-{
-	int totalTrucks = NumberNormalTrucks + NumberSpecialTrucks + NumberVipTrucks;
-	ofstream of;
-	of.open("testOut.txt");
-	//In auto promoted u compared with all cargos, while only normal are promoted.  //Fixed.
-	of << "Statistics: " << endl;
-	of << "Cargos: " << (NCargos + SCargos + VCargos) << "[N: " << NCargos << ", S: " << SCargos << ", V:  " << VCargos << "]" << endl;
-	of << "Auto Promoted Cargos: " << 100 * (autoPromoted / (NCargos + autoPromoted)) << "%" << endl;
-	of << "Trucks: " << totalTrucks << "[N: " << NumberNormalTrucks << ", S: " << NumberSpecialTrucks << ", V:  " << NumberVipTrucks << "]" << endl;
-	Truck* temp;
-	for (int i = 0; i < NumberNormalTrucks; i++)
-	{
-		AvailbleNormalTrucks.dequeue(temp);
-		truckTotalActive += temp->getActiveTime();
-		int tsim = (24 * UniversalTime.CurrentDay) + UniversalTime.CurrentHour;
-		truckTotalUtilization += temp->calcTruckUtilization(tsim);
-		AvailbleNormalTrucks.enqueue(temp);
-	}
-	for (int i = 0; i < NumberVipTrucks; i++)
-	{
-		AvailbleVipTrucks.Pop(temp);
-		truckTotalActive += temp->getActiveTime();
-		int tsim = (24 * UniversalTime.CurrentDay) + UniversalTime.CurrentHour;
-		truckTotalUtilization += temp->calcTruckUtilization(tsim);
-		AvailbleVipTrucks.insert(temp);
-	}
-	for (int i = 0; i < NumberSpecialTrucks; i++)
-	{
-		AvailbleSpecialTrucks.dequeue(temp);
-		truckTotalActive += temp->getActiveTime();
-		int tsim = (24 * UniversalTime.CurrentDay) + UniversalTime.CurrentHour;
-		truckTotalUtilization += temp->calcTruckUtilization(tsim);
-		AvailbleNormalTrucks.enqueue(temp);
-	}
-	truckAvgActive = truckTotalActive / totalTrucks;
-	truckAvgUtilization = truckTotalUtilization / totalTrucks;
-	of << "Average Active Time: " << /*truckAvgActive<<*/endl;
-	of << "Average Utilization: " << /*truckAvgUtilization<<*/endl;
+	//else {
 
-}
+	//	OutputFile << "CDT" << setw(10) << "ID" << setw(10) << "PT" << setw(10) << "WT" << setw(10) << "TID" << endl;
 
+	//	Cargo* dc;
+
+
+	//	while (AllDelieverdCargos.getCount() > 0) {
+	//		AllDelieverdCargos.peek(dc);
+
+	//		OutputFile <<dc->getCDTdebug()<< "  ";
+	//		OutputFile << dc->getCargoID() << "  ";
+	//		OutputFile << dc->getPrepDay() << ":" << dc->getPrepHour() << "  ";
+	//		OutputFile << dc->getWaitedTime() << "  ";
+	//		OutputFile << dc->getTruckID() << "  " << endl;
+
+	//	}
+
+
+	//	OutputFile << "........................................................................" << endl;
+	//	OutputFile << "........................................................................" << endl;
+
+	//	//ro be completed with the statistics
+	//	OutputFile << "Cargos: " << endl;
+	//	OutputFile << "Cargos Avg Wait: " << endl;
+	//	OutputFile << "Auto-promoted Caros: " << "%" << endl;
+	//	OutputFile << "Trucks: " << endl;
+	//	OutputFile << "Avg Active time = " << "%" << endl;
+	//	OutputFile << "Avg utilization = " << "%" << endl;
+	//	OutputFile.close();
+//	}
+//}
+	void Company::outputStatistics()
+	{
+		int totalTrucks = NumberNormalTrucks + NumberSpecialTrucks + NumberVipTrucks;
+		ofstream of;
+		of.open("testOut.txt");
+		//In auto promoted u compared with all cargos, while only normal are promoted.  //Fixed.
+		of << "Statistics: " << endl;
+		of << "Cargos: " << (NCargos + SCargos + VCargos) << "[N: " << NCargos << ", S: " << SCargos << ", V:  " << VCargos << "]" << endl;
+		of << "Auto Promoted Cargos: " << 100 * (autoPromoted / (NCargos + autoPromoted)) << "%" << endl;
+		of << "Trucks: " << totalTrucks << "[N: " << NumberNormalTrucks << ", S: " << NumberSpecialTrucks << ", V:  " << NumberVipTrucks << "]" << endl;
+		Truck* temp;
+		for (int i = 0; i < NumberNormalTrucks; i++)
+		{
+			AvailbleNormalTrucks.dequeue(temp);
+			truckTotalActive += temp->getActiveTime();
+			int tsim = (24 * UniversalTime.CurrentDay) + UniversalTime.CurrentHour;
+			truckTotalUtilization += temp->calcTruckUtilization(tsim);
+			AvailbleNormalTrucks.enqueue(temp);
+		}
+		for (int i = 0; i < NumberVipTrucks; i++)
+		{
+			AvailbleVipTrucks.Pop(temp);
+			truckTotalActive += temp->getActiveTime();
+			int tsim = (24 * UniversalTime.CurrentDay) + UniversalTime.CurrentHour;
+			truckTotalUtilization += temp->calcTruckUtilization(tsim);
+			AvailbleVipTrucks.insert(temp);
+		}
+		for (int i = 0; i < NumberSpecialTrucks; i++)
+		{
+			AvailbleSpecialTrucks.dequeue(temp);
+			truckTotalActive += temp->getActiveTime();
+			int tsim = (24 * UniversalTime.CurrentDay) + UniversalTime.CurrentHour;
+			truckTotalUtilization += temp->calcTruckUtilization(tsim);
+			AvailbleNormalTrucks.enqueue(temp);
+		}
+		truckAvgActive = truckTotalActive / totalTrucks;
+		truckAvgUtilization = truckTotalUtilization / totalTrucks;
+		of << "Average Active Time: " << /*truckAvgActive<<*/endl;
+		of << "Average Utilization: " << /*truckAvgUtilization<<*/endl;
+
+		}
+	
+	
 
 

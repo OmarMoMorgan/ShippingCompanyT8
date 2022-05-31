@@ -16,6 +16,7 @@ int main()
     p1.Pop();
 
     //p1.printarr();*/
+
     Company c;
     c.Simulator();
     //c.Simulator();

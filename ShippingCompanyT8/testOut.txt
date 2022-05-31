@@ -1,6 +1,4 @@
 Statistics: 
-Cargos: 15[N: -1, S: 4, V:  12]
+Cargos: 16[N: 3, S: 4, V:  9]
 Auto Promoted Cargos: 0%
-Trucks: 8[N: 3, S: 3, V:  2]
-Average Active Time: 
-Average Utilization: 
+Trucks: 7[N: 3, S: 3, V:  1]

@@ -80,6 +80,7 @@ void Cargo::setCargoType(int t) { CarTyp = t; }
 void Cargo::setDelieveryDistance(double dd) { deleiveryDistance = dd; }
 void Cargo::setCost(double c) { Cost = c; }
 void Cargo::setCargoID(int id) { cargoID = id; }
+
 void Cargo::setMovetime(int x)
 {
 	movetime = x;

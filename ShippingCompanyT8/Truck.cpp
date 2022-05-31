@@ -94,7 +94,7 @@ int Truck::calcTruckUtilization(int TSim)
 	if (currentJourney == 0) utilization = 0;
 	else
 	{
-		utilization = tDC / ((truckCapacity * currentJourney) * (activeTime / TSim));
+		utilization = tDC / ((truckCapacity * currentJourney) * (getActiveTime() / TSim));
 
 		return utilization;
 	}
