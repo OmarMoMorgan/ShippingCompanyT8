@@ -13,6 +13,7 @@ Truck::Truck(int ttype, int speed, int capacity, int J, int maintt)
 	activeTime = 0;
 	delivery_Interval = 0;
 	returntime = 0;
+
 }
 
 void Truck:: setTruckCapacity(int c) { truckCapacity = c; }

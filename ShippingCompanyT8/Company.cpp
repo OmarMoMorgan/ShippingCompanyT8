@@ -453,6 +453,7 @@ void Company::LoadVip() {
 					//Move Truck to Loading
 					AvailbleVipTrucks.Pop(pTruck);
 					LoadingTrucks.insert(pTruck, 1);
+					pTruck->setLoadTime(getCurrentDay() * 24 + getCurrentHour());
 					//Move to the truck
 					//it also determines the move time of the truck
 					for (int i = 0; i < pTruck->getTruckCapacity(); i++) {
@@ -880,7 +881,7 @@ void Company::Simulator() {
 			WaitingSpecialCargo, WaitingNormalCargo, WaitingVipCargo, AvailbleNormalTrucks, AvailbleSpecialTrucks,
 			AvailbleVipTrucks, DeliveredSpecialCargo, DeliveredVipCargo, DeliveredNormalCargo, LoadingTrucks, MovingTrucks, ReturnBackTruck, FixingTrucks);
 			flag = 2;
-		/*	outputStatistics();*/
+			outputStatistics();
 		}
 	}
 }
@@ -1047,18 +1048,19 @@ PriorityQueueArr<Cargo*> Company::makeOneDelieverdQueue(LinkedQueue<Cargo*> norm
 		for (int i = 0; i < NumberNormalTrucks; i++)
 		{
 			AvailbleNormalTrucks.dequeue(temp);
+			
 			truckTotalActive += temp->getActiveTime();
 			int tsim = (24 * UniversalTime.CurrentDay) + UniversalTime.CurrentHour;
 			truckTotalUtilization += temp->calcTruckUtilization(tsim);
-			AvailbleNormalTrucks.enqueue(temp);
 		}
 		for (int i = 0; i < NumberVipTrucks; i++)
 		{
+			
 			AvailbleVipTrucks.Pop(temp);
+		
 			truckTotalActive += temp->getActiveTime();
 			int tsim = (24 * UniversalTime.CurrentDay) + UniversalTime.CurrentHour;
 			truckTotalUtilization += temp->calcTruckUtilization(tsim);
-			AvailbleVipTrucks.insert(temp);
 		}
 		for (int i = 0; i < NumberSpecialTrucks; i++)
 		{
@@ -1066,12 +1068,11 @@ PriorityQueueArr<Cargo*> Company::makeOneDelieverdQueue(LinkedQueue<Cargo*> norm
 			truckTotalActive += temp->getActiveTime();
 			int tsim = (24 * UniversalTime.CurrentDay) + UniversalTime.CurrentHour;
 			truckTotalUtilization += temp->calcTruckUtilization(tsim);
-			AvailbleNormalTrucks.enqueue(temp);
 		}
 		truckAvgActive = truckTotalActive / totalTrucks;
 		truckAvgUtilization = truckTotalUtilization / totalTrucks;
-		of << "Average Active Time: " << /*truckAvgActive<<*/endl;
-		of << "Average Utilization: " << /*truckAvgUtilization<<*/endl;
+		of << "Average Active Time: " << truckAvgActive<<endl;
+		of << "Average Utilization: " << truckAvgUtilization<<endl;
 
 		}
 	
