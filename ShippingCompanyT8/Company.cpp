@@ -244,7 +244,7 @@ void Company::ReturnToCompany()
 		// add to maintance or availabe
 		if (currentTime >= Ptruck->getReturnTime())
 		{	ReturnBackTruck.Pop(Ptruck);
-			if (Ptruck->getTotalJourneys() %2 == 0)
+			if (Ptruck->getTotalJourneys() %Ptruck->getJtm() == 0)
 			{
 				Ptruck->setReturnTime(currentTime);
 				FixingTrucks.insert(Ptruck,1);
@@ -682,9 +682,9 @@ void Company::FinsihDeleivery() {
 			if (pTruck->getListCount() > 0)
 				MovingTrucks.insert(pTruck);
 			else {
-				pTruck->setfinishTime(current_time_Hours+1);
+				pTruck->setfinishTime(current_time_Hours);
 				pTruck->incrementJourney();
-				pTruck->setReturnTime(pCargo->getDelieveryDistance()/ pTruck->getSpeed()+ current_time_Hours+2);
+				pTruck->setReturnTime((pCargo->getDelieveryDistance()+100)/ pTruck->getSpeed()+ current_time_Hours); //+100 as getdistance was so small it returned zero
 				ReturnBackTruck.insert(pTruck, pTruck->getReturnTime());
 			}
 		}
@@ -838,8 +838,9 @@ void Company::Simulator() {
 		
 		MoveTofixed();
 		if (AllEnded()) {
+		
 		AllDelieverdCargos	=makeOneDelieverdQueue(DeliveredNormalCargo, DeliveredSpecialCargo, DeliveredVipCargo);
-
+		//this is just as final check that all is empty 
 		UIController->StartInteractiveMode(UniversalTime.CurrentDay, UniversalTime.CurrentHour,
 			WaitingSpecialCargo, WaitingNormalCargo, WaitingVipCargo, AvailbleNormalTrucks, AvailbleSpecialTrucks,
 			AvailbleVipTrucks, DeliveredSpecialCargo, DeliveredVipCargo, DeliveredNormalCargo, LoadingTrucks, MovingTrucks, ReturnBackTruck, FixingTrucks);
@@ -857,10 +858,10 @@ bool Company::AllEnded() {
 	int FT = FixingTrucks.getCount();
 	int LoadT = LoadingTrucks.getCount();
 	int MoveT = MovingTrucks.getCount();
-
+	int RT = ReturnBackTruck.getCount();
 	int ev = EventsList.getCount();
 
-	if (WN + WV + WS + LoadT + MoveT + ev+ FT == 0) {
+	if (WN + WV + WS + LoadT + MoveT + ev+ FT+ RT == 0) {
 		return true;
 	}
 	else {

@@ -130,7 +130,7 @@ void UIClass::StartInteractiveMode(int D, int H, LinkedQueue<Cargo*> &WaitingSpe
 		cout << "fixing Trucks" << " ";
 		fixingtruck.getCount();
 		fixingtruck.printarrTruck();
-		//std::cout << std::string(20, '_') << endl;
+		std::cout << std::string(20, '_') << endl;
 		//cout << "movingTrucks" << " ";
 		//movingtruck.getCount();
 		//movingtruck.printarrTruck();

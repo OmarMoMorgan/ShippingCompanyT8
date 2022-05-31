@@ -63,7 +63,7 @@ public:
 	void setActiveTime();   /// I changed it to increase with each journey and not take it an int as a parameter
 	void incrementJourney(); /// This is a new function that should be called in the main to increase journey number
 	void setfinishTime(int);
-	void  setDelieveryInterval();
+	void  setDelieveryInterval(int);
 	
 	int getfinishTime();
 	int getType()const { return truckType; };

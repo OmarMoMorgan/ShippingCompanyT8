@@ -34,24 +34,10 @@ void Truck::setfinishTime(int x)
 
 
 }
-void Truck::setDelieveryInterval() // could be removed
+void Truck::setDelieveryInterval(int x) // could be removed
 {
-	/*Cargo* Pcargo;
 	
-	int total_unload_cargos_Time = 0;
-    int	farthest_distance_cargo=0;
-	for (int i = 0; i < CargoinTruck.getCount(); i++)
-	{
-		CargoinTruck.Pop(Pcargo);
-		total_unload_cargos_Time = total_unload_cargos_Time +Pcargo->getunloadTime();
-		if (farthest_distance_cargo < Pcargo->getDelieveryDistance())
-			farthest_distance_cargo = Pcargo->getDelieveryDistance() ;
-	}
-	if (currentJourney%journeys_to_maintenance==0)
-		delivery_Interval = farthest_distance_cargo*2 / getSpeed() + getMaintenanceTime() + total_unload_cargos_Time;
-	else
-		delivery_Interval = farthest_distance_cargo*2 / getSpeed()   + total_unload_cargos_Time;*/
-
+	delivery_Interval = x;
 	
 }
 
