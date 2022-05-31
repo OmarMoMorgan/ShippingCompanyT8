@@ -183,3 +183,9 @@ void Truck::setCargosWaitedTime(int moveTime)
 void Truck::printcargosdebug() {
 	CargoinTruck.printarrCargo();
 }
+
+int Truck::getTruckPriority()
+{
+	int p = 50 * (((3 / 5) * truckCapacity) + ((2 / 5) * truckSpeed));
+	return p;
+}

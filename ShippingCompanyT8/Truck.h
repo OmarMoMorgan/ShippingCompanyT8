@@ -95,5 +95,6 @@ public:
 	void setCargosWaitedTime(int currentTime);
 
 	void printcargosdebug();
+	int getTruckPriority();
 };
 

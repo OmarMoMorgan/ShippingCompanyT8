@@ -96,17 +96,49 @@ void Company::LoadFile() {
 
 	//adding trucks to their lists 
 	Truck* pTruck; 
+	int speedStep = -5;
+	int capStep = -2;
 	for (int i = 0; i < NumberNormalTrucks; i++) {
+		/*
+		int speedToAssign;
+		int capacityToAssign;
+		if (capStep > 2) capStep = -2;
+		if (speedStep > 5) speedStep = -5;
+		speedToAssign = DummyNSpeed + speedStep;
+		capacityToAssign = DummyNCap + capStep;
+		speedStep++;
+		capStep++;
+		*/
 		pTruck = new Truck(1, DummyNSpeed, DummyNCap, DummyNumJourneys, DummyNumJourneysN);
 		AvailbleNormalTrucks.enqueue(pTruck);
 	}
 
 	for (int i = 0; i < NumberSpecialTrucks; i++) {
-		pTruck = new Truck(2, DummySSpeed, DummySCap, DummyNumJourneys, DummyNumJourneysS);
+		/*
+		int speedToAssign;
+		int capacityToAssign;
+		if (capStep > 2) capStep = -2;
+		if (speedStep > 5) speedStep = -5;
+		speedToAssign = DummySSpeed + speedStep;
+		capacityToAssign = DummySCap + capStep;
+		speedStep++;
+		capStep++;
+		*/
+		pTruck = new Truck(2, DummyNSpeed, DummyNCap, DummyNumJourneys, DummyNumJourneysS);
 		AvailbleSpecialTrucks.enqueue(pTruck);
 	}
 
 	for (int i = 0; i < NumberVipTrucks; i++) {
+		/*
+		int speedToAssign;
+		int capacityToAssign;
+		if (capStep > 2) capStep = -2;
+		if (speedStep > 5) speedStep = -5;
+		speedToAssign = DummyVpeed + speedStep;
+		capacityToAssign = DummyVCap + capStep;
+		speedStep++;
+		capStep++;
+		*/
 		pTruck = new Truck(3, DummyVSpeed, DummyVCap, DummyNumJourneys, DummyNumJourneysV);
 		AvailbleVipTrucks.insert(pTruck);
 	}
