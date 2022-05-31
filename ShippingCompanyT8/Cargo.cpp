@@ -31,14 +31,14 @@ Cargo:: Cargo(int icomingCargoType, int prepD, int prepH, int ID, double DIST, i
 	this->setMovetime(0);
 }
 
-bool Cargo:: isWaiting() const
-{
-	if (prepDay > curDay)
-		return true;
-	else if (prepDay == curDay && prepHour >= prepHour)
-		return true;
-	return false;
-}
+//bool Cargo:: isWaiting() const
+//{
+//	//if (prepDay > curDay)
+//	//	return true;
+//	//else if (prepDay == curDay && prepHour >= prepHour)
+//	//	return true;
+//	//return false;
+//}
 /*
 bool Cargo::waitedForMax()
 {
