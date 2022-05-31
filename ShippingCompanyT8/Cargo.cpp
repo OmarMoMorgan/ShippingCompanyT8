@@ -102,8 +102,8 @@ int Cargo::getLoadTime() const { return loadTime; }
 int  Cargo::getunloadTime() const { return unloadTime; }
 int Cargo::getCDT(int truckspeed, int movetime)  //calculates time after cargo delvierly
 {
-	Cdt = movetime + getLoadTime() + getDelieveryDistance() / truckspeed;
-	return movetime + getLoadTime() + getDelieveryDistance() / truckspeed;
+	Cdt = movetime + getLoadTime()+  (getDelieveryDistance()+100) / truckspeed;
+	return movetime + getLoadTime()+ (getDelieveryDistance() + 100) / truckspeed;
 }
 int Cargo::getCDTdebug() {
 	return Cdt;

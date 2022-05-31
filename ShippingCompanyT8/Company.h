@@ -25,6 +25,7 @@
 class Company
 {
 	private:
+		
 
 		//current time and hour This funciton can only add less than 24 hours now
 		struct Time
@@ -105,7 +106,7 @@ class Company
 		
 		PriorityQueueArr<Truck*> LoadingTrucks;
 		PriorityQueueArr<Truck*> MovingTrucks;
-		LinkedQueue<Truck*> FixingTrucks;
+		PriorityQueueArr<Truck*> FixingTrucks;
 		PriorityQueueArr<Truck*> ReturnBackTruck;
 		PriorityQueueArr<Cargo*> AllDelieverdCargos;
 		//some variabeles that might be neeeded later
@@ -131,6 +132,15 @@ class Company
 		int DummyNCap;
 		int DummySCap;
 		int DummyVCap;
+		int isNightshift(Truck* T1)
+		{
+			if (T1->getSpeed() > 100)
+			{
+				return 1;
+			}
+			else 
+				return 0;
+		}
 
 		int DummyNumJourneys;
 		int DummyNumJourneysN;

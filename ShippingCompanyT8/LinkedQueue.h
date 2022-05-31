@@ -190,8 +190,10 @@ bool LinkedQueue<T>:: dequeue(T& frntEntry)
 	if (nodeToDeletePtr == backPtr)	 // Special case: last node in the queue
 		backPtr = nullptr ;	
 		
-	// Free memory reserved for the dequeued node
-	delete nodeToDeletePtr;
+	// Free memory reserved for the dequeued nodei
+	if (nodeToDeletePtr!=nullptr)
+	
+	//delete nodeToDeletePtr;
 
 	return true;
 }
@@ -215,9 +217,13 @@ bool LinkedQueue<T>:: peek(T& frntEntry) const
 		return false;
 
 	frntEntry = frontPtr->getItem();
+	
 	return true;
 
 }
+
+
+
 ///////////////////////////////////////////////////////////////////////////////////
 
 template <typename T>
@@ -232,21 +238,21 @@ int LinkedQueue<T>::getCount() {
 }
 
 template <typename T>
+
 LinkedQueue<T>::~LinkedQueue()
 {
 	//Note that the cout statements here is just for learning purpose
 	//They should be normally removed from the destructor
-	//cout<<"\nStarting LinkedQueue destructor...";
-	//cout<<"\nFreeing all nodes in the queue...";
+	cout << "\nStarting LinkedQueue destructor...";
+	cout << "\nFreeing all nodes in the queue...";
 
 	//Free all nodes in the queue
 	T temp;
-	while(dequeue(temp));
-	
-	//cout<<"\n Is LinkedQueue Empty now?? ==> "<<boolalpha<<isEmpty();
-	//cout<<"\nEnding LinkedQueue destructor..."<<endl;
-}
+	while (dequeue(temp));
 
+	cout << "\n Is LinkedQueue Empty now?? ==> " << boolalpha << isEmpty();
+	cout << "\nEnding LinkedQueue destructor..." << endl;
+}
 ///////////////////# will use it for the UI (counter) #\\\\\\\\
 
 
@@ -352,5 +358,22 @@ inline void LinkedQueue<Truck*>::PrintQueue() {
 	
 }
 
+template <>
+inline LinkedQueue<Truck*>::~LinkedQueue()
+{
+	//Note that the cout statements here is just for learning purpose
+	//They should be normally removed from the destructor
+	//cout<<"\nStarting LinkedQueue destructor...";
+	//cout<<"\nFreeing all nodes in the queue...";
 
+	//Free all nodes in the queue
+	Truck* temp;
+	while (dequeue(temp)){
+		delete temp;
+	
+	}
+	
+	//cout<<"\n Is LinkedQueue Empty now?? ==> "<<boolalpha<<isEmpty();
+	//cout<<"\nEnding LinkedQueue destructor..."<<endl;
+}
 #endif

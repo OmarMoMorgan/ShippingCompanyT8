@@ -82,7 +82,7 @@ void UIClass::StartInteractiveMode(int D, int H, LinkedQueue<Cargo*> &WaitingSpe
 	PriorityQueueArr<Cargo*> &WaitingVIPCargo, LinkedQueue<Truck*> &AvailbleNormalTrucks,
 	LinkedQueue<Truck*> &AvailbleSpecialTrucks, PriorityQueueArr<Truck*> &AvailbleVipTrucks,
 	LinkedQueue<Cargo*> &DeliveredSpecialCargo, LinkedQueue<Cargo*> &DeliveredVipCargo, 
-	LinkedQueue<Cargo*> &DeliveredNormalCargo, PriorityQueueArr<Truck*> &LoadingTrucks, PriorityQueueArr<Truck*>& movingtruck, PriorityQueueArr<Truck*>& returningback,LinkedQueue<Truck*> fixingtruck)
+	LinkedQueue<Cargo*> &DeliveredNormalCargo, PriorityQueueArr<Truck*> &LoadingTrucks, PriorityQueueArr<Truck*>& movingtruck, PriorityQueueArr<Truck*>& returningback, PriorityQueueArr<Truck*>& fixingtruck)
 
 {
 	{
@@ -127,10 +127,10 @@ void UIClass::StartInteractiveMode(int D, int H, LinkedQueue<Cargo*> &WaitingSpe
 		returningback.printarrTruck();
 		std::cout << std::string(20, '_') << endl;
 
-		cout << "fixing Trucks" << " "<<
+		cout << "fixing Trucks" << " ";
 		fixingtruck.getCount();
-		fixingtruck.PrintQueue();
-		std::cout << std::string(20, '_') << endl;
+		fixingtruck.printarrTruck();
+		//std::cout << std::string(20, '_') << endl;
 		//cout << "movingTrucks" << " ";
 		//movingtruck.getCount();
 		//movingtruck.printarrTruck();
@@ -146,27 +146,6 @@ void UIClass::StartInteractiveMode(int D, int H, LinkedQueue<Cargo*> &WaitingSpe
 }
 
 	//void UI::StartStepByStepMode(){}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
